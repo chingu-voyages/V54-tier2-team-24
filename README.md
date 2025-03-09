@@ -36,6 +36,6 @@ coding!
 
 - zephyr_koryami (Sokuen Ryan)[GitHub](https://github.com/sokuenryan) / [LinkedIn](https://linkedin.com/in/sokuenryan)
 
-- moonshark26 (Benjamin Corbett)[GitHub](https://github.com/bcsurf) / [LinkedIn](https://linkedin.com/in/benjamin-corbett-84822424a/)
+- moonshark26 (Benjamin Corbett)[GitHub](https://github.com/bcsurf2822) / [LinkedIn](https://linkedin.com/in/benjamin-corbett-84822424a/)
 
 - Teammate name #3: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
