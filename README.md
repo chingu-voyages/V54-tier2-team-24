@@ -40,4 +40,6 @@ coding!
 
 - solarluiso (Luis Solar)[GitHub](https://github.com/solarluiso) / [LinkedIn](https://www.linkedin.com/in/solarluiso/)
 
+- codingpaige (Christin Martin)[GitHub](https://github.com/Christin-paige) / [LinkedIn](https://www.linkedin.com/in/christin-martin/)
+
 - Teammate name #3: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
