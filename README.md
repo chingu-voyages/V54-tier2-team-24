@@ -38,4 +38,6 @@ coding!
 
 - moonshark26 (Benjamin Corbett)[GitHub](https://github.com/bcsurf2822) / [LinkedIn](https://linkedin.com/in/benjamin-corbett-84822424a/)
 
+- solarluiso (Luis Solar)[GitHub](https://github.com/solarluiso) / [LinkedIn](https://www.linkedin.com/in/solarluiso/)
+
 - Teammate name #3: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
