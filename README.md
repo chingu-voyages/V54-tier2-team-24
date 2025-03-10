@@ -42,4 +42,4 @@ coding!
 
 - codingpaige (Christin Martin)[GitHub](https://github.com/Christin-paige) / [LinkedIn](https://www.linkedin.com/in/christin-martin/)
 
-- Teammate name #3: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Matthew Neie (Developer): [GitHub](https://github.com/MatthewNeie) / [LinkedIn](https://linkedin.com/in/matthew-neie)
