@@ -42,4 +42,8 @@ coding!
 
 - codingpaige (Christin Martin)[GitHub](https://github.com/Christin-paige) / [LinkedIn](https://www.linkedin.com/in/christin-martin/)
 
+- carissa.yeaaa (Carissa Abraham)[GitHub](https://github.com/carissayeaaa) / [LinkedIn](https://www.linkedin.com/in/carissa-abraham/)
+
+- moogle_moxie0018 (Jessica Hackett)[GitHub](https://github.com/mooglemoxie0018) / [LinkedIn](https://www.linkedin.com/in/jessica-hackett-6725a4325/)
+
 - Teammate name #3: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
