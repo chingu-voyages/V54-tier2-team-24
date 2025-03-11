@@ -1,9 +1,8 @@
 function App() {
   return (
-    <div className="w-full h-[100vh] flex items-center justify-center bg-neutral-300">
-      Welcome{" "}
-      <span className="font-bold text-2xl text-blue-950"> Team 24 </span> to AI
-      Prompt Project
+    <div className="flex flex-col min-h-screen bg-neutral-100">
+<main className="flex-1"></main>
+      <footer>this is footer</footer>
     </div>
   );
 }
