@@ -3,7 +3,7 @@ import { FaGithub } from "react-icons/fa";
 function App() {
   return (
     <div className="flex flex-col min-h-screen bg-neutral-100">
-      <main className="flex-1">Main Content</main>
+      <main className="flex-1"> Content</main>
       <footer className="flex justify-between items-center boder-2 border-neutral-400 h-[7vh] bg-neutral-300 px-2 ">
         <a
           href="https://github.com/chingu-voyages/V54-tier2-team-24"
