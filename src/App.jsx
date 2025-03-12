@@ -15,9 +15,12 @@ function App() {
         </a>
 
         <p>Voyage 54 Team 24</p>
-        <div className="text-sm flex w-3/4 justify-evenly hidden">
-          <p>Carissa Abraham</p>
-          <p>Aaron Goodwin</p>
+        <div className="text-sm flex w-3/4 justify-evenly ">
+          <div>
+            <p>Carissa Abraham</p>
+            <p>Aaron Goodwin</p>
+          </div>
+
           <p>Chris </p>
           <p>Jessica Hackett</p>
           <p>Matthew Neie</p>
