@@ -1,4 +1,11 @@
 export default function Header() {
     return (
         <>
-        <d
+        <div>
+            <h1>
+                <Logo></Logo>
+            </h1>
+        </div>
+        </>
+    )
+}
