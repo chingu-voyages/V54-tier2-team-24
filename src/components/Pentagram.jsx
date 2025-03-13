@@ -3,15 +3,6 @@ import { Circle } from "lucide-react";
 import { PentagramProvider, usePentagram } from "./PentagramContext";
 import PromptField from "./PromptField";
 
-const Pentagram = () => {
-    return (
-        <PentagramProvider>
-            <PentagramContent />
-        </PentagramProvider>
-    );
-};
-
-// Extract main content to a separate component so `usePentagram` can work
 const PentagramContent = () => {
     const { index, setIndex } = usePentagram();
 
@@ -56,5 +47,14 @@ const PentagramContent = () => {
         </div>
     );
 };
+
+const Pentagram = () => {
+    return (
+        <PentagramProvider>
+            <PentagramContent />
+        </PentagramProvider>
+    );
+};
+
 
 export default Pentagram;

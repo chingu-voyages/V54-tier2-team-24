@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
 
+// create useContext hook for switching input fields and recording user inputs
+// the user input can ba accessed by {inputs} = usePentagram(),string[]
+// the index can be access by { index} = usePentagram(),number
+
 const PentagramContext = createContext();
 
 export const PentagramProvider = ({ children }) => {
@@ -22,9 +26,5 @@ export const PentagramProvider = ({ children }) => {
 };
 
 export const usePentagram = () => {
-    const context = useContext(PentagramContext);
-    if (!context) {
-        throw new Error("usePentagram must be used within a PentagramProvider");
-    }
-    return context;
+    return useContext(PentagramContext);
 };

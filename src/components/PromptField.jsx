@@ -35,6 +35,7 @@ const PromptField = () => {
                     className="border-3 h-80 border-blue-300 rounded-lg text-blue-350 w-full"
                     placeholder={examplePrompt[index]}
                     value={inputValue}
+                    required={true}
                     onChange={handleChange}
                 />
             </div>
