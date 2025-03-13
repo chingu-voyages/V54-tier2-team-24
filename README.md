@@ -51,3 +51,5 @@ coding!
 - christel_l (Christel)[GitHub](https://github.com/christel-l) / [LinkedIn](https://www.linkedin.com/in/welahlookymba/)
 
 - eloquentsage (Aaron Goodwin)[GitHub](https://github.com/tradingwait) / [LinkedIn](https://www.linkedin.com/in/goodwinaaron/)
+
+- Gentiana.z (Gentiana)[GitHub](https://github.com/gentianaZ1) / [LinkedIn](https://www.linkedin.com/in/gentiana-han-006b39353)

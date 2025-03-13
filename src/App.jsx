@@ -1,3 +1,4 @@
+import React from "react";
 function App() {
   return (
     <div className="w-full h-[100vh] flex items-center justify-center bg-neutral-300">
