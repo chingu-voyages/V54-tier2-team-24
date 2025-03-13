@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {usePentagram} from "./PentagramContext.jsx";
     const examplePrompt =[
         "You are a Product Owner, Scrum Master, UI/UX Designer, Web Developer, or" +
         "Data Scientist who is at the beginning of your career and is looking to apply" +
@@ -17,12 +18,24 @@ import React from "react";
         "Avoid overly technical responses."
     ]
 
-const PromptField = ({promptIndex}) => {
+const PromptField = () => {
+        const { index,inputs,updateInput } = usePentagram();
+        const [inputValue, setInputValue] = useState(inputs[index]);
+        useEffect(() => {
+            setInputValue(inputs[index] || "");
+    }, [index, inputs]);
+
+    const handleChange = (e) => {
+        setInputValue(e.target.value);
+        updateInput(e.target.value);
+    };
         return (
             <div className="prompt-field flex flex-row items-center justify-center  max-sm:justify-start max-sm:w-full">
                 <textarea
                     className="border-3 h-80 border-blue-300 rounded-lg text-blue-350 w-full"
-                    placeholder={examplePrompt[promptIndex]}
+                    placeholder={examplePrompt[index]}
+                    value={inputValue}
+                    onChange={handleChange}
                 />
             </div>
         )
