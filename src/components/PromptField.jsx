@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {usePentagram} from "./PentagramContext.jsx";
-    const examplePrompt =[
+    const examplePrompt =[//order: persona, context, task, output, constrain
         "You are a Product Owner, Scrum Master, UI/UX Designer, Web Developer, or" +
         "Data Scientist who is at the beginning of your career and is looking to apply" +
         "what you've learned to build practical experience to help you get noticed in" +
