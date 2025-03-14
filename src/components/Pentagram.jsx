@@ -15,7 +15,7 @@ const PentagramContent = () => {
             <h1 className="text-2xl text-blue-400 font-bold text-center mb-8 max-sm:text-left">PENTAGRAM</h1>
 
             <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3 ">
-                //number 1: persona, 2: context, 3 : task, 4 : output, 5 : constrain
+                {/* //number 1: persona, 2: context, 3 : task, 4 : output, 5 : constrain */}
                 {[0, 1, 2, 3, 4].map((num) => (
                     <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
                         <Circle
