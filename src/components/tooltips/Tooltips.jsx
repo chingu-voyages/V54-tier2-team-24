@@ -14,7 +14,7 @@ export default function Tooltips({ pentaPrompts }) {
       </div>
 
       {isOpen && (
-        <div className="absolute right-2 md:left-0 bottom-8 z-10 w-64  p-4 bg-gradient-to-br from-blue-200 to-blue-500 border-1 shadow-xl rounded-xl text-white backdrop-blur-sm font-bold bg-opacity-90 transform transition-all ease-in-out">
+        <div className="absolute right-4  bottom-5 z-10 w-64  p-4 bg-gradient-to-br from-blue-200 to-blue-500 border-1 shadow-xl rounded-xl text-white backdrop-blur-sm font-bold bg-opacity-90 transform transition-all ease-in-out">
           <p className="text-sm text-gray-700">{tooltip}</p>
         </div>
       )}
