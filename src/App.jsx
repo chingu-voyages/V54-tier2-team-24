@@ -1,9 +1,12 @@
 import { FaGithub } from "react-icons/fa";
+import LoadingFeature from "./HandleLoading";
 
 function App() {
   return (
+
     <div className="flex flex-col min-h-screen ">
       <main className="flex-1"> </main>
+          <LoadingFeature />
       <footer className="flex justify-between items-center boder-t-2 border-blue-400 h-[7vh] bg-blue-100 px-2 ">
         <a
           href="https://github.com/chingu-voyages/V54-tier2-team-24"
