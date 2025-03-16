@@ -1,5 +1,6 @@
 import { FaGithub } from "react-icons/fa";
 import LoadingFeature from "./HandleLoading";
+import Header from "./components/header";
 
 import Pentagram from "./components/Pentagram";
 
@@ -7,7 +8,7 @@ function App() {
   return (
 
     <div className="flex flex-col min-h-screen ">
-
+<Header />
       <main className="flex-1">
       <Pentagram />     
       <LoadingFeature />
