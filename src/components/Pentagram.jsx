@@ -1,15 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { Circle } from "lucide-react";
 import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
+import ResetButtons from "./ResetButtons.jsx";
 
 const PentagramContent = () => {
-  const { index, setIndex, pentaPrompts } = usePentagram();
+  const { index, setIndex, pentaPrompts, inputs, updateInput } = usePentagram();
+  const [response, setResponse] = useState(null);
+  const [error, setError] = useState(null);
 
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
   const onNext = () => setIndex(index === 4 ? 4 : index + 1);
+
+  const handleSubmit = async () => {
+    if (inputs.some((value) => value.trim() === "")) {
+      alert("Please fill out all fields before submitting.");
+      return;
+    }
+
+    try {
+      const res = await fetch("https://api.gemini.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ inputs }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch response from Gemini API");
+      }
+
+      const data = await res.json();
+      setResponse(data);
+      setError(null);
+    } catch (err) {
+      setError(err.message);
+      setResponse(null);
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-6">
@@ -32,8 +61,15 @@ const PentagramContent = () => {
           </button>
         ))}
       </div>
-      <div className="w-full flex justify-end pb-2 ">
-        <Tooltips pentaPrompts={pentaPrompts[index]} />
+
+      <div className="w-full flex justify-between pb-2">
+        <div className="flex gap-4">
+          {pentaPrompts[index] && (
+            <ResetButtons field={pentaPrompts[index].name} />
+          )}
+          <ResetButtons isResetAll={true} />
+        </div>
+        {pentaPrompts[index] && <Tooltips pentaPrompts={pentaPrompts[index]} />}
       </div>
 
       <div className="w-full">
@@ -54,12 +90,17 @@ const PentagramContent = () => {
         </button>
 
         <button
-          onClick={onNext}
+          onClick={index === 4 ? handleSubmit : onNext}
           className="px-6 py-2 rounded-md bg-blue-300 text-blue-500 mt-3"
         >
           {index === 4 ? "Submit" : "Next"}
         </button>
       </div>
+
+      {error && <p className="text-red-500 mt-2">{error}</p>}
+      {response && (
+        <p className="text-green-500 mt-2">Submission Successful!</p>
+      )}
     </div>
   );
 };
