@@ -10,14 +10,6 @@ const PentagramContent = () => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
 
-  const [fields, setFields] = useState({
-    persona: "",
-    context: "",
-    task: "",
-    output: "",
-    constraint: "",
-  });
-
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
   const onNext = () => setIndex(index === 4 ? 4 : index + 1);
@@ -72,18 +64,12 @@ const PentagramContent = () => {
 
       <div className="w-full flex justify-between pb-2">
         <div className="flex gap-4">
-          <ResetButtons
-            field={pentaPrompts[index].name}
-            fields={fields}
-            setFields={setFields}
-          />
-          <ResetButtons
-            isResetAll={true}
-            fields={fields}
-            setFields={setFields}
-          />
+          {pentaPrompts[index] && (
+            <ResetButtons field={pentaPrompts[index].name} />
+          )}
+          <ResetButtons isResetAll={true} />
         </div>
-        <Tooltips pentaPrompts={pentaPrompts[index]} />
+        {pentaPrompts[index] && <Tooltips pentaPrompts={pentaPrompts[index]} />}
       </div>
 
       <div className="w-full">
