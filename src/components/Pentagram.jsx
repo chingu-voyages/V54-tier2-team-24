@@ -3,7 +3,7 @@ import { Circle } from "lucide-react";
 import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
-import ResetButtons from "./ResetButtons.jsx"; // Importamos el componente ResetButtons
+import ResetButtons from "./ResetButtons.jsx";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs, updateInput } = usePentagram();
