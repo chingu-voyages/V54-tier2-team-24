@@ -3,11 +3,20 @@ import { Circle } from "lucide-react";
 import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
+import ResetButtons from "./ResetButtons.jsx"; // Importamos el componente ResetButtons
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs, updateInput } = usePentagram();
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
+
+  const [fields, setFields] = useState({
+    persona: "",
+    context: "",
+    task: "",
+    output: "",
+    constraint: "",
+  });
 
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
@@ -60,8 +69,21 @@ const PentagramContent = () => {
           </button>
         ))}
       </div>
-      <div className="w-full flex justify-end pb-2 ">
-          <Tooltips pentaPrompts={pentaPrompts[index]} />
+
+      <div className="w-full flex justify-between pb-2">
+        <div className="flex gap-4">
+          <ResetButtons
+            field={pentaPrompts[index].name}
+            fields={fields}
+            setFields={setFields}
+          />
+          <ResetButtons
+            isResetAll={true}
+            fields={fields}
+            setFields={setFields}
+          />
+        </div>
+        <Tooltips pentaPrompts={pentaPrompts[index]} />
       </div>
 
       <div className="w-full">
