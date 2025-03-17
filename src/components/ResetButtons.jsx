@@ -17,9 +17,9 @@ const ResetButtons = ({ field, fields, setFields, isResetAll = false }) => {
   return (
     <button
       onClick={isResetAll ? handleResetAll : handleResetField}
-      className="p-2 bg-blue-500 hover:bg-blue-400 text-white rounded-full cursor-pointer"
+      className="p-1 bg-blue-500 hover:bg-blue-400 text-white rounded-full cursor-pointer"
     >
-      {isResetAll ? <ListRestart size={20} /> : <RotateCcw size={20} />}
+      {isResetAll ? <ListRestart size={16} /> : <RotateCcw size={16} />}
     </button>
   );
 };
