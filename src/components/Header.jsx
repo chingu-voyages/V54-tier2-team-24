@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GiSpellBook } from "react-icons/gi";
 import HelpMenu from "./HelpMenu";
 
@@ -14,6 +14,10 @@ function getDate() {
 function Header() {
   const [currentDate, setCurrentDate] = useState(getDate());
   const [showHelp, setShowHelp] = useState(false);
+
+  useEffect(()=> {
+    setCurrentDate(getDate())
+  },[])
 
   const toggleHelp = () => {
     setShowHelp(!showHelp);
