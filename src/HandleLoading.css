@@ -1,0 +1,53 @@
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 12px;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-button {
+  margin-top: 10px;
+  border: solid 1px black;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+}
+
+.AI-prompt-test {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-input {
+  margin-top: 10px;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+}
