@@ -18,6 +18,18 @@ export const PentagramProvider = ({ children }) => {
     });
   };
 
+  const resetField = (fieldIndex) => {
+    setInputs((prev) => {
+      const updated = [...prev];
+      updated[fieldIndex] = "";
+      return updated;
+    });
+  };
+
+  const resetAllFields = () => {
+    setInputs(["", "", "", "", ""]);
+  };
+
   const pentaPrompts = [
     {
       name: "persona",
@@ -53,7 +65,15 @@ export const PentagramProvider = ({ children }) => {
 
   return (
     <PentagramContext.Provider
-      value={{ index, setIndex, inputs, updateInput, pentaPrompts }}
+      value={{
+        index,
+        setIndex,
+        inputs,
+        updateInput,
+        pentaPrompts,
+        resetField,
+        resetAllFields,
+      }}
     >
       {children}
     </PentagramContext.Provider>
