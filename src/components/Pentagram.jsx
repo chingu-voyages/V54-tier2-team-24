@@ -12,15 +12,10 @@ const PentagramContent = () => {
   const [responseText, setResponseText] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [text, setText] = useState("");
 
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
   const onNext = () => setIndex(index === 4 ? 4 : index + 1);
-
-  const handleInputChange = (event) => {
-    setText(event.target.value);
-  };
 
   const handleSubmit = async () => {
     if (inputs.some((value) => value.trim() === "")) {
@@ -35,7 +30,8 @@ const PentagramContent = () => {
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-      const result = await model.generateContent(text);
+      const concatenatedText = inputs.join(" ");
+      const result = await model.generateContent(concatenatedText);
 
       setResponseText(result.response.text || "No response text found");
       setError(null);
