@@ -6,7 +6,7 @@ import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
 
 const PentagramContent = () => {
-  const { index, setIndex, pentaPrompts, inputs, updateInput } = usePentagram();
+  const { index, setIndex, pentaPrompts, inputs } = usePentagram();
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
 
