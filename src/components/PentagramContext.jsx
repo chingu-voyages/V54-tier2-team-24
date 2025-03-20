@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 
 // create useContext hook for switching input fields and recording user inputs
 // the user input can ba accessed by {inputs} = usePentagram(),string[]
-// the index can be access by { index} = usePentagram(),number
+// the index can be access by {index} = usePentagram(),number
 
 const PentagramContext = createContext();
 
@@ -34,32 +34,47 @@ export const PentagramProvider = ({ children }) => {
     {
       name: "persona",
       tooltip:
-        "Defines who the prompt will be for. Is there a specific audience?",
-      placeholder: "",
+        "Can you tell me a little bit about yourself?",
+      placeholder:
+          "You are a Product Owner, Scrum Master, UI/UX Designer, Web Developer, or" +
+        "Data Scientist who is at the beginning of your career and is looking to apply" +
+        "what you've learned to build practical experience to help you get noticed in" +
+        "the job market.",
     },
     {
       name: "context",
       tooltip:
-        "The situation in which the prompt is for. Do you have any background information to generate the relevant response? ",
-      placeholder: "",
+        "What type of background information can you provide? ",
+      placeholder:
+          "The information provided should assume that I am a Frontend Web Developer" +
+        "who understands the technical aspects of what is needed to build websites." +
+        "But, I have not worked in team projects with individuals in different roles.",
     },
     {
       name: "task",
       tooltip:
-        "Specifies what you want from the AI. Do you want it to construct a document?",
-      placeholder: "",
+        "What would you like me to do?",
+      placeholder:
+          "Provide a list of websites for organizations that provide programs and" +
+        "services which will help me transform what I've learned into experience that" +
+        "other job applicants will not have.",
     },
     {
       name: "output",
       tooltip:
-        "Defines the format, tone, or style of the response. Do you want me to contruct my response in a certain format or in a certain language?",
-      placeholder: "",
+        "Is there a tone or format in how you would like me to respond?",
+      placeholder:
+          "The tone should be informal and the list of websites should include a link" +
+        "to the site, it's name, and cost information.",
     },
     {
       name: "constraint",
       tooltip:
-        "Defines boundries and limitations. Do you want me to avoid any language or geography? ",
-      placeholder: "",
+        "What boundries or limits would you like me to honor?",
+      placeholder:
+          "Avoid generating lots of text only a summary of the websites are needed. Also," +
+        "responses should be tailored to readers with a high school level of education." +
+        "Avoid overly technical responses.",
     },
   ];
 
