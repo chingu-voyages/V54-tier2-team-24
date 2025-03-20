@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { GiSpellBook } from "react-icons/gi";
 import HelpMenu from "./HelpMenu";
+import { useHelpData } from "../contexts/HelpDataContext";
 
 function getDate() {
   const today = new Date();
@@ -14,6 +15,9 @@ function getDate() {
 function Header() {
   const [currentDate, setCurrentDate] = useState(getDate());
   const [showHelp, setShowHelp] = useState(false);
+
+  const {helpDataObject} = useHelpData()
+
 
   useEffect(()=> {
     setCurrentDate(getDate())
