@@ -19,12 +19,27 @@ function GeminiAPI({ loading, setLoading, text }) {
         setResponseText(result.response.text || "No response text found");
       } catch (error) {
         console.error("Error fetching data:", error);
-        setResponseText("An error occurred while fetching data.");
+
+        if (error.message.includes("Failed to fetch")) {
+          setResponseText(
+            "Network error: Please check your internet connection."
+          );
+        } else if (error.response && error.response.status === 429) {
+          setResponseText("Rate limit exceeded: Please try again later.");
+        } else if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          setResponseText(`API error: ${error.response.data.message}`);
+        } else {
+          setResponseText("An error occurred while fetching data.");
+        }
       }
     };
 
     fetchAIResponse();
-  }, []);
+  }, [text]);
 
   console.log(responseText);
 

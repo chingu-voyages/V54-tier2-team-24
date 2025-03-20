@@ -4,10 +4,13 @@ import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import "../HandleLoading.css";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
-  const [response, setResponse] = useState(null);
+  const [responseText, setResponseText] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const onChangeIndex = (num) => setIndex(num);
@@ -20,23 +23,41 @@ const PentagramContent = () => {
       return;
     }
 
-    try {
-      const res = await fetch("https://api.gemini.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ inputs }),
-      });
+    setLoading(true);
 
-      if (!res.ok) {
-        throw new Error("Failed to fetch response from Gemini API");
+    try {
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+      const concatenatedText = inputs.join(" ");
+      const result = await model.generateContent(concatenatedText);
+
+      setResponseText(result.response.text || "No response text found");
+      setError(null);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+
+      if (error.message.includes("Failed to fetch")) {
+        setResponseText(
+          "Network error: Please check your internet connection."
+        );
+      } else if (error.response && error.response.status === 429) {
+        setResponseText("Rate limit exceeded: Please try again later.");
+      } else if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setResponseText(`API error: ${error.response.data.message}`);
+      } else {
+        setResponseText("An error occurred while fetching data.");
       }
 
-      const data = await res.json();
-      setResponse(data);
-      setError(null);
-    } catch (err) {
-      setError(err.message);
+      setError(error.message);
       setResponse(null);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -97,10 +118,14 @@ const PentagramContent = () => {
         </button>
       </div>
 
-      {error && <p className="text-red-500 mt-2">{error}</p>}
-      {response && (
-        <p className="text-green-500 mt-2">Submission Successful!</p>
+      {loading && (
+        <div className="loading-spinner">
+          <div className="spinner"></div>
+          <div>Loading...</div>
+        </div>
       )}
+      {error && <p className="text-red-500 mt-2">{error}</p>}
+      {responseText && <p className="text-green-500 mt-2">{responseText}</p>}
     </div>
   );
 };

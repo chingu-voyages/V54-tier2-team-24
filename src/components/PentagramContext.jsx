@@ -34,7 +34,7 @@ export const PentagramProvider = ({ children }) => {
     {
       name: "persona",
       tooltip:
-        "Defines who the prompt will be for. Is there a specific audience?",
+        "Can you tell me a little bit about yourself?",
       placeholder:
           "You are a Product Owner, Scrum Master, UI/UX Designer, Web Developer, or" +
         "Data Scientist who is at the beginning of your career and is looking to apply" +
@@ -44,7 +44,7 @@ export const PentagramProvider = ({ children }) => {
     {
       name: "context",
       tooltip:
-        "The situation in which the prompt is for. Do you have any background information to generate the relevant response? ",
+        "What type of background information can you provide? ",
       placeholder:
           "The information provided should assume that I am a Frontend Web Developer" +
         "who understands the technical aspects of what is needed to build websites." +
@@ -53,7 +53,7 @@ export const PentagramProvider = ({ children }) => {
     {
       name: "task",
       tooltip:
-        "Specifies what you want from the AI. Do you want it to construct a document?",
+        "What would you like me to do?",
       placeholder:
           "Provide a list of websites for organizations that provide programs and" +
         "services which will help me transform what I've learned into experience that" +
@@ -62,7 +62,7 @@ export const PentagramProvider = ({ children }) => {
     {
       name: "output",
       tooltip:
-        "Defines the format, tone, or style of the response. Do you want me to contruct my response in a certain format or in a certain language?",
+        "Is there a tone or format in how you would like me to respond?",
       placeholder:
           "The tone should be informal and the list of websites should include a link" +
         "to the site, it's name, and cost information.",
@@ -70,7 +70,7 @@ export const PentagramProvider = ({ children }) => {
     {
       name: "constraint",
       tooltip:
-        "Defines boundries and limitations. Do you want me to avoid any language or geography? ",
+        "What boundries or limits would you like me to honor?",
       placeholder:
           "Avoid generating lots of text only a summary of the websites are needed. Also," +
         "responses should be tailored to readers with a high school level of education." +
