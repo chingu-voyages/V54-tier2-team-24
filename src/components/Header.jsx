@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { GiSpellBook } from "react-icons/gi";
-import HelpMenu from "./HelpMenu";
-import { useHelpData } from "../contexts/HelpDataContext";
+import HelpMenu from "./helpMenu/HelpMenu";
 
 function getDate() {
   const today = new Date();
@@ -16,12 +15,9 @@ function Header() {
   const [currentDate, setCurrentDate] = useState(getDate());
   const [showHelp, setShowHelp] = useState(false);
 
-  const {helpDataObject} = useHelpData()
-
-
-  useEffect(()=> {
-    setCurrentDate(getDate())
-  },[])
+  useEffect(() => {
+    setCurrentDate(getDate());
+  }, []);
 
   const toggleHelp = () => {
     setShowHelp(!showHelp);
@@ -30,7 +26,6 @@ function Header() {
   return (
     <>
       <HelpMenu
-        title="Help Menu"
         width="w-full sm:w-1/2 md:w-1/3 lg:w-1/3"
         position="right-0"
         isOpen={showHelp}
@@ -44,26 +39,25 @@ function Header() {
             App Name
           </h1>
         </div>
-       
-          <div className="flex flex-col items-end gap-2 pr-5 sm:flex-col sm:items-end sm:ml-auto sm:mt-4">
+
+        <div className="flex flex-col items-end gap-2 pr-5 sm:flex-col sm:items-end sm:ml-auto sm:mt-4">
           <img
             className="w-12 h-12 ml-8 rounded-full border-2 border-white cursor-pointer"
             src="./avatar.jpeg"
             alt="avatar"
           />
-     
-            <h3 className="text-blue-400 font-sans mt-6 text-sm sm:text-base">{currentDate}</h3>
-           
-              <button
-                className="text-white bg-blue-400 rounded-lg px-2 mt-2 text-sm sm:text-base" 
-                onClick={toggleHelp}
-              >
-                Help Menu
-              </button>
-             
-            </div>
-          
-       
+
+          <h3 className="text-blue-400 font-sans mt-6 text-sm sm:text-base">
+            {currentDate}
+          </h3>
+
+          <button
+            className="text-white bg-blue-400 rounded-lg px-2 mt-2 text-sm sm:text-base"
+            onClick={toggleHelp}
+          >
+            Help Menu
+          </button>
+        </div>
       </header>
     </>
   );
