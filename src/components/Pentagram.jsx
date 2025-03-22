@@ -5,6 +5,7 @@ import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
 
+
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
   const [response, setResponse] = useState(null);
@@ -88,13 +89,12 @@ const PentagramContent = () => {
         >
           Back
         </button>
-
         <button
-          onClick={index === 4 ? handleSubmit : onNext}
-          className="px-6 py-2 rounded-md bg-blue-300 text-blue-500 mt-3"
-        >
-          {index === 4 ? "Submit" : "Next"}
-        </button>
+        onClick={index === 4 ? handleSubmit : onNext}
+        className="px-6 py-2 rounded-md bg-blue-300 text-blue-500 mt-3"
+      >
+        {index === 4 ? "Submit" : "Next"}
+      </button>
       </div>
 
       {error && <p className="text-red-500 mt-2">{error}</p>}

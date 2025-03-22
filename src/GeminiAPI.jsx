@@ -13,7 +13,7 @@ function GeminiAPI({ loading, setLoading, text }) {
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
         const prompt = "Explain how AI works";
-        const result = await model.generateContent(text);
+        const result = await model.generateContent("Explain how AI works. Answer in 5 sentences");
 
         // Ensure you are accessing the correct property in the result object
         setResponseText(result.response.text || "No response text found");
@@ -32,6 +32,7 @@ function GeminiAPI({ loading, setLoading, text }) {
     <div>
       {!responseText ? setLoading(true) : setLoading(false)}
       {responseText}
+      
     </div>
   );
 }
