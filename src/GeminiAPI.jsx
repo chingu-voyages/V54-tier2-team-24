@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 function GeminiAPI({ loading, setLoading, text, onResponse }) {
-  const [responseText, setResponseText] = useState("");
+ 
 
   useEffect(() => {
     const fetchAIResponse = async () => {
