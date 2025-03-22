@@ -4,7 +4,8 @@ import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
-
+import Response from "./Response.jsx";
+import GeminiAPI from "../GeminiAPI.jsx";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
@@ -21,7 +22,7 @@ const PentagramContent = () => {
       return;
     }
 
-    try {
+    /**try {
       const res = await fetch("https://api.gemini.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -38,8 +39,8 @@ const PentagramContent = () => {
     } catch (err) {
       setError(err.message);
       setResponse(null);
-    }
-  };
+    }**/
+  }
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-6">
@@ -90,13 +91,13 @@ const PentagramContent = () => {
           Back
         </button>
         <button
-        onClick={index === 4 ? handleSubmit : onNext}
-        className="px-6 py-2 rounded-md bg-blue-300 text-blue-500 mt-3"
-      >
-        {index === 4 ? "Submit" : "Next"}
-      </button>
+          onClick={index === 4 ? handleSubmit : onNext}
+          className="px-6 py-2 rounded-md bg-blue-300 text-blue-500 mt-3"
+        >
+          {index === 4 ? "Submit" : "Next"}
+        </button>
       </div>
-
+      <Response />
       {error && <p className="text-red-500 mt-2">{error}</p>}
       {response && (
         <p className="text-green-500 mt-2">Submission Successful!</p>
