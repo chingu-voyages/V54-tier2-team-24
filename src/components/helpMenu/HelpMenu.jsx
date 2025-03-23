@@ -1,21 +1,35 @@
+import { useEffect, useState } from "react";
 import { useHelpData } from "../../contexts/HelpDataContext";
 import AdvanceFeatures from "./helpMenuSections/AdvanceFeatures";
 import Faq from "./helpMenuSections/Faq";
 import GettingStarted from "./helpMenuSections/GettingStarted";
 
 const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
+  const [isVisible, setIsVisible] = useState(isOpen);
   const { helpDataObject } = useHelpData();
   const { introduction, gettingStarted, faqs, advancedFeatures } =
     helpDataObject;
-    
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsVisible(true);
+    } else {
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+      }, 700);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
+
   return (
     <div
-      className={`fixed top-0 right-0 bg-black/[0.65] w-full h-screen z-40 transition-opacity duration-300 
-        ${isOpen ? "opacity-100" : "opacity-0 invisible"}`}
+      className={`fixed top-0 right-0 bg-black/[0.65] w-full h-screen z-40 transition-opacity duration-300
+        ${isOpen ? "opacity-100" : "opacity-0"} ${isVisible ? "" : "invisible"}`}
     >
       <div
         className={`bg-white px-8 py-12 ${width} absolute ${position} h-screen shadow-lg transform transition-transform duration-700
-        ${isOpen ? "translate-x-0" : "translate-x-full"} overflow-y-auto`}
+          ${isOpen ? "translate-x-0" : "translate-x-full"} overflow-y-auto`}
       >
         <h2 className="text-blue-300 text-lg font-bold pt-40 sm:pt-40 md:pt-40">
           {introduction.title}
