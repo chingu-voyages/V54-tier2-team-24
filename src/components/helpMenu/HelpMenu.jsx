@@ -6,6 +6,7 @@ import GettingStarted from "./helpMenuSections/GettingStarted";
 
 const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
   const [isVisible, setIsVisible] = useState(isOpen);
+  const [isSectionOpen, setIsSectionOpen] = useState(null);
   const { helpDataObject } = useHelpData();
   const { introduction, gettingStarted, faqs, advancedFeatures } =
     helpDataObject;
@@ -22,10 +23,16 @@ const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
     }
   }, [isOpen]);
 
+  const toggleSection = (sectionId) => {
+    setIsSectionOpen((current) => (current === sectionId ? null : sectionId));
+  };
+
   return (
     <div
       className={`fixed top-0 right-0 bg-black/[0.65] w-full h-screen z-40 transition-opacity duration-300
-        ${isOpen ? "opacity-100" : "opacity-0"} ${isVisible ? "" : "invisible"}`}
+        ${isOpen ? "opacity-100" : "opacity-0"} ${
+        isVisible ? "" : "invisible"
+      }`}
     >
       <div
         className={`bg-white px-8 py-12 ${width} absolute ${position} h-screen shadow-lg transform transition-transform duration-700
@@ -40,16 +47,28 @@ const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
         >
           x
         </button>
-        <div className="flex flex-col justify-center items-center w-full">
+        <div className="flex flex-col gap-3 justify-center items-center w-full">
           <label>Search Topics</label>
           <input className="bg-neutral-300 w-5/6" type="text" />
 
           <p>{introduction.content}</p>
         </div>
         <div>
-          <GettingStarted data={gettingStarted} />
-          <Faq data={faqs} />
-          <AdvanceFeatures data={advancedFeatures} />
+          <GettingStarted
+            data={gettingStarted}
+            toggleSection={toggleSection}
+            isSectionOpen={isSectionOpen}
+          />
+          <Faq
+            data={faqs}
+            toggleSection={toggleSection}
+            isSectionOpen={isSectionOpen}
+          />
+          <AdvanceFeatures
+            data={advancedFeatures}
+            toggleSection={toggleSection}
+            isSectionOpen={isSectionOpen}
+          />
         </div>
       </div>
     </div>
