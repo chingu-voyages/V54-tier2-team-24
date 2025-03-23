@@ -5,6 +5,7 @@ import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import ResponseDisplay from './ResponseDisplay.jsx';
 import "../HandleLoading.css";
 
 const PentagramContent = () => {
@@ -125,7 +126,9 @@ const PentagramContent = () => {
         </div>
       )}
       {error && <p className="text-red-500 mt-2">{error}</p>}
-      {responseText && <p className="text-green-500 mt-2">{responseText}</p>}
+      {/*{responseText && <p className="text-green-500 mt-2">{responseText}</p>}*/}
+      <ResponseDisplay responseText={responseText}/>
+
     </div>
   );
 };
