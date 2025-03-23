@@ -1,7 +1,7 @@
 import { useHelpData } from "../../contexts/HelpDataContext";
-import AdvanceFeatures from "../helpMenuSections/AdvanceFeatures";
-import Faq from "../helpMenuSections/Faq";
-import GettingStarted from "../helpMenuSections/GettingStarted";
+import AdvanceFeatures from "./helpMenuSections/AdvanceFeatures";
+import Faq from "./helpMenuSections/Faq";
+import GettingStarted from "./helpMenuSections/GettingStarted";
 
 const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
   const { helpDataObject } = useHelpData();
