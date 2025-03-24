@@ -42,7 +42,7 @@ const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
       >
         <div className=" w-full flex flex-col gap-5">
           <div className="flex items-center justify-between px-2 ">
-            <h2 className="text-neutral-900  text-2xl font-bold pt-40 sm:pt-40 md:pt-40">
+            <h2 className="text-neutral-900  text-2xl font-bold pt-40 sm:pt-40 md:pt-40 underline">
               {introduction.title}
             </h2>
             <button
