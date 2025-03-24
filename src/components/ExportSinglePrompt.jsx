@@ -14,7 +14,7 @@ const ExportSinglePrompt = ({ inputs, responseText }) => {
 
     // Pentagram inputs
     doc.setFontSize(12);
-    let yPosition = margin;
+    let yPosition = margin+15;
     doc.text("Your Prompt:", 10, yPosition);
     yPosition += margin;
     // input fields
