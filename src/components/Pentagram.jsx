@@ -32,7 +32,7 @@ const PentagramContent = () => {
       </h1>
 
       <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3 ">
-        {/* //number 1: persona, 2: context, 3 : task, 4 : output, 5 : constrain */}
+        {/* //number 0: persona, 1: context, 2 : task, 3 : output, 4 : constrain */}
         {[0, 1, 2, 3, 4].map((num) => (
           <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
             <Circle
