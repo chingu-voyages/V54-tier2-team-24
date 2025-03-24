@@ -9,8 +9,7 @@ export const useFetchAPi = () => {
           setLoading(true);
           setError(null);
           try {
-              const apiKey = "AIzaSyA3nWkFJGTGT0Vn3sFiPBOMEmX3rdguyb8";
-             // const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+              const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
               const genAI = new GoogleGenerativeAI(apiKey);
               const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
               const concatenatedText = inputs.join(" ");
