@@ -22,7 +22,7 @@ const ExportSinglePrompt = ({ inputs, responseText }) => {
     const labels = ["Persona", "Context", "Task", "Output", "Constraint"];
     inputs.forEach((input, index) => {
       const label = labels[index] || `Input ${index + 1}`;
-      let theString = doc.splitTextToSize(`${label}. ${input}` , pageWidth);
+      let theString = doc.splitTextToSize(`${label}: ${input}` , pageWidth);
       theString.forEach((splitString) => {
         doc.text(splitString, 10, yPosition);
         yPosition += lineHeight;
