@@ -3,6 +3,8 @@ import { useHelpData } from "../../contexts/HelpDataContext";
 import AdvanceFeatures from "./helpMenuSections/AdvanceFeatures";
 import Faq from "./helpMenuSections/Faq";
 import GettingStarted from "./helpMenuSections/GettingStarted";
+import { IoCloseOutline } from "react-icons/io5";
+import { FaWindowClose } from "react-icons/fa";
 
 const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
   const [isVisible, setIsVisible] = useState(isOpen);
@@ -35,24 +37,25 @@ const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
       }`}
     >
       <div
-        className={`bg-white px-8 py-12 ${width} absolute ${position} h-screen shadow-lg transform transition-transform duration-700
+        className={`bg-white pt-12 ${width} absolute ${position} h-screen shadow-lg transform transition-transform duration-700
           ${isOpen ? "translate-x-0" : "translate-x-full"} overflow-y-auto`}
       >
-        <h2 className="text-blue-300 text-lg font-bold pt-40 sm:pt-40 md:pt-40">
-          {introduction.title}
-        </h2>
-        <button
-          onClick={onRequestClose}
-          className="absolute top-4 right-4 pt-40 sm:pt-30 md:pt-45 text-gray-900 text-xl hover:text-gray-900 cursor-pointer"
-        >
-          x
-        </button>
-        <div className="flex flex-col gap-3 justify-center items-center w-full">
-          <label>Search Topics</label>
-          <input className="bg-neutral-300 w-5/6" type="text" />
+        <div className=" w-full flex flex-col gap-5">
+          <div className="flex items-center justify-between px-2 ">
+            <h2 className="text-neutral-900  text-2xl font-bold pt-40 sm:pt-40 md:pt-40">
+              {introduction.title}
+            </h2>
+            <button
+              onClick={onRequestClose}
+              className="sm:pt-30 md:pt-40 text-neutral-900    text-4xl hover:text-gray-700  cursor-pointer rounded-2xl"
+            >
+              <FaWindowClose />
+            </button>
+          </div>
 
           <p>{introduction.content}</p>
         </div>
+
         <div>
           <GettingStarted
             data={gettingStarted}

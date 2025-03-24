@@ -1,6 +1,6 @@
 const helpData = {
   introduction: {
-    title: "Help Menu",
+    title: "How To Use The App",
     content:
       "Welcome to AI Helper! This section provides a step-by-step guidance on how to use the app, answers common questions, and offers troubleshooting tips.",
   },

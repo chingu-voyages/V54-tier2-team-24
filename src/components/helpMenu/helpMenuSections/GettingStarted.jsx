@@ -4,7 +4,7 @@ export default function GettingStarted({ data, toggleSection, isSectionOpen }) {
     <section className="p-4">
       <button
         onClick={() => toggleSection(sectionId)}
-        className="w-full text-left flex justify-between items-center bg-gray-50 p-3 rounded-md hover:bg-gray-100"
+        className="w-full text-left flex justify-between items-center bg-gray-100 p-3 rounded-md hover:bg-gray-200"
       >
         <h2 className="text-2xl font-bold">{data.title}</h2>
         <span className="text-xl">
