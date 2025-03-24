@@ -5,13 +5,14 @@ import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../HandleLoading.css";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
   const [responseText, setResponseText] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
@@ -19,7 +20,7 @@ const PentagramContent = () => {
 
   const handleSubmit = async () => {
     if (inputs.some((value) => value.trim() === "")) {
-      alert("Please fill out all fields before submitting.");
+      toast.warn("Please fill out all fields before submitting.");
       return;
     }
 
@@ -34,28 +35,22 @@ const PentagramContent = () => {
       const result = await model.generateContent(concatenatedText);
 
       setResponseText(result.response.text || "No response text found");
-      setError(null);
     } catch (error) {
       console.error("Error fetching data:", error);
 
       if (error.message.includes("Failed to fetch")) {
-        setResponseText(
-          "Network error: Please check your internet connection."
-        );
+        toast.error("Network error: Please check your internet connection.");
       } else if (error.response && error.response.status === 429) {
-        setResponseText("Rate limit exceeded: Please try again later.");
+        toast.error("Rate limit exceeded: Please try again later.");
       } else if (
         error.response &&
         error.response.data &&
         error.response.data.message
       ) {
-        setResponseText(`API error: ${error.response.data.message}`);
+        toast.error(`API error: ${error.response.data.message}`);
       } else {
-        setResponseText("An error occurred while fetching data.");
+        toast.error("An error occurred while fetching data.");
       }
-
-      setError(error.message);
-      setResponse(null);
     } finally {
       setLoading(false);
     }
@@ -124,7 +119,6 @@ const PentagramContent = () => {
           <div>Loading...</div>
         </div>
       )}
-      {error && <p className="text-red-500 mt-2">{error}</p>}
       {responseText && <p className="text-green-500 mt-2">{responseText}</p>}
     </div>
   );

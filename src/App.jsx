@@ -2,6 +2,7 @@ import { FaGithub } from "react-icons/fa";
 import LoadingFeature from "./HandleLoading";
 import Header from "./components/header";
 import Pentagram from "./components/Pentagram";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -10,6 +11,12 @@ function App() {
       <main className="flex-1">
         <Pentagram />
         <LoadingFeature />
+        <ToastContainer
+          position="bottom-center"
+          theme="dark"
+          autoClose={3000}
+          hideProgressBar
+        />
       </main>
       <footer className="flex justify-between items-center boder-t-2 border-blue-400 h-[7vh] bg-blue-100 px-2 ">
         <a
