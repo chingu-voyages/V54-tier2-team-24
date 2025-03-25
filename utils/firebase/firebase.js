@@ -19,7 +19,7 @@ import {
   writeBatch,
   query,
   getDocs,
-  query,
+
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -32,20 +32,21 @@ const firebaseConfig = {
   measurementId: "G-GJCSPV0YW4",
 };
 
+const firebaseApp = initializeApp(firebaseConfig);
+
 export const db = getFirestore();
 
 export const addItemsToStore = async (collectionKey, objToAdd) => {
   const collectionRef = collection(db, collectionKey);
-
   const batch = writeBatch(db);
 
-  objToAdd.forEach((obj) => {
-    const docRef = doc(collectionRef, obj.title.toLowerCase());
-    batch.set(docRef, obj);
+  Object.entries(objToAdd).forEach(([docKey, docValue]) => {
+    const docRef = doc(collectionRef, docKey); 
+    batch.set(docRef, docValue);
   });
 
   await batch.commit();
-  console.log("Collection Added");
+  console.log(`Collection '${collectionKey}' successfully added.`);
 };
 
 
