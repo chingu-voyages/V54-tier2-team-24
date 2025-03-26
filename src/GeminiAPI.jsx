@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+
 import { GoogleGenerativeAI } from "@google/generative-ai";
+
 
 function GeminiAPI({ loading, setLoading, text }) {
   const [responseText, setResponseText] = useState();
@@ -12,7 +14,7 @@ function GeminiAPI({ loading, setLoading, text }) {
         const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        const prompt = "Explain how AI works";
+        const prompt = "Explain how AI works, use less than 5 sentences";
         const result = await model.generateContent(text);
 
         // Ensure you are accessing the correct property in the result object
@@ -44,10 +46,14 @@ function GeminiAPI({ loading, setLoading, text }) {
   console.log(responseText);
 
   return (
+   
     <div>
+   
       {!responseText ? setLoading(true) : setLoading(false)}
-      {responseText}
+   {responseText}
+ 
     </div>
+   
   );
 }
 
