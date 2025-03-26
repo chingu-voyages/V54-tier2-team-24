@@ -23,7 +23,15 @@ export const FirestoreProvider = ({ children }) => {
   }, []);
 
   return (
-    <FirestoreContext.Provider value={{ helpDataObject, loading, addItemToStore, deleteItemFromStore, addItemsToStore }}>
+    <FirestoreContext.Provider
+      value={{
+        helpDataObject,
+        loading,
+        addItemToStore,
+        deleteItemFromStore,
+        addItemsToStore,
+      }}
+    >
       {children}
     </FirestoreContext.Provider>
   );
