@@ -1,35 +1,34 @@
 import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  signInWithRedirect,
-  signInWithPopup,
-  GoogleAuthProvider,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
+// import {
+//   getAuth,
+//   signInWithRedirect,
+//   signInWithPopup,
+//   GoogleAuthProvider,
+//   createUserWithEmailAndPassword,
+//   signInWithEmailAndPassword,
+//   signOut,
+//   onAuthStateChanged,
+// } from "firebase/auth";
 
 import {
   doc,
   getFirestore,
-  getDoc,
   setDoc,
+  deleteDoc,
   collection,
   writeBatch,
   query,
   getDocs,
-
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDNA7CsEEOVdYtwS2GKcDLhVKjtI0FiYmw",
-  authDomain: "chingu-aiq.firebaseapp.com",
-  projectId: "chingu-aiq",
-  storageBucket: "chingu-aiq.firebasestorage.app",
-  messagingSenderId: "490518562303",
-  appId: "1:490518562303:web:2c42f675fc2feb69ed13ca",
-  measurementId: "G-GJCSPV0YW4",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
@@ -41,7 +40,7 @@ export const addItemsToStore = async (collectionKey, objToAdd) => {
   const batch = writeBatch(db);
 
   Object.entries(objToAdd).forEach(([docKey, docValue]) => {
-    const docRef = doc(collectionRef, docKey); 
+    const docRef = doc(collectionRef, docKey);
     batch.set(docRef, docValue);
   });
 
@@ -49,19 +48,36 @@ export const addItemsToStore = async (collectionKey, objToAdd) => {
   console.log(`Collection '${collectionKey}' successfully added.`);
 };
 
-
-export const getItemsFromStore = async () => {
-  const collectionRef = collection(db, "categories");
+export const getItemsFromStore = async (collectionName) => {
+  const collectionRef = collection(db, collectionName);
   const q = query(collectionRef);
 
-const querySnapshot = await getDocs(q);
-  // .reduce((accumaltor, docSnapshot) => {
-  //   const { title, items } = docSnapshot.data();
-  //   accumaltor[title.toLowerCase()] = items;
-  //   return accumaltor;
-  // }, {});
-  // return categoryMap;
-}
+  const querySnapshot = await getDocs(q);
+  const results = {};
+
+  querySnapshot.forEach((doc) => {
+    results[doc.id] = doc.data();
+  });
+
+  return results;
+};
+
+export const addItemToStore = async (collectionName, id, data) => {
+  const docRef = doc(db, collectionName, id);
+  await setDoc(docRef, data);
+};
+
+export const deleteItemFromStore = async (collectionName, id) => {
+  const docRef = doc(db, collectionName, id);
+  await deleteDoc(docRef);
+};
+// const querySnapshot = await getDocs(q);
+// .reduce((accumaltor, docSnapshot) => {
+//   const { title, items } = docSnapshot.data();
+//   accumaltor[title.toLowerCase()] = items;
+//   return accumaltor;
+// }, {});
+// return categoryMap;
 
 // export const createEmailAndPassword = async (email, password) => {
 //   if (!email || !password) return;

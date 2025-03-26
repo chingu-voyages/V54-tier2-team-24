@@ -1,5 +1,6 @@
 import HelpTest from "./datatest/HelpTest";
 
+
 const HelpMenu = ({ title, width, position, isOpen, onRequestClose }) => {
   return (
     <div
@@ -10,14 +11,18 @@ const HelpMenu = ({ title, width, position, isOpen, onRequestClose }) => {
         className={`bg-white px-8 py-12 ${width} absolute ${position} h-screen shadow-lg transform transition-transform duration-700
         ${isOpen ? "translate-x-0" : "translate-x-full"} overflow-y-auto`}
       >
-        <h2 className="text-blue-300 text-lg font-bold pt-40 sm:pt-40 md:pt-40">{title}</h2>
+        <h2 className="text-blue-300 text-lg font-bold pt-40 sm:pt-40 md:pt-40">
+          {title}
+        </h2>
         <button
           onClick={onRequestClose}
           className="absolute top-4 right-4 pt-40 sm:pt-30 md:pt-45 text-gray-900 text-xl hover:text-gray-900 cursor-pointer"
         >
           x
         </button>
-      <HelpTest />
+
+          <HelpTest />
+
       </div>
     </div>
   );
