@@ -1,3 +1,5 @@
+import HelpTest from "./datatest/HelpTest";
+
 const HelpMenu = ({ title, width, position, isOpen, onRequestClose }) => {
   return (
     <div
@@ -15,6 +17,7 @@ const HelpMenu = ({ title, width, position, isOpen, onRequestClose }) => {
         >
           x
         </button>
+      <HelpTest />
       </div>
     </div>
   );
