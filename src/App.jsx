@@ -1,16 +1,14 @@
 import { FaGithub } from "react-icons/fa";
 import LoadingFeature from "./HandleLoading";
-import Header from "./components/header";
+import Header from "./components/Header";
 import Pentagram from "./components/Pentagram";
-import { HelpDataProvider } from "./contexts/HelpDataContext";
+import HeroSection from "./components/hero/HeroSection";
 
 function App() {
   return (
     <div className="flex flex-col min-h-screen ">
-      <HelpDataProvider>
-        <Header />
-      </HelpDataProvider>
-
+      <Header />
+      <HeroSection />
       <main className="flex-1">
         <Pentagram />
         <LoadingFeature />
