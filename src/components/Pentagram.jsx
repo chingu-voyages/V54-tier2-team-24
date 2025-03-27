@@ -8,6 +8,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import ResponseDisplay from './ResponseDisplay.jsx';
 import "../HandleLoading.css";
 
+import PromptHistory from "./PromptHistory.jsx";
+
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
   const [responseText, setResponseText] = useState(null);
@@ -110,6 +112,8 @@ const PentagramContent = () => {
         >
           Back
         </button>
+
+        <PromptHistory />
 
         <button
           onClick={index === 4 ? handleSubmit : onNext}
