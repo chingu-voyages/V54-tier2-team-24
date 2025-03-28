@@ -71,13 +71,7 @@ export const deleteItemFromStore = async (collectionName, id) => {
   const docRef = doc(db, collectionName, id);
   await deleteDoc(docRef);
 };
-// const querySnapshot = await getDocs(q);
-// .reduce((accumaltor, docSnapshot) => {
-//   const { title, items } = docSnapshot.data();
-//   accumaltor[title.toLowerCase()] = items;
-//   return accumaltor;
-// }, {});
-// return categoryMap;
+
 
 // export const createEmailAndPassword = async (email, password) => {
 //   if (!email || !password) return;
