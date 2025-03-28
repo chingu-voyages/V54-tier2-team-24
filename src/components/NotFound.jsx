@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
-import lostRobot from "../../public/assets/lost-robot.json";
+import lostRobot from "../assets/lost-robot.json";
 
 const NotFound = () => {
   return (
