@@ -3,6 +3,7 @@ import { FaGithub } from "react-icons/fa";
 import LoadingFeature from "./HandleLoading";
 import Header from "./components/Header";
 import Pentagram from "./components/Pentagram";
+import HeroSection from "./components/hero/HeroSection";
 import NotFound from "./components/NotFound";
 
 function App() {
@@ -10,7 +11,8 @@ function App() {
     <Router>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="flex-1">
+        <HeroSection />
+      <main className="flex-1">
           <Routes>
             <Route path="/" element={<Pentagram />} />
             <Route path="*" element={<NotFound />} />
