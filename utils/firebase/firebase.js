@@ -1,14 +1,10 @@
 import { initializeApp } from "firebase/app";
-// import {
-//   getAuth,
-//   signInWithRedirect,
-//   signInWithPopup,
-//   GoogleAuthProvider,
-//   createUserWithEmailAndPassword,
-//   signInWithEmailAndPassword,
-//   signOut,
-//   onAuthStateChanged,
-// } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+} from "firebase/auth";
 
 import {
   doc,
@@ -72,20 +68,26 @@ export const deleteItemFromStore = async (collectionName, id) => {
   await deleteDoc(docRef);
 };
 
+const auth = getAuth();
+const provider = new GoogleAuthProvider();
 
-// export const createEmailAndPassword = async (email, password) => {
-//   if (!email || !password) return;
+export const signInWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    console.log("User Info:", user);
+    const token = GoogleAuthProvider.credentialFromResult(result);
+    localStorage.setItem("authToken", token);
+  } catch (error) {
+    console.error("Error Message:", error.message);
+  }
+};
 
-//   return await createUserWithEmailAndPassword(auth, email, password);
-// };
-
-// export const signInAuthUserWithEmailAndPassword = async (email, password) => {
-//   if (!email || !password) return;
-
-//   return await signInWithEmailAndPassword(auth, email, password);
-// };
-
-// export const signOutUser = async () => await signOut(auth);
-
-// export const onAuthStateChangedListener = (callback) =>
-//   onAuthStateChanged(auth, callback);
+export const logoutUser = async () => {
+  try {
+    await signOut(auth);
+    localStorage.removeItem("authToken");
+  } catch (error) {
+    console.error("Error Message:", error.message);
+  }
+};
