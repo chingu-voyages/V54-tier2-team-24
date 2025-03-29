@@ -14,10 +14,12 @@
     "@tailwindcss/vite": "^4.0.12",
     "dotenv": "^16.4.7",
     "jspdf": "^3.0.1",
+    "firebase": "^11.5.0",
     "lucide-react": "^0.479.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
+    "react-markdown": "^8.0.7",
     "tailwindcss": "^4.0.14"
   },
   "devDependencies": {
