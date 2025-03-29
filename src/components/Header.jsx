@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { GiSpellBook } from "react-icons/gi";
 import HelpMenu from "./helpMenu/HelpMenu";
-import { signInWithGoogle } from "../../utils/firebase/firebase";
+import {
+  logoutUser,
+  signInWithGoogle,
+  useFirebaseAuth,
+} from "../../utils/firebase/firebase";
 
 function getDate() {
   const today = new Date();
@@ -15,6 +19,24 @@ function getDate() {
 function Header() {
   const [currentDate, setCurrentDate] = useState(getDate());
   const [showHelp, setShowHelp] = useState(false);
+
+  const { user, isAuthenticated } = useFirebaseAuth();
+
+  const handleLogin = async () => {
+    try {
+      await signInWithGoogle();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     setCurrentDate(getDate());
@@ -42,18 +64,38 @@ function Header() {
         </div>
 
         <div className="flex flex-col items-end gap-2 pr-5 sm:flex-col sm:items-end sm:ml-auto sm:mt-4">
-          {/* <img
-            className="w-12 h-12 ml-8 rounded-full border-2 border-white cursor-pointer"
-            src="./avatar.jpeg"
-            alt="avatar"
-          /> */}
-  <button onClick={signInWithGoogle} className="bg-blue-500 text-white px-4 py-2 rounded">
-        Sign in with Google
-      </button>
+          <div>
+            {isAuthenticated ? (
+              <div className="flex flex-col items-center gap-4">
+                <div className="flex">
+                  <img
+                    className="w-10 h-10 rounded-4xl"
+                    src={user.photoURL}
+                    alt={`${user.displayName}s Avatar`}
+                  />
+                  <span>{user.displayName || "User"}</span>
+                </div>
+
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={handleLogin}
+                className="bg-blue-900 text-white px-4 py-2 "
+              >
+                Google Sign In
+              </button>
+            )}
+          </div>
+
           <h3 className="text-blue-400 font-sans mt-6 text-sm sm:text-base">
             {currentDate}
           </h3>
-
           <button
             className="text-white bg-blue-400 rounded-lg px-2 mt-2 text-sm sm:text-base"
             onClick={toggleHelp}

@@ -4,6 +4,8 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   signOut,
+  onAuthStateChanged,
+  getRedirectResult
 } from "firebase/auth";
 
 import {
@@ -16,6 +18,7 @@ import {
   query,
   getDocs,
 } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -68,26 +71,45 @@ export const deleteItemFromStore = async (collectionName, id) => {
   await deleteDoc(docRef);
 };
 
-const auth = getAuth();
+export const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
 export const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-    console.log("User Info:", user);
-    const token = GoogleAuthProvider.credentialFromResult(result);
-    localStorage.setItem("authToken", token);
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    localStorage.setItem("token", token);
+    return { user, token };
   } catch (error) {
     console.error("Error Message:", error.message);
+    throw error; 
   }
 };
+
 
 export const logoutUser = async () => {
   try {
     await signOut(auth);
-    localStorage.removeItem("authToken");
+    localStorage.removeItem("token");
   } catch (error) {
     console.error("Error Message:", error.message);
+    throw error; 
   }
+};
+
+export const useFirebaseAuth = () => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  return { user, loading, isAuthenticated: !!user };
 };
