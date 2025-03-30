@@ -1,0 +1,79 @@
+@font-face {
+  font-family: "Karla";
+  src: url("/fonts/Karla/Karla-VariableFont_wght.ttf")
+    format("truetype-variations");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Karla";
+  src: url("/fonts/Karla/static/Karla-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Karla";
+  src: url("/fonts/Karla/static/Karla-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inconsolata";
+  src: url("/fonts/Inconsolata/Inconsolata-VariableFont_wdth\,wght.ttf")
+    format("truetype-variations");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inconsolata";
+  src: url("/fonts/Inconsolata/static/Inconsolata-Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inconsolata";
+  src: url("/fonts/Inconsolata/static/Inconsolata-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inconsolata";
+  src: url("/fonts/Inconsolata/static/Inconsolata-ExtraLight.ttf")
+    format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inconsolata Expanded";
+  src: url("/fonts/Inconsolata/static/Inconsolata-Medium.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inconsolata Expanded";
+  src: url("/fonts/Inconsolata/static/Inconsolata-ExtraLight.ttf")
+    format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
