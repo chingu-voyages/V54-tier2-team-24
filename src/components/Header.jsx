@@ -6,6 +6,7 @@ import {
   signInWithGoogle,
   useFirebaseAuth,
 } from "../../utils/firebase/firebase";
+import { FaRegQuestionCircle } from "react-icons/fa";
 
 function getDate() {
   const today = new Date();
@@ -75,6 +76,10 @@ function Header() {
               </p>
               <span className="text-white">{user.displayName || "User"}</span>
             </div>
+            <div>
+
+              
+            </div>
             <button
               onClick={handleLogout}
               className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
@@ -85,11 +90,12 @@ function Header() {
         ) : (
           <button
             onClick={handleLogin}
-            className="bg-blue-300 text-white px-3 py-1 rounded-4xl"
+            className="bg-blue-700 text-white px-3 py-1 rounded-4xl"
           >
-            Google Sign In
+            Sign In
           </button>
-        )}
+        )}{" "}
+        <FaRegQuestionCircle className="text-white" />
       </div>
     </header>
   );
