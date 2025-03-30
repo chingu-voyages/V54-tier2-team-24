@@ -58,7 +58,6 @@ const PentagramContent = () => {
       }
 
       setError(error.message);
-      setResponse(null);
     } finally {
       setLoading(false);
     }
