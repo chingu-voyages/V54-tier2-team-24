@@ -70,7 +70,7 @@ function Header() {
                 <div className="flex">
                   <img
                     className="w-10 h-10 rounded-4xl"
-                    src={user.photoURL}
+                    src={user?.photoURL}
                     alt={`${user.displayName}s Avatar`}
                   />
                   <span>{user.displayName || "User"}</span>
