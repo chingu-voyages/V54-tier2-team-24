@@ -10,6 +10,10 @@ export default {
           'karla': ['Karla', 'sans-serif'],
           'inconsolata': ['Inconsolata', 'monospace'],
         },
+        fontWeight: {
+          'extralight': 200,
+          'semibold': 600,
+        },
         colors: {
           'background-start': '#02010B',
           'background-end': '#0D00A4',
@@ -23,4 +27,6 @@ export default {
         },
       },
     },
+    // You can add plugins if needed
+    plugins: [],
   }

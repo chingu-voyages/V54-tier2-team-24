@@ -58,7 +58,7 @@ function Header() {
       <header className="flex flex-wrap justify-between items-center sticky top-0 left-0 w-full bg-blue-100 shadow-md p-4 z-50">
         <div className="flex flex-col items-center sm:items-start sm:pl-10 justify-center">
           <GiSpellBook className="text-blue-400 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24" />
-          <h1 className="text-blue-400 font-sans text-xl sm:text-lg md:text2xl text-center sm:text-left">
+          <h1 className="text-8xl">
             App Name
           </h1>
         </div>

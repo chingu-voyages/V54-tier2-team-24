@@ -3,15 +3,19 @@ import LoadingFeature from "./HandleLoading";
 import Header from "./components/Header";
 import Pentagram from "./components/Pentagram";
 import HeroSection from "./components/hero/HeroSection";
+import { PentagramProvider } from "./components/PentagramContext";
+import PentagramContent from "./components/Pentagram";
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen ">
+    <div className="flex flex-col min-h-screen">
       <Header />
       <HeroSection />
-      <main className="flex-1">
-        <Pentagram />
-        <LoadingFeature />
+      <main className="flex flex-col justify-center w-full bg-green-200">
+        <PentagramProvider>
+          <PentagramContent />
+          <LoadingFeature />
+        </PentagramProvider>
       </main>
       <footer className="flex justify-between items-center boder-t-2 border-blue-400 h-[7vh] bg-blue-100 px-2 ">
         <a

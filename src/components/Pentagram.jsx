@@ -5,7 +5,7 @@ import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import ResponseDisplay from './ResponseDisplay.jsx';
+import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
 
 import PromptHistory from "./PromptHistory.jsx";
@@ -65,7 +65,7 @@ const PentagramContent = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-6">
+    <div className="w-5/6  py-6  bg-amber-200">
       <h1 className="text-2xl text-blue-400 font-bold text-center mb-8 max-sm:text-left">
         PENTAGRAM
       </h1>
@@ -96,9 +96,7 @@ const PentagramContent = () => {
         {pentaPrompts[index] && <Tooltips pentaPrompts={pentaPrompts[index]} />}
       </div>
 
-      <div className="w-full">
-        <PromptField />
-      </div>
+      <PromptField />
 
       <div className="flex justify-between items-center mb-8">
         <button
@@ -131,18 +129,9 @@ const PentagramContent = () => {
       )}
       {error && <p className="text-red-500 mt-2">{error}</p>}
       {/*{responseText && <p className="text-green-500 mt-2">{responseText}</p>}*/}
-      <ResponseDisplay responseText={responseText}/>
-
+      <ResponseDisplay responseText={responseText} />
     </div>
   );
 };
 
-const Pentagram = () => {
-  return (
-    <PentagramProvider>
-      <PentagramContent />
-    </PentagramProvider>
-  );
-};
-
-export default Pentagram;
+export default PentagramContent;
