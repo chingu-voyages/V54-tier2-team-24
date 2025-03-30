@@ -11,10 +11,10 @@ function App() {
     <Router>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <HeroSection />
-      <main className="flex-1">
+        <main className="flex-1">
           <Routes>
-            <Route path="/" element={<Pentagram />} />
+            <Route path="/" element={<HeroSection />} />
+            <Route path="/pentagram" element={<Pentagram />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <LoadingFeature />
