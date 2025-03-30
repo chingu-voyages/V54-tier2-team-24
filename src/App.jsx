@@ -1,13 +1,15 @@
 import { FaGithub } from "react-icons/fa";
 import LoadingFeature from "./HandleLoading";
-import Header from "./components/header";
+import Header from "./components/Header";
 import Pentagram from "./components/Pentagram";
+import HeroSection from "./components/hero/HeroSection";
 import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <div className="flex flex-col min-h-screen ">
       <Header />
+      <HeroSection />
       <main className="flex-1">
         <Pentagram />
         <LoadingFeature />

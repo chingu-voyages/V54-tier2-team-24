@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { Circle } from "lucide-react";
 import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
+import {useFetchAPi} from "./useFetchAPi.jsx";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import ResponseDisplay from './ResponseDisplay.jsx';
 import "../HandleLoading.css";
+import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
+
+
+import PromptHistory from "./PromptHistory.jsx";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
-  const [responseText, setResponseText] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { responseText, error, loading,fetchData } = useFetchAPi();
 
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
@@ -23,37 +26,7 @@ const PentagramContent = () => {
       toast.warn("Please fill out all fields before submitting.");
       return;
     }
-
-    setLoading(true);
-
-    try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-      const concatenatedText = inputs.join(" ");
-      const result = await model.generateContent(concatenatedText);
-
-      setResponseText(result.response.text || "No response text found");
-    } catch (error) {
-      console.error("Error fetching data:", error);
-
-      if (error.message.includes("Failed to fetch")) {
-        toast.error("Network error: Please check your internet connection.");
-      } else if (error.response && error.response.status === 429) {
-        toast.error("Rate limit exceeded: Please try again later.");
-      } else if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        toast.error(`API error: ${error.response.data.message}`);
-      } else {
-        toast.error("An error occurred while fetching data.");
-      }
-    } finally {
-      setLoading(false);
-    }
+    await fetchData(inputs)
   };
 
   return (
@@ -63,7 +36,7 @@ const PentagramContent = () => {
       </h1>
 
       <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3 ">
-        {/* //number 1: persona, 2: context, 3 : task, 4 : output, 5 : constrain */}
+        {/* //number 0: persona, 1: context, 2 : task, 3 : output, 4 : constrain */}
         {[0, 1, 2, 3, 4].map((num) => (
           <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
             <Circle
@@ -105,6 +78,8 @@ const PentagramContent = () => {
           Back
         </button>
 
+        <PromptHistory />
+
         <button
           onClick={index === 4 ? handleSubmit : onNext}
           className="px-6 py-2 rounded-md bg-blue-300 text-blue-500 mt-3"
@@ -112,6 +87,7 @@ const PentagramContent = () => {
           {index === 4 ? "Submit" : "Next"}
         </button>
       </div>
+        <ExportSinglePrompt inputs={inputs} responseText={responseText} />
 
       {loading && (
         <div className="loading-spinner">
@@ -119,7 +95,10 @@ const PentagramContent = () => {
           <div>Loading...</div>
         </div>
       )}
-      {responseText && <p className="text-green-500 mt-2">{responseText}</p>}
+      {error && <p className="text-red-500 mt-2">{error}</p>}
+      {/*{responseText && <p className="text-green-500 mt-2">{responseText}</p>}*/}
+      <ResponseDisplay responseText={responseText}/>
+
     </div>
   );
 };
