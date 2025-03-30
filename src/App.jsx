@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Pentagram from "./components/Pentagram";
 import HeroSection from "./components/hero/HeroSection";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Pentagram />
         <LoadingFeature />
         <ToastContainer
-          position="bottom-center"
+          position="top-center"
           theme="dark"
           autoClose={3000}
           hideProgressBar

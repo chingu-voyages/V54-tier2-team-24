@@ -4,18 +4,16 @@ import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
-import {useFetchAPi} from "./useFetchAPi.jsx";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import ResponseDisplay from './ResponseDisplay.jsx';
+import { useFetchAPi } from "./useFetchAPi.jsx";
+import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
 import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
-
-
 import PromptHistory from "./PromptHistory.jsx";
+import { toast } from "react-toastify";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
-  const { responseText, error, loading,fetchData } = useFetchAPi();
+  const { responseText, loading, fetchData } = useFetchAPi();
 
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
@@ -26,7 +24,7 @@ const PentagramContent = () => {
       toast.warn("Please fill out all fields before submitting.");
       return;
     }
-    await fetchData(inputs)
+    await fetchData(inputs);
   };
 
   return (
@@ -36,7 +34,6 @@ const PentagramContent = () => {
       </h1>
 
       <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3 ">
-        {/* //number 0: persona, 1: context, 2 : task, 3 : output, 4 : constrain */}
         {[0, 1, 2, 3, 4].map((num) => (
           <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
             <Circle
@@ -87,7 +84,7 @@ const PentagramContent = () => {
           {index === 4 ? "Submit" : "Next"}
         </button>
       </div>
-        <ExportSinglePrompt inputs={inputs} responseText={responseText} />
+      <ExportSinglePrompt inputs={inputs} responseText={responseText} />
 
       {loading && (
         <div className="loading-spinner">
@@ -95,10 +92,7 @@ const PentagramContent = () => {
           <div>Loading...</div>
         </div>
       )}
-      {error && <p className="text-red-500 mt-2">{error}</p>}
-      {/*{responseText && <p className="text-green-500 mt-2">{responseText}</p>}*/}
-      <ResponseDisplay responseText={responseText}/>
-
+      {responseText && <ResponseDisplay responseText={responseText} />}
     </div>
   );
 };
