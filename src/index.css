@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Karla";
+  src: url("/fonts/Karla/static/Karla-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Karla";
+  src: url("/fonts/Karla/static/Karla-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}

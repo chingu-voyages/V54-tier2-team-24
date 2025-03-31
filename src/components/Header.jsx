@@ -50,14 +50,14 @@ function Header() {
 
   return (
     // Swithc to VH
-    <header className="flex justify-evenly items-center sticky top-0 left-0 w-full bg-neutral-900 shadow-md p-4 z-50">
+    <header className="flex justify-evenly items-center sticky top-0 left-0 w-full bg-[#02010B] shadow-md p-4 z-50">
       <div className="flex items-center gap-3 w-1/3 ">
         {/* <img
           src="/designAssets/robot_logo.png"
           alt="Description of AiQ Logo"
           className="w-9 h-9"
         /> */}
-        <h1 className="text-white font-sans text-xl md:text-2xl">AiQ</h1>
+        <h1 className="text-white font-karla font-bold text-xl ">AiQ</h1>
       </div>
       <div className="w-1/3 text-center ">
         <h3 className="text-white font-sans text-sm sm:text-base">
