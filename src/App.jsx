@@ -6,7 +6,7 @@ import HeroSection from "./components/hero/HeroSection";
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen ">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-950 to-blue-700">
       <Header />
       <HeroSection />
       <main className="flex-1">

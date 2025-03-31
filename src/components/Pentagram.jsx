@@ -35,7 +35,7 @@ const PentagramContent = () => {
         PENTAGRAM
       </h1>
 
-      <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3 ">
+      <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3">
         {/* //number 0: persona, 1: context, 2 : task, 3 : output, 4 : constrain */}
         {[0, 1, 2, 3, 4].map((num) => (
           <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
@@ -61,7 +61,7 @@ const PentagramContent = () => {
         {pentaPrompts[index] && <Tooltips pentaPrompts={pentaPrompts[index]} />}
       </div>
 
-      <div className="w-full">
+      <div className="w-full rounded-md bg-white">
         <PromptField />
       </div>
 
