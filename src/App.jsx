@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
-import LoadingFeature from "./HandleLoading";
 import Header from "./components/Header";
 import Pentagram from "./components/Pentagram";
 import HeroSection from "./components/hero/HeroSection";
@@ -11,13 +10,12 @@ function App() {
     <Router>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="flex-1">
+        <main className="flex-1 flex">
           <Routes>
             <Route path="/" element={<HeroSection />} />
             <Route path="/pentagram" element={<Pentagram />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <LoadingFeature />
         </main>
         <footer className="flex justify-between items-center border-t-2 border-blue-400 h-[7vh] bg-blue-100 px-2">
           <a

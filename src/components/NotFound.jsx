@@ -5,7 +5,7 @@ import lostRobot from "../assets/lost-robot.json";
 
 const NotFound = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-blue-100 text-blue-400 p-6 md:gap-20">
+    <div className="flex flex-1 flex-col md:flex-row items-center justify-center bg-blue-100 text-blue-400 p-6 md:gap-20">
       {/* Lottie Animation */}
       <div className="w-64 h-64 md:w-80 md:h-80 mt-6 md:order-2">
         <Lottie animationData={lostRobot} loop={true} />
