@@ -57,10 +57,10 @@ function Header() {
           alt="Description of AiQ Logo"
           className="w-9 h-9"
         /> */}
-        <h1 className="text-white font-karla font-bold text-xl ">AiQ</h1>
+        <h1 className="text-white font-karlasemibold  text-2xl">AiQ</h1>
       </div>
       <div className="w-1/3 text-center ">
-        <h3 className="text-white font-sans text-sm sm:text-base">
+        <h3 className="text-white  font-karlasemibold  text-sm sm:text-base">
           {currentDate}
         </h3>
       </div>
@@ -75,11 +75,13 @@ function Header() {
                 alt={`${user.displayName}s Avatar`}
                 referrerPolicy="no-referrer"
               />
-              <span className="text-white">{user.displayName || "User"}</span>
+              <span className="text-white font-karlasemibold  ">
+                {user.displayName || "User"}
+              </span>
             </div>
             <button
               onClick={handleLogout}
-              className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-4xl text-sm cursor-pointer"
+              className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-4xl text-sm  font-karlasemibold  cursor-pointer"
             >
               Sign Out
             </button>
@@ -87,7 +89,7 @@ function Header() {
         ) : (
           <button
             onClick={handleLogin}
-            className="bg-blue-700 hover:bg-blue-500 text-white px-5 py-1 rounded-4xl text-sm cursor-pointer"
+            className="bg-blue-700 hover:bg-blue-500 text-white px-5 py-1 rounded-4xl text-sm font-karlasemibold  cursor-pointer"
           >
             Sign In
           </button>
