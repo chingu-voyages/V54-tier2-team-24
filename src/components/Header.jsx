@@ -7,6 +7,7 @@ import {
   useFirebaseAuth,
 } from "../../utils/firebase/firebase";
 import { FaRegQuestionCircle } from "react-icons/fa";
+import { format } from "date-fns";
 
 function getDate() {
   const today = new Date();
@@ -40,7 +41,7 @@ function Header() {
   };
 
   useEffect(() => {
-    setCurrentDate(getDate());
+    setCurrentDate(format(getDate(), "MM/dd/yyyy"));
   }, []);
 
   const toggleHelp = () => {
@@ -49,8 +50,8 @@ function Header() {
 
   return (
     // Swithc to VH
-    <header className="flex justify-between items-center sticky top-0 left-0 w-full bg-neutral-900 shadow-md p-4 z-50">
-      <div className="flex items-center gap-3">
+    <header className="flex justify-evenly items-center sticky top-0 left-0 w-full bg-neutral-900 shadow-md p-4 z-50">
+      <div className="flex items-center gap-3 w-1/3 ">
         {/* <img
           src="/designAssets/robot_logo.png"
           alt="Description of AiQ Logo"
@@ -58,32 +59,27 @@ function Header() {
         /> */}
         <h1 className="text-white font-sans text-xl md:text-2xl">AiQ</h1>
       </div>
+      <div className="w-1/3 text-center ">
+        <h3 className="text-white font-sans text-sm sm:text-base">
+          {currentDate}
+        </h3>
+      </div>
 
-      <h3 className="text-white font-sans text-sm sm:text-base">
-        {currentDate}
-      </h3>
-
-      <div>
+      <div className="flex justify-end items-center gap-2 w-1/3">
         {isAuthenticated ? (
           <div className="flex items-center gap-2">
             <div className="flex items-center">
-              {/* <img
-              className="w-10 h-10 rounded-full mr-2"
-              src={user?.photoURL}
-              alt={`${user.displayName}s Avatar`}
-            /> */}
-              <p className="w-10 h-10 rounded-full mr-2 bg-blue-200 flex items-center justify-center font-bold">
-                A
-              </p>
+              <img
+                className="w-8 h-8 rounded-full mr-2"
+                src={user.photoURL}
+                alt={`${user.displayName}s Avatar`}
+                referrerPolicy="no-referrer"
+              />
               <span className="text-white">{user.displayName || "User"}</span>
-            </div>
-            <div>
-
-              
             </div>
             <button
               onClick={handleLogout}
-              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+              className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-4xl text-sm cursor-pointer"
             >
               Sign Out
             </button>
@@ -91,12 +87,14 @@ function Header() {
         ) : (
           <button
             onClick={handleLogin}
-            className="bg-blue-700 text-white px-3 py-1 rounded-4xl"
+            className="bg-blue-700 hover:bg-blue-500 text-white px-5 py-1 rounded-4xl text-sm cursor-pointer"
           >
             Sign In
           </button>
         )}{" "}
-        <FaRegQuestionCircle className="text-white" />
+        <button onClick={toggleHelp} className="cursor-pointer ">
+          <FaRegQuestionCircle className="text-white h-5 w-5" />
+        </button>
       </div>
     </header>
   );

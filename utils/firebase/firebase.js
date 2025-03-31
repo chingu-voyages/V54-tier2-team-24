@@ -81,6 +81,7 @@ export const signInWithGoogle = async () => {
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;
     localStorage.setItem("token", token);
+    console.log("User", user)
     return { user, token };
   } catch (error) {
     console.error("Error Message:", error.message);
