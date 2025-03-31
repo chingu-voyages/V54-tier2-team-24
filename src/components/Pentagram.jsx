@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { Circle } from "lucide-react";
 import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
+import {useFetchAPi} from "./useFetchAPi.jsx";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
+import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
+
+
+import PromptHistory from "./PromptHistory.jsx";
 
 const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
+  const { responseText, error, loading,fetchData } = useFetchAPi();
   const [responseText, setResponseText] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -81,6 +87,9 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
     } finally {
       setLoading(false);
     }
+
+    await fetchData(inputs)
+
   };
 
   return (
@@ -98,7 +107,7 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
       </h1>
 
       <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3 ">
-        {/* //number 1: persona, 2: context, 3 : task, 4 : output, 5 : constrain */}
+        {/* //number 0: persona, 1: context, 2 : task, 3 : output, 4 : constrain */}
         {[0, 1, 2, 3, 4].map((num) => (
           <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
             <Circle
@@ -158,6 +167,8 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
           Back
         </button>
 
+        <PromptHistory />
+
         <button
           onClick={index === 4 ? handleSubmit : onNext}
           className="px-6 py-2 rounded-md bg-blue-300 text-blue-500 mt-3"
@@ -165,6 +176,7 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
           {index === 4 ? "Submit" : "Next"}
         </button>
       </div>
+        <ExportSinglePrompt inputs={inputs} responseText={responseText} />
 
       {loading && (
         <div className="loading-spinner">
