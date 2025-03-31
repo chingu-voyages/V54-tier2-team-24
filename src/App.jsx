@@ -13,7 +13,7 @@ function App() {
         <Pentagram />
         <LoadingFeature />
       </main>
-      <footer className="flex justify-between items-center boder-t-2 border-blue-400 h-[10vh] bg-neutral-900 px-2 ">
+      <footer className="flex justify-between items-center boder-t-2 border-blue-400 h-[10vh] bg-[#02010B]  px-2 ">
         <a
           href="https://github.com/chingu-voyages/V54-tier2-team-24"
           target="_blank"
@@ -25,8 +25,6 @@ function App() {
             <p className="text-sm">GitHub Repository</p>
           </div>
         </a>
-
-        {/* <p className="text-blue-400">Voyage 54 Team 24</p> */}
         {/* Links to LI or GitHub Flip action with LINKED and GIThub */}
         <div className="text-sm md:flex sm:max-w-3xl w-3/4 justify-evenly hidden text-blue-300 sm:items-center ">
           <div className="text-center">
