@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Image1 from "../../images/AI-PNG-HD.png";
+import Image1 from "../../images/AI-PNG-Isolated-HD.png";
 import "./HeroSection.css";
 
 const HeroSection = ({ setPentagramShowing }) => {
