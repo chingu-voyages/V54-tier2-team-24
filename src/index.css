@@ -1,15 +1,32 @@
-@import "tailwindcss";
-
 @font-face {
-  font-family: "Karla";
-  src: url("/fonts/Karla/static/Karla-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
+  font-family: Karla-SemiBold;
+  src: url("./assets/fonts/Karla/Karla-SemiBold.ttf");
+}
+@font-face {
+  font-family: Karla-Bold;
+  src: url("./assets/fonts/Karla/Karla-Bold.ttf");
+}
+@font-face {
+  font-family: Inconsolata-Regular;
+  src: url("./assets/fonts/Inconsolata/Inconsolata-Regular.ttf");
 }
 
 @font-face {
-  font-family: "Karla";
-  src: url("/fonts/Karla/static/Karla-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
+  font-family: Inconsolata-Bold;
+  src: url("./assets/fonts/Inconsolata/Inconsolata-Bold.ttf");
+}
+
+@font-face {
+  font-family: Inconsolata-ExtraLight;
+  src: url("./assets/fonts/Inconsolata/Inconsolata-ExtraLight.ttf");
+}
+
+@import "tailwindcss";
+
+@theme {
+  --font-karlasemibold: Karla-SemiBold, "sans-serif";
+  --font-karlabold: Karla-Bold, "sans-serif";
+  --font-inconsolataregular: Inconsolata-Regular, monospace;
+  --font-inconsolatabold: Inconsolata-Bold, monospace;
+  --font-inconsolataextralight: Inconsolata-ExtraLight, monospace;
 }
