@@ -4,18 +4,17 @@ import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
-import {useFetchAPi} from "./useFetchAPi.jsx";
+import { useFetchAPi } from "./useFetchAPi.jsx";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import ResponseDisplay from './ResponseDisplay.jsx';
+import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
 import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
-
 
 import PromptHistory from "./PromptHistory.jsx";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
-  const { responseText, error, loading,fetchData } = useFetchAPi();
+  const { responseText, error, loading, fetchData } = useFetchAPi();
 
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
@@ -26,11 +25,11 @@ const PentagramContent = () => {
       alert("Please fill out all fields before submitting.");
       return;
     }
-    await fetchData(inputs)
+    await fetchData(inputs);
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-6">
+    <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6">
       <h1 className="text-2xl text-blue-400 font-bold text-center mb-8 max-sm:text-left">
         PENTAGRAM
       </h1>
@@ -87,7 +86,7 @@ const PentagramContent = () => {
           {index === 4 ? "Submit" : "Next"}
         </button>
       </div>
-        <ExportSinglePrompt inputs={inputs} responseText={responseText} />
+      <ExportSinglePrompt inputs={inputs} responseText={responseText} />
 
       {loading && (
         <div className="loading-spinner">
@@ -97,8 +96,7 @@ const PentagramContent = () => {
       )}
       {error && <p className="text-red-500 mt-2">{error}</p>}
       {/*{responseText && <p className="text-green-500 mt-2">{responseText}</p>}*/}
-      <ResponseDisplay responseText={responseText}/>
-
+      <ResponseDisplay responseText={responseText} />
     </div>
   );
 };
