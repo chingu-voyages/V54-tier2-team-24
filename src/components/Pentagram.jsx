@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Circle } from "lucide-react";
 import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
@@ -16,9 +16,9 @@ import PromptHistory from "./PromptHistory.jsx";
 const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
   const { responseText, error, loading,fetchData } = useFetchAPi();
-  const [responseText, setResponseText] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // const [responseText, setResponseText] = useState(null);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
   const [personaPrompt, setPersonaPrompt] = useState("");
   const [contextPrompt, setContextPrompt] = useState("");
   const [taskPrompt, setTaskPrompt] = useState("");
