@@ -9,9 +9,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
 import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
-
-
 import PromptHistory from "./PromptHistory.jsx";
+import { toast } from "react-toastify";
 
 const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
@@ -87,13 +86,18 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
     } finally {
       setLoading(false);
     }
+    
+    if (inputs.some((value) => value.trim() === "")) {
+      toast.warn("Please fill out all fields before submitting.");
+      return;
+    }
 
     await fetchData(inputs)
 
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-6">
+    <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6">
       <button
         className="border border-black-500 p-2"
         onClick={() => {
@@ -176,7 +180,7 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
           {index === 4 ? "Submit" : "Next"}
         </button>
       </div>
-        <ExportSinglePrompt inputs={inputs} responseText={responseText} />
+      <ExportSinglePrompt inputs={inputs} responseText={responseText} />
 
       {loading && (
         <div className="loading-spinner">
@@ -184,11 +188,7 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
           <div>Loading...</div>
         </div>
       )}
-      {error && <p className="text-red-500 mt-2">{error}</p>}
-      {/*{responseText && <p className="text-green-500 mt-2">{responseText}</p>}*/}
-      {responseText === null ? null : (
-        <ResponseDisplay responseText={responseText} />
-      )}
+      {responseText && <ResponseDisplay responseText={responseText} />}
     </div>
   );
 };
