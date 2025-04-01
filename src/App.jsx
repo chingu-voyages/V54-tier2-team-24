@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import Pentagram from "./components/Pentagram";
 import HeroSection from "./components/hero/HeroSection";
 import NotFound from "./components/NotFound";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -16,6 +18,12 @@ function App() {
             <Route path="/pentagram" element={<Pentagram />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <ToastContainer
+          position="top-center"
+          theme="dark"
+          autoClose={3000}
+          hideProgressBar
+        />
         </main>
         <footer className="flex justify-between items-center border-t-2 border-blue-400 h-[7vh] bg-blue-100 px-2">
           <a
