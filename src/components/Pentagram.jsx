@@ -1,34 +1,111 @@
-import React from "react";
+import React, { useState } from "react";
 import { Circle } from "lucide-react";
 import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
-import { useFetchAPi } from "./useFetchAPi.jsx";
+import {useFetchAPi} from "./useFetchAPi.jsx";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
 import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
 import PromptHistory from "./PromptHistory.jsx";
 import { toast } from "react-toastify";
 
-const PentagramContent = () => {
+const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
-  const { responseText, loading, fetchData } = useFetchAPi();
+  const { responseText, error, loading,fetchData } = useFetchAPi();
+  // const [responseText, setResponseText] = useState(null);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
+  const [personaPrompt, setPersonaPrompt] = useState("");
+  const [contextPrompt, setContextPrompt] = useState("");
+  const [taskPrompt, setTaskPrompt] = useState("");
+  const [outputPrompt, setOutputPrompt] = useState("");
+  const [constraintPrompt, setConstraintPrompt] = useState("");
 
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
   const onNext = () => setIndex(index === 4 ? 4 : index + 1);
 
   const handleSubmit = async () => {
+    if (
+      personaPrompt === "" ||
+      contextPrompt === "" ||
+      taskPrompt === "" ||
+      outputPrompt === "" ||
+      constraintPrompt === ""
+    ) {
+      alert("Please fill out all fields before submitting.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+      const concatenatedText =
+        personaPrompt +
+        " " +
+        contextPrompt +
+        " " +
+        taskPrompt +
+        " " +
+        outputPrompt +
+        " " +
+        constraintPrompt;
+      console.log(concatenatedText);
+      const result = await model.generateContent(concatenatedText);
+
+      setResponseText(result.response.text || "No response text found");
+      setError(null);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+
+      if (error.message.includes("Failed to fetch")) {
+        setResponseText(
+          "Network error: Please check your internet connection."
+        );
+      } else if (error.response && error.response.status === 429) {
+        setResponseText("Rate limit exceeded: Please try again later.");
+      } else if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setResponseText(`API error: ${error.response.data.message}`);
+      } else {
+        setResponseText("An error occurred while fetching data.");
+      }
+
+      setError(error.message);
+      setResponse(null);
+    } finally {
+      setLoading(false);
+    }
+    
     if (inputs.some((value) => value.trim() === "")) {
       toast.warn("Please fill out all fields before submitting.");
       return;
     }
-    await fetchData(inputs);
+
+    await fetchData(inputs)
+
   };
 
   return (
     <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6">
+      <button
+        className="border border-black-500 p-2"
+        onClick={() => {
+          setPentagramShowing(false);
+        }}
+      >
+        Back to Hero
+      </button>
       <h1 className="text-2xl text-blue-400 font-bold text-center mb-8 max-sm:text-left">
         PENTAGRAM
       </h1>
@@ -54,13 +131,31 @@ const PentagramContent = () => {
           {pentaPrompts[index] && (
             <ResetButtons field={pentaPrompts[index].name} />
           )}
-          <ResetButtons isResetAll={true} />
+          <ResetButtons
+            isResetAll={true}
+            setPersonaPrompt={setPersonaPrompt}
+            setContextPrompt={setContextPrompt}
+            setTaskPrompt={setTaskPrompt}
+            setOutputPrompt={setOutputPrompt}
+            setConstraintPrompt={setConstraintPrompt}
+          />
         </div>
         {pentaPrompts[index] && <Tooltips pentaPrompts={pentaPrompts[index]} />}
       </div>
 
       <div className="w-full">
-        <PromptField />
+        <PromptField
+          personaPrompt={personaPrompt}
+          contextPrompt={contextPrompt}
+          taskPrompt={taskPrompt}
+          outputPrompt={outputPrompt}
+          constraintPrompt={constraintPrompt}
+          setPersonaPrompt={setPersonaPrompt}
+          setContextPrompt={setContextPrompt}
+          setTaskPrompt={setTaskPrompt}
+          setOutputPrompt={setOutputPrompt}
+          setConstraintPrompt={setConstraintPrompt}
+        />
       </div>
 
       <div className="flex justify-between items-center mb-8">
@@ -98,10 +193,13 @@ const PentagramContent = () => {
   );
 };
 
-const Pentagram = () => {
+const Pentagram = ({ pentagramShowing, setPentagramShowing }) => {
   return (
     <PentagramProvider>
-      <PentagramContent />
+      <PentagramContent
+        pentagramShowing={pentagramShowing}
+        setPentagramShowing={setPentagramShowing}
+      />
     </PentagramProvider>
   );
 };

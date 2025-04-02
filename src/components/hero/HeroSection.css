@@ -8,7 +8,7 @@
   margin-bottom: 2vh;
   width: 100%;
   height: 80vh;
-  background: no-repeat url("../../images/AiQ-herobackgroundimg.avif");
+  background: no-repeat url("../../images/AiQ-herobackground.PNG");
   background-size: cover;
   display: flex;
 }
@@ -66,7 +66,7 @@
     margin-bottom: 2vh;
     width: 100%;
     height: 50vh;
-    background: no-repeat url("../../images/AiQ-herobackgroundimg.avif");
+    background: no-repeat url("../../images/AiQ-herobackground.PNG");
     background-size: cover;
     display: flex;
   }
@@ -96,7 +96,7 @@
     margin-bottom: 2vh;
     width: 100%;
     height: 50vh;
-    background: no-repeat url("../../images/AiQ-herobackgroundimg.avif");
+    background: no-repeat url("../../images/AiQ-herobackground.PNG");
     background-size: cover;
     display: flex;
   }
