@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { GiSpellBook } from "react-icons/gi";
 import HelpMenu from "./helpMenu/HelpMenu";
+import {
+  logoutUser,
+  signInWithGoogle,
+  useFirebaseAuth,
+} from "../../utils/firebase/firebase";
+import { FaRegQuestionCircle } from "react-icons/fa";
+import { format } from "date-fns";
 
 function getDate() {
   const today = new Date();
@@ -15,8 +22,26 @@ function Header() {
   const [currentDate, setCurrentDate] = useState(getDate());
   const [showHelp, setShowHelp] = useState(false);
 
+  const { user, isAuthenticated } = useFirebaseAuth();
+
+  const handleLogin = async () => {
+    try {
+      await signInWithGoogle();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    setCurrentDate(getDate());
+    setCurrentDate(format(getDate(), "MM/dd/yyyy"));
   }, []);
 
   const toggleHelp = () => {
@@ -24,42 +49,56 @@ function Header() {
   };
 
   return (
-    <>
-      <HelpMenu
-        width="w-full sm:w-1/2 md:w-1/3 lg:w-1/3"
-        position="right-0"
-        isOpen={showHelp}
-        onRequestClose={toggleHelp}
-      />
+    // Swithc to VH
+    <header className="flex justify-evenly items-center sticky top-0 left-0 w-full bg-[#02010B] shadow-md p-4 z-50">
+      <div className="flex items-center gap-3 w-1/3 ">
+        {/* <img
+          src="/designAssets/robot_logo.png"
+          alt="Description of AiQ Logo"
+          className="w-9 h-9"
+        /> */}
+        <h1 className="text-white font-karlasemibold  text-2xl">AiQ</h1>
+      </div>
+      <div className="w-1/3 text-center ">
+        <h3 className="text-white  font-karlasemibold  text-sm sm:text-base">
+          {currentDate}
+        </h3>
+      </div>
 
-      <header className="flex flex-wrap justify-between items-center sticky top-0 left-0 w-full bg-blue-100 shadow-md p-4 z-50">
-        <div className="flex flex-col items-center sm:items-start sm:pl-10 justify-center">
-          <GiSpellBook className="text-blue-400 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24" />
-          <h1 className="text-blue-400 font-sans text-xl sm:text-lg md:text2xl text-center sm:text-left">
-            App Name
-          </h1>
-        </div>
-
-        <div className="flex flex-col items-end gap-2 pr-5 sm:flex-col sm:items-end sm:ml-auto sm:mt-4">
-          <img
-            className="w-12 h-12 ml-8 rounded-full border-2 border-white cursor-pointer"
-            src="./avatar.jpeg"
-            alt="avatar"
-          />
-
-          <h3 className="text-blue-400 font-sans mt-6 text-sm sm:text-base">
-            {currentDate}
-          </h3>
-
+      <div className="flex justify-end items-center gap-2 w-1/3">
+        {isAuthenticated ? (
+          <div className="flex items-center gap-2">
+            <div className="flex items-center">
+              <img
+                className="w-8 h-8 rounded-full mr-2"
+                src={user.photoURL}
+                alt={`${user.displayName}s Avatar`}
+                referrerPolicy="no-referrer"
+              />
+              <span className="text-white font-karlasemibold  ">
+                {user.displayName || "User"}
+              </span>
+            </div>
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-4xl text-sm  font-karlasemibold  cursor-pointer"
+            >
+              Sign Out
+            </button>
+          </div>
+        ) : (
           <button
-            className="text-white bg-blue-400 rounded-lg px-2 mt-2 text-sm sm:text-base"
-            onClick={toggleHelp}
+            onClick={handleLogin}
+            className="bg-blue-700 hover:bg-blue-500 text-white px-5 py-1 rounded-4xl text-sm font-karlasemibold  cursor-pointer"
           >
-            Help Menu
+            Sign In
           </button>
-        </div>
-      </header>
-    </>
+        )}{" "}
+        <button onClick={toggleHelp} className="cursor-pointer ">
+          <FaRegQuestionCircle className="text-white h-5 w-5" />
+        </button>
+      </div>
+    </header>
   );
 }
 export default Header;
