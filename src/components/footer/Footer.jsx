@@ -1,5 +1,6 @@
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
+import FooterContent from "./FooterLinks";
 
 export default function Footer() {
   return (
@@ -16,28 +17,7 @@ export default function Footer() {
         </div>
       </a>
       {/* Links to LI or GitHub Flip action with LINKED and GIThub */}
-      <div className="text-sm md:flex sm:max-w-3xl w-3/4 justify-evenly hidden text-blue-300 sm:items-center ">
-        <div className="text-center">
-          <p>Carissa Abraham</p>
-          <p>Aaron Goodwin</p>
-        </div>
-        <div className="text-center">
-          <p>Jessica Hackett</p>
-          <p>Christin Martin </p>
-        </div>
-        <div className="text-center">
-          <p>Matthew Neie</p>
-          <p>Luis Solar</p>
-        </div>
-
-        <div className="text-center">
-          <p>Benjamin Corbett</p>
-          <p>Sokuen Ryan</p>
-        </div>
-        <div>
-          <p>Christel Looky</p>
-        </div>
-      </div>
+      <FooterContent />
     </footer>
   );
 }
