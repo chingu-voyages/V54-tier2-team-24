@@ -6,8 +6,9 @@ export const useFetchAPi = () => {
   const [responseText, setResponseText] = useState(null);
   const [loading, setLoading] = useState(false);
   const [networkErrorToastId, setNetworkErrorToastId] = useState(null); // Track the network error toast ID
+  const [retrying, setRetrying] = useState(false); // Track if the user is retrying after a network error
 
-  const fetchData = async (inputs) => {
+  const fetchData = async (inputs, isRetry = false) => {
     setLoading(true);
     try {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -23,29 +24,35 @@ export const useFetchAPi = () => {
         setNetworkErrorToastId(null); // Reset the toast ID
       }
 
-      // Show success toast
-      toast.success("Successfully reconnected and fetched data!");
+      // Show success toast only if this was a retry
+      if (isRetry) {
+        toast.success("Successfully reconnected and fetched data!");
+        setRetrying(false); // Reset retrying state
+      }
     } catch (error) {
       console.error("Error fetching data:", error); // Log the error for debugging
 
       if (error.message.includes("Failed to fetch")) {
         // Show network error toast with retry button
-        const toastId = toast.error(
-          <div>
-            <p>Network error: Please check your internet connection.</p>
-            <button
-              onClick={() => {
-                toast.dismiss(toastId); // Close the toast
-                fetchData(inputs); // Retry the request
-              }}
-              className="px-4 py-1 rounded-md border-1 border-red-400 text-red-400 mt-3 text-sm shadow-md cursor-pointer"
-            >
-              Retry
-            </button>
-          </div>,
-          { autoClose: false } // Keep the toast open until dismissed
-        );
-        setNetworkErrorToastId(toastId); // Store the toast ID for later dismissal
+        if (!networkErrorToastId) {
+          const toastId = toast.error(
+            <div>
+              <p>Network error: Please check your internet connection.</p>
+              <button
+                onClick={() => {
+                  toast.dismiss(toastId); // Close the toast
+                  setRetrying(true); // Set retrying state
+                  fetchData(inputs, true); // Retry the request
+                }}
+                className="px-4 py-1 rounded-md border-1 border-red-400 text-red-400 mt-3 text-sm shadow-md cursor-pointer"
+              >
+                Retry
+              </button>
+            </div>,
+            { autoClose: false } // Keep the toast open until dismissed
+          );
+          setNetworkErrorToastId(toastId); // Store the toast ID for later dismissal
+        }
       } else if (error.response && error.response.status === 429) {
         toast.error("Rate limit exceeded: Please try again later.");
       } else if (
