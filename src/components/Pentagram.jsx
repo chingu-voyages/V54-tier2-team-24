@@ -10,6 +10,7 @@ import "../HandleLoading.css";
 import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
 import PromptHistory from "./PromptHistory.jsx";
 import { toast } from "react-toastify";
+import { validateInput } from "../utils/validationUtils.js";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
@@ -20,10 +21,14 @@ const PentagramContent = () => {
   const onNext = () => setIndex(index === 4 ? 4 : index + 1);
 
   const handleSubmit = async () => {
-    if (inputs.some((value) => value.trim() === "")) {
+    const hasEmptyFields = inputs.some((value) => value.trim() === "");
+    const hasErrors = inputs.some((value) => validateInput(value) !== "");
+
+    if (hasEmptyFields || hasErrors) {
       toast.warn("Please fill out all fields before submitting.");
       return;
     }
+
     await fetchData(inputs);
   };
 
