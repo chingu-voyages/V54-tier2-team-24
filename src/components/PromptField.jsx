@@ -3,13 +3,12 @@ import { usePentagram } from "./PentagramContext.jsx";
 import { validateInput } from "../utils/validationUtils.js";
 
 const PromptField = () => {
-  const { index, inputs, updateInput, pentaPrompts } = usePentagram();
+  const { index, inputs, updateInput, errors, updateError, pentaPrompts } =
+    usePentagram();
   const [inputValue, setInputValue] = useState(inputs[index]);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     setInputValue(inputs[index] || "");
-    setError(""); // Clear error when switching fields
   }, [index, inputs]);
 
   const handleChange = (e) => {
@@ -17,7 +16,7 @@ const PromptField = () => {
     setInputValue(value);
 
     const validationError = validateInput(value);
-    setError(validationError);
+    updateError(index, validationError); // Update error in context
     if (!validationError) {
       updateInput(value); // Update context only if input is valid
     }
@@ -28,7 +27,7 @@ const PromptField = () => {
       {/* Textarea */}
       <textarea
         className={`border-3 h-80 border-blue-300 rounded-lg text-blue-350 w-full p-4 ${
-          error ? "border-red-300" : ""
+          errors[index] ? "border-red-300" : ""
         }`}
         placeholder={pentaPrompts[index].placeholder}
         value={inputValue}
@@ -36,9 +35,13 @@ const PromptField = () => {
         onChange={handleChange}
       />
       {/* Error Message */}
-      {error && (
-        <div className="my-2 bg-red-400 text-white text-base py-4 px-4 rounded-lg shadow-md">
-          {error}
+      {errors[index] && (
+        <div
+          className="my-2 bg-red-400 text-white text-base py-4 px-4 rounded-lg shadow-md"
+          role="alert"
+          aria-live="assertive"
+        >
+          {errors[index]}
         </div>
       )}
     </div>

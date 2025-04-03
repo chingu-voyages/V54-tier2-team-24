@@ -9,11 +9,20 @@ const PentagramContext = createContext();
 export const PentagramProvider = ({ children }) => {
   const [index, setIndex] = useState(0);
   const [inputs, setInputs] = useState(["", "", "", "", ""]);
+  const [errors, setErrors] = useState(["", "", "", "", ""]); // Track errors for all fields
 
   const updateInput = (value) => {
     setInputs((prev) => {
       const updated = [...prev];
       updated[index] = value;
+      return updated;
+    });
+  };
+
+  const updateError = (fieldIndex, error) => {
+    setErrors((prev) => {
+      const updated = [...prev];
+      updated[fieldIndex] = error;
       return updated;
     });
   };
@@ -24,10 +33,12 @@ export const PentagramProvider = ({ children }) => {
       updated[fieldIndex] = "";
       return updated;
     });
+    updateError(fieldIndex, ""); // Clear error for the field
   };
 
   const resetAllFields = () => {
     setInputs(["", "", "", "", ""]);
+    setErrors(["", "", "", "", ""]); // Clear all errors
   };
 
   const pentaPrompts = [
@@ -81,6 +92,8 @@ export const PentagramProvider = ({ children }) => {
         inputs,
         setInputs,
         updateInput,
+        errors,
+        updateError,
         pentaPrompts,
         resetField,
         resetAllFields,
