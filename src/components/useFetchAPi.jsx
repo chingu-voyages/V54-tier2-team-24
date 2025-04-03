@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 export const useFetchAPi = () => {
   const [responseText, setResponseText] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async (inputs) => {
     setLoading(true);
@@ -16,8 +16,24 @@ export const useFetchAPi = () => {
       const result = await model.generateContent(concatenatedText);
       setResponseText(result.response.text || "No response text found");
     } catch (error) {
+      console.error("Error fetching data:", error); // Log the error for debugging
+
       if (error.message.includes("Failed to fetch")) {
-        toast.error("Network error: Please check your internet connection.");
+        const toastId = toast.error(
+          <div>
+            <p>Network error: Please check your internet connection.</p>
+            <button
+              onClick={() => {
+                toast.dismiss(toastId); // Close the toast
+                fetchData(inputs); // Retry the request
+              }}
+              className="px-4 py-1 rounded-md border-1 border-red-400 text-red-400 mt-3 text-sm shadow-md cursor-pointer"
+            >
+              Retry
+            </button>
+          </div>,
+          { autoClose: false } // Keep the toast open until dismissed
+        );
       } else if (error.response && error.response.status === 429) {
         toast.error("Rate limit exceeded: Please try again later.");
       } else if (
