@@ -1,6 +1,7 @@
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
-import FooterContent from "./FooterLinks";
+import FooterContent from "./FooterContent";
+
 
 export default function Footer() {
   return (
@@ -16,7 +17,6 @@ export default function Footer() {
           <p className="text-sm">GitHub Repository</p>
         </div>
       </a>
-      {/* Links to LI or GitHub Flip action with LINKED and GIThub */}
       <FooterContent />
     </footer>
   );
