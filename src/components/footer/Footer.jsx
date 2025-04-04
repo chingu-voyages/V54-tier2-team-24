@@ -34,8 +34,9 @@ export default function Footer() {
           <p>Benjamin Corbett</p>
           <p>Sokuen Ryan</p>
         </div>
-        <div>
+        <div className="text-center">
           <p>Christel Looky</p>
+          <p>Gentiana Han</p>
         </div>
       </div>
     </footer>
