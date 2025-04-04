@@ -1,4 +1,5 @@
-import ReactMarkdown from 'react-markdown';
+import { useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 
 const ResponseDisplay = ({ responseText })=>{
 
