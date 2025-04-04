@@ -1,6 +1,7 @@
 import React from "react";
-import { RotateCcw, ListRestart } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import { usePentagram } from "./PentagramContext.jsx";
+import Eraser from "/public/eraser.svg";
 
 const ResetButtons = ({
   field,
@@ -41,9 +42,18 @@ const ResetButtons = ({
   return (
     <button
       onClick={isResetAll ? handleResetAll : handleResetField}
-      className="p-1 bg-blue-500 hover:bg-blue-400 text-white rounded-full cursor-pointer"
+      className="p-1 rounded-full cursor-pointer"
     >
-      {isResetAll ? <ListRestart size={16} /> : <RotateCcw size={16} />}
+      {isResetAll ?
+          (<div className="flex items-center gap-1 font-inconsolataexpanded text-[27px] lg:text-[35px] md:text-[29px]">
+            <img src={Eraser} alt="Reset All Fields Button" className="w-8"
+                     style={{filter: "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
+                             "hue-rotate(185deg) brightness(103%) contrast(96%) " +
+                             "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))"}}
+                />
+            <span>Reset All</span>
+          </div>) :
+          (<div className="flex items-center gap-1 font-inconsolataexpanded text-[27px] lg:text-[35px] md:text-[29px]"><RotateCcw color="#A3CAF6" size={24} /> Reset This</div>)}
     </button>
   );
 };
