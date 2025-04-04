@@ -4,9 +4,11 @@ import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
 import {useFetchAPi} from "./useFetchAPi.jsx";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import ResponseDisplay from './ResponseDisplay.jsx';
 import "../HandleLoading.css";
 import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
+import { toast } from "react-toastify";
 import Rectangle from "./Rectangle.jsx";
 import Triangle from "/src/assets/svg_assets/triangle-svgrepo-com.svg";
 import Lightbulb from "/src/assets/svg_assets/lightbulb.svg";
@@ -14,12 +16,16 @@ import Lightbulb from "/src/assets/svg_assets/lightbulb.svg";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
-  const { responseText, error, loading,fetchData } = useFetchAPi();
+  //const { responseText, error, loading,fetchData } = useFetchAPi();
   const [personaPrompt, setPersonaPrompt] = useState("");
   const [contextPrompt, setContextPrompt] = useState("");
   const [taskPrompt, setTaskPrompt] = useState("");
   const [outputPrompt, setOutputPrompt] = useState("");
   const [constraintPrompt, setConstraintPrompt] = useState("");
+  const [responseText, setResponseText] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
 
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
@@ -36,7 +42,68 @@ const PentagramContent = () => {
       alert("Please fill out all fields before submitting.");
       return;
     }
-    await fetchData(inputs)
+        if (
+      personaPrompt === "" ||
+      contextPrompt === "" ||
+      taskPrompt === "" ||
+      outputPrompt === "" ||
+      constraintPrompt === ""
+    ) {
+      alert("Please fill out all fields before submitting.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+      const concatenatedText =
+        personaPrompt +
+        " " +
+        contextPrompt +
+        " " +
+        taskPrompt +
+        " " +
+        outputPrompt +
+        " " +
+        constraintPrompt;
+      console.log(concatenatedText);
+      const result = await model.generateContent(concatenatedText);
+
+      setResponseText(result.response.text || "No response text found");
+      setError(null);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+
+      if (error.message.includes("Failed to fetch")) {
+        setResponseText(
+          "Network error: Please check your internet connection."
+        );
+      } else if (error.response && error.response.status === 429) {
+        setResponseText("Rate limit exceeded: Please try again later.");
+      } else if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setResponseText(`API error: ${error.response.data.message}`);
+      } else {
+        setResponseText("An error occurred while fetching data.");
+      }
+
+      setError(error.message);
+      setResponseText(null);
+    } finally {
+      setLoading(false);
+    }
+
+    if (inputs.some((value) => value.trim() === "")) {
+      toast.warn("Please fill out all fields before submitting.");
+      return;
+    }
   };
 
   return (
