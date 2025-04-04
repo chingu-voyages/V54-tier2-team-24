@@ -33,11 +33,11 @@
 @import "tailwindcss";
 
 @theme {
-  --font-karlasemibold: Karla-SemiBold, "sans-serif";
-  --font-karlabold: Karla-Bold, "sans-serif";
-  --font-inconsolataregular: Inconsolata-Regular, monospace;
-  --font-inconsolatabold: Inconsolata-Bold, monospace;
+    --font-karlasemibold: Karla-SemiBold, "sans-serif";
+    --font-karlabold: Karla-Bold, "sans-serif";
+    --font-inconsolataregular: Inconsolata-Regular, monospace;
+    --font-inconsolatabold: Inconsolata-Bold, monospace;
     --font-inconsolataexpanded: Inconsolata-Expanded-Regular, monospace;
-  --font-inconsolataextralight: Inconsolata-ExtraLight, monospace;
+    --font-inconsolataextralight: Inconsolata-ExtraLight, monospace;
     --color-icon:#A3CAF6;
 }

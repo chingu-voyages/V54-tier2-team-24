@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { usePentagram } from "./PentagramContext.jsx";
-
+const style = `border-3 border-icon bg-white rounded-lg w-full h-[30vh] m-0 p-0`
 const PromptField = ({
   personaPrompt,
   setPersonaPrompt,
@@ -83,10 +83,12 @@ const PromptField = ({
   };
 
   return (
-    <div className="prompt-field flex flex-row items-center justify-center  max-sm:justify-start max-sm:w-full">
+    <div className="prompt-field flex flex-row items-start justify-start w-full
+    font-inconsolataregular text-black
+    lg:items-center lg:justify-center ">
       {pentaPrompts[index].name === "persona" ? (
         <textarea
-          className="border-3 h-80 border-blue-300 rounded-lg text-blue-350 w-full"
+          className={style}
           placeholder={pentaPrompts[index].placeholder}
           value={personaPrompt}
           required={true}
@@ -95,7 +97,7 @@ const PromptField = ({
       ) : null}
       {pentaPrompts[index].name === "context" ? (
         <textarea
-          className="border-3 h-80 border-blue-300 rounded-lg text-blue-350 w-full"
+          className={style}
           placeholder={pentaPrompts[index].placeholder}
           value={contextPrompt}
           required={true}
@@ -104,7 +106,7 @@ const PromptField = ({
       ) : null}
       {pentaPrompts[index].name === "task" ? (
         <textarea
-          className="border-3 h-80 border-blue-300 rounded-lg text-blue-350 w-full"
+          className={style}
           placeholder={pentaPrompts[index].placeholder}
           value={taskPrompt}
           required={true}
@@ -113,7 +115,7 @@ const PromptField = ({
       ) : null}
       {pentaPrompts[index].name === "output" ? (
         <textarea
-          className="border-3 h-80 border-blue-300 rounded-lg text-blue-350 w-full"
+          className={style}
           placeholder={pentaPrompts[index].placeholder}
           value={outputPrompt}
           required={true}
@@ -122,7 +124,7 @@ const PromptField = ({
       ) : null}
       {pentaPrompts[index].name === "constraint" ? (
         <textarea
-          className="border-3 h-80 border-blue-300 rounded-lg text-blue-350 w-full"
+          className={style}
           placeholder={pentaPrompts[index].placeholder}
           value={constraintPrompt}
           required={true}

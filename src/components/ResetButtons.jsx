@@ -1,7 +1,7 @@
 import React from "react";
 import { RotateCcw } from "lucide-react";
 import { usePentagram } from "./PentagramContext.jsx";
-import Eraser from "/public/eraser.svg";
+import Eraser from "/src/assets/svg_assets/eraser.svg";
 
 const ResetButtons = ({
   field,
@@ -45,15 +45,16 @@ const ResetButtons = ({
       className="p-1 rounded-full cursor-pointer"
     >
       {isResetAll ?
-          (<div className="flex items-center gap-1 font-inconsolataexpanded text-[27px] lg:text-[35px] md:text-[29px]">
+          (<div className="flex items-center gap-1 font-inconsolataexpanded text-[20px] lg:text-[26px] md:text-[22px]">
             <img src={Eraser} alt="Reset All Fields Button" className="w-8"
                      style={{filter: "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
                              "hue-rotate(185deg) brightness(103%) contrast(96%) " +
                              "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))"}}
                 />
-            <span>Reset All</span>
+            <span>Clear All</span>
           </div>) :
-          (<div className="flex items-center gap-1 font-inconsolataexpanded text-[27px] lg:text-[35px] md:text-[29px]"><RotateCcw color="#A3CAF6" size={24} /> Reset This</div>)}
+          (<div className="flex items-center gap-1 font-inconsolataexpanded text-[20px] lg:text-[26px] md:text-[22px]">
+            <RotateCcw color="#A3CAF6" size={24} />Clear This</div>)}
     </button>
   );
 };

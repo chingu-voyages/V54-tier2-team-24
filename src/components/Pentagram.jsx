@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
@@ -8,20 +8,31 @@ import ResponseDisplay from './ResponseDisplay.jsx';
 import "../HandleLoading.css";
 import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
 import Rectangle from "./Rectangle.jsx";
-import Triangle from "/public/triangle.svg";
-import Lightbulb from "/public/lightbulb.svg";
+import Triangle from "/src/assets/svg_assets/triangle-svgrepo-com.svg";
+import Lightbulb from "/src/assets/svg_assets/lightbulb.svg";
 
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
   const { responseText, error, loading,fetchData } = useFetchAPi();
+  const [personaPrompt, setPersonaPrompt] = useState("");
+  const [contextPrompt, setContextPrompt] = useState("");
+  const [taskPrompt, setTaskPrompt] = useState("");
+  const [outputPrompt, setOutputPrompt] = useState("");
+  const [constraintPrompt, setConstraintPrompt] = useState("");
 
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
   const onNext = () => setIndex(index === 4 ? 4 : index + 1);
 
   const handleSubmit = async () => {
-    if (inputs.some((value) => value.trim() === "")) {
+    if (
+      personaPrompt === "" ||
+      contextPrompt === "" ||
+      taskPrompt === "" ||
+      outputPrompt === "" ||
+      constraintPrompt === ""
+    ) {
       alert("Please fill out all fields before submitting.");
       return;
     }
@@ -29,37 +40,63 @@ const PentagramContent = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-6">
-      <h1 className="text-2xl font-bold mb-8 text-left font-karlasemibold text-[32px] lg:font-karlabold lg:text-[42px]
-       md:text-center md:text-[40px]">
+    <div className="mx-auto px-4 py-6
+    bg-gradient-to-b from-[#02010B] to-[#0D00A4] text-white
+    w-screen justify-items-center">
+      <h1 className="mb-8 text-left font-karlasemibold
+      text-[32px]
+      lg:font-karlabold lg:text-[42px]
+      md:text-center md:text-[40px]">
         PENTAGRAM
       </h1>
 
-      <div className="flex sm:justify-center items-center lg:gap-6 lg:mb-8 justify-start sm:gap-2 sm:mb-2">
+      <div className="flex items-center justify-start w-7/8
+       lg:gap-6 lg:mb-8
+       sm:gap-2 sm:mb-2 sm:justify-center ">
         {/* //number 0: persona, 1: context, 2 : task, 3 : output, 4 : constrain */}
         {[0, 1, 2, 3, 4].map((num) => (
           <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
-          <Rectangle key={num} isFilled={inputs[num]} isSelected={index===num}/>
+            <Rectangle key={num} isFilled={inputs[num]} isSelected={index===num}/>
           </button>
         ))}
       </div>
-      <div className="w-full flex justify-between pb-2 font-inconsolataregular">
-        <div className="flex gap-4">
+      <div className="flex justify-between pb-2 align-bottom
+      font-inconsolataregular
+      w-7/8 md:w-1/2">
+        <div className="flex gap-2">
           {pentaPrompts[index] && (
             <ResetButtons field={pentaPrompts[index].name} />
           )}
-          <ResetButtons isResetAll={true} />
+            <ResetButtons
+            isResetAll={true}
+            setPersonaPrompt={setPersonaPrompt}
+            setContextPrompt={setContextPrompt}
+            setTaskPrompt={setTaskPrompt}
+            setOutputPrompt={setOutputPrompt}
+            setConstraintPrompt={setConstraintPrompt}
+          />
         </div>
         {pentaPrompts[index] && <Tooltips pentaPrompts={pentaPrompts[index]} />}
       </div>
 
-      <div className="w-full">
-        <PromptField />
+      <div className="md:w-1/2 w-7/8 ">
+          <PromptField
+          personaPrompt={personaPrompt}
+          contextPrompt={contextPrompt}
+          taskPrompt={taskPrompt}
+          outputPrompt={outputPrompt}
+          constraintPrompt={constraintPrompt}
+          setPersonaPrompt={setPersonaPrompt}
+          setContextPrompt={setContextPrompt}
+          setTaskPrompt={setTaskPrompt}
+          setOutputPrompt={setOutputPrompt}
+          setConstraintPrompt={setConstraintPrompt}
+        />
       </div>
 
-      <div className="flex justify-between items-center mb-8
-      font-inconsolataexpanded text-[20px] lg:text-[35px] md:text-[29px]">
-          {/*20pt=27px*/}
+      <div className="flex justify-between items-center mb-8 w-7/8 md:w-1/2
+      font-inconsolataexpanded text-[20px] lg:text-[26px] md:text-[22px]">
+
         <button
           onClick={onPrevious}
   /*        className={`px-6 py-2 rounded-md font-medium transition-colors ${
@@ -90,11 +127,10 @@ const PentagramContent = () => {
                              "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))"}}
                     />
                   <span>Generate Prompt</span>
-                 {/*<Lightbulb color="#A3CAF6" size={27} /> Generate Prompt*/}
               </div>)
               : (
               <div className="flex gap-2 mt-2 items-center">
-                  <span>Submit</span>
+                  <span>Next</span>
                 <img src={Triangle} alt="Submit Button" className="w-8 rotate-270"
                      style={{filter: "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
                              "hue-rotate(185deg) brightness(103%) contrast(96%) " +
@@ -114,11 +150,6 @@ const PentagramContent = () => {
       {error && <p className="text-red-500 mt-2">{error}</p>}
       {/*{responseText && <p className="text-green-500 mt-2">{responseText}</p>}*/}
       <ResponseDisplay responseText={responseText}/>
-
-        <PromptHistory />
-        <ExportSinglePrompt inputs={inputs} responseText={responseText} />
-
-
     </div>
   );
 };
