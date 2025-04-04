@@ -19,8 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HeroSection pentagramShowing={pentagramShowing}
           setPentagramShowing={setPentagramShowing} />} />
-            <Route path="/pentagram" element={<Pentagram pentagramShowing={pentagramShowing}
-          setPentagramShowing={setPentagramShowing} />} />
+            <Route path="/pentagram" element={<Pentagram />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <ToastContainer
