@@ -2,7 +2,15 @@ import React from "react";
 import { RotateCcw, ListRestart } from "lucide-react";
 import { usePentagram } from "./PentagramContext.jsx";
 
-const ResetButtons = ({ field, isResetAll = false }) => {
+const ResetButtons = ({
+  field,
+  isResetAll = false,
+  setPersonaPrompt,
+  setContextPrompt,
+  setTaskPrompt,
+  setOutputPrompt,
+  setConstraintPrompt,
+}) => {
   const { pentaPrompts, resetField, resetAllFields } = usePentagram();
 
   const handleResetField = () => {
@@ -17,6 +25,16 @@ const ResetButtons = ({ field, isResetAll = false }) => {
   const handleResetAll = () => {
     if (window.confirm("Are you sure you want to reset all fields?")) {
       resetAllFields();
+      setPersonaPrompt("");
+      setContextPrompt("");
+      setTaskPrompt("");
+      setOutputPrompt("");
+      setConstraintPrompt("");
+      localStorage.removeItem("personaPrompt");
+      localStorage.removeItem("contextPrompt");
+      localStorage.removeItem("taskPrompt");
+      localStorage.removeItem("outputPrompt");
+      localStorage.removeItem("constraintPrompt");
     }
   };
 

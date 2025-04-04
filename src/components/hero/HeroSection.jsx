@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Image1 from "../../images/AI-PNG-HD.png";
+import Image1 from "../../images/AI-PNG-Isolated-HD.png";
 import "./HeroSection.css";
 
-const HeroSection = () => {
+const HeroSection = ({ setPentagramShowing }) => {
   return (
     <div className="hero-wrapper">
       <div className="hero-container">
@@ -14,7 +14,14 @@ const HeroSection = () => {
             about the features of the Pentagram; Persona, Context, Task, Output,
             Contraints. <br></br>Build your knowledge of AI with AiQ!
           </p>
-          <div className="get-started-button">Get Started</div>
+          <div
+            className="get-started-button"
+            onClick={() => {
+              setPentagramShowing(true);
+            }}
+          >
+            Get Started
+          </div>
         </div>
         <div className="hero-right">
           <img src={Image1} className="hero-img" />

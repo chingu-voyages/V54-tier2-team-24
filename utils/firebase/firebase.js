@@ -1,14 +1,12 @@
 import { initializeApp } from "firebase/app";
-// import {
-//   getAuth,
-//   signInWithRedirect,
-//   signInWithPopup,
-//   GoogleAuthProvider,
-//   createUserWithEmailAndPassword,
-//   signInWithEmailAndPassword,
-//   signOut,
-//   onAuthStateChanged,
-// } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+  onAuthStateChanged,
+  getRedirectResult
+} from "firebase/auth";
 
 import {
   doc,
@@ -20,6 +18,7 @@ import {
   query,
   getDocs,
 } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -71,27 +70,47 @@ export const deleteItemFromStore = async (collectionName, id) => {
   const docRef = doc(db, collectionName, id);
   await deleteDoc(docRef);
 };
-// const querySnapshot = await getDocs(q);
-// .reduce((accumaltor, docSnapshot) => {
-//   const { title, items } = docSnapshot.data();
-//   accumaltor[title.toLowerCase()] = items;
-//   return accumaltor;
-// }, {});
-// return categoryMap;
 
-// export const createEmailAndPassword = async (email, password) => {
-//   if (!email || !password) return;
+export const auth = getAuth();
+const provider = new GoogleAuthProvider();
 
-//   return await createUserWithEmailAndPassword(auth, email, password);
-// };
+export const signInWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    localStorage.setItem("token", token);
+    console.log("User", user)
+    return { user, token };
+  } catch (error) {
+    console.error("Error Message:", error.message);
+    throw error; 
+  }
+};
 
-// export const signInAuthUserWithEmailAndPassword = async (email, password) => {
-//   if (!email || !password) return;
 
-//   return await signInWithEmailAndPassword(auth, email, password);
-// };
+export const logoutUser = async () => {
+  try {
+    await signOut(auth);
+    localStorage.removeItem("token");
+  } catch (error) {
+    console.error("Error Message:", error.message);
+    throw error; 
+  }
+};
 
-// export const signOutUser = async () => await signOut(auth);
+export const useFirebaseAuth = () => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-// export const onAuthStateChangedListener = (callback) =>
-//   onAuthStateChanged(auth, callback);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  return { user, loading, isAuthenticated: !!user };
+};
