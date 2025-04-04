@@ -1,4 +1,13 @@
+@font-face{
+    font-family: Inconsolata;
+    src: url("../src/assets/fonts/Inconsolata-Regular.ttf")
+}
+
 @import "tailwindcss";
+
+@theme{
+    --font-inconsolata: Inconsolata, "sans-serif";
+}
 
 
   
