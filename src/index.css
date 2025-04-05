@@ -30,3 +30,22 @@
   --font-inconsolatabold: Inconsolata-Bold, monospace;
   --font-inconsolataextralight: Inconsolata-ExtraLight, monospace;
 }
+.font-Karla-SemiBold {
+  font-family: 'Karla-SemiBold', sans-serif;
+}
+
+.font-Karla-Bold {
+  font-family: 'Karla-Bold', sans-serif;
+}
+
+.font-Inconsolata-Regular {
+  font-family: 'Inconsolata-Regular', monospace;
+}
+
+.font-Inconsolata-Bold {
+  font-family: 'Inconsolata-Bold', monospace;
+}
+
+.font-Inconsolata-ExtraLight {
+  font-family: 'Inconsolata-ExtraLight', monospace;
+}
