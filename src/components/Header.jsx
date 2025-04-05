@@ -108,7 +108,7 @@ function Header() {
                 <div className="px-4 py-2 text-white text-sm border-b border-gray-700 hidden sm:block">
                   {user.displayName || "User"}
                 </div>
-                <button``
+                <button
                   onClick={handleLogout}
                   className="w-full text-left px-4 py-2 text-white text-sm hover:bg-[#2a2a40] transition-colors"
                 >
