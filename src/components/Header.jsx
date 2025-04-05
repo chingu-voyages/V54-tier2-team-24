@@ -96,7 +96,6 @@ function Header() {
               </span>
             </div>
 
-            {/* Desktop sign out button */}
             <button
               onClick={handleLogout}
               className="hidden sm:block bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-4xl text-sm font-karlasemibold cursor-pointer"
@@ -104,13 +103,12 @@ function Header() {
               Sign Out
             </button>
 
-            {/* Mobile dropdown menu */}
             {showDropdown && (
               <div className="absolute right-0 top-10 bg-[#1a1a2e] rounded-md shadow-lg py-2 z-50 min-w-[120px]">
                 <div className="px-4 py-2 text-white text-sm border-b border-gray-700 hidden sm:block">
                   {user.displayName || "User"}
                 </div>
-                <button
+                <button``
                   onClick={handleLogout}
                   className="w-full text-left px-4 py-2 text-white text-sm hover:bg-[#2a2a40] transition-colors"
                 >
