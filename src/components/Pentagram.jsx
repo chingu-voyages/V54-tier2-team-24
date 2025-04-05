@@ -102,7 +102,7 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
   };
 
   return (
-    <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6">
+    <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6 ">
       <button
         className="border border-black-500 p-2"
         onClick={() => {
