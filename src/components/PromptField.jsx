@@ -83,7 +83,7 @@ const PromptField = ({
   };
 
   return (
-    <div className="prompt-field flex flex-row items-center justify-center  max-sm:justify-start max-sm:w-full">
+    <div className="prompt-field flex flex-row items-center justify-center  max-sm:justify-start max-sm:w-full rounded-md bg-white">
       {pentaPrompts[index].name === "persona" ? (
         <textarea
           className="border-3 h-80 border-blue-300 rounded-lg text-blue-350 w-full"

@@ -15,10 +15,10 @@ import { toast } from "react-toastify";
 
 const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
-  const { responseText, error, loading,fetchData } = useFetchAPi();
-  // const [responseText, setResponseText] = useState(null);
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(null);
+  const { fetchData } = useFetchAPi();
+  const [responseText, setResponseText] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [personaPrompt, setPersonaPrompt] = useState("");
   const [contextPrompt, setContextPrompt] = useState("");
   const [taskPrompt, setTaskPrompt] = useState("");
@@ -29,18 +29,20 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
   const onNext = () => setIndex(index === 4 ? 4 : index + 1);
 
+  
+
   const handleSubmit = async () => {
-    if (
-      personaPrompt === "" ||
-      contextPrompt === "" ||
-      taskPrompt === "" ||
-      outputPrompt === "" ||
-      constraintPrompt === ""
-    ) {
-      alert("Please fill out all fields before submitting.");
+    const inputs = [
+      personaPrompt,
+      contextPrompt, 
+      taskPrompt,
+      outputPrompt, 
+      constraintPrompt, 
+    ]
+    if (inputs.some((value) => value.trim() === "")) {
+      toast.warn("Please fill out all fields before submitting.");
       return;
     }
-
     setLoading(true);
 
     try {
@@ -60,8 +62,13 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
         constraintPrompt;
       console.log(concatenatedText);
       const result = await model.generateContent(concatenatedText);
+      console.log("result", result)
 
-      setResponseText(result.response.text || "No response text found");
+      const text = await result.response.text() //text is in model.generateContent
+      console.log("API result", text)
+      setResponseText(text || "No response text found");
+      console.log("updated response text", result.response.text)
+     
       setError(null);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -88,17 +95,14 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
       setLoading(false);
     }
     
-    if (inputs.some((value) => value.trim() === "")) {
-      toast.warn("Please fill out all fields before submitting.");
-      return;
-    }
+  
 
-    await fetchData(inputs)
+   await fetchData(inputs)
 
   };
 
   return (
-    <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6">
+    <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6 ">
       <button
         className="border border-black-500 p-2"
         onClick={() => {
@@ -111,7 +115,7 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
         PENTAGRAM
       </h1>
 
-      <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3 ">
+      <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3">
         {/* //number 0: persona, 1: context, 2 : task, 3 : output, 4 : constrain */}
         {[0, 1, 2, 3, 4].map((num) => (
           <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
@@ -182,6 +186,9 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
         </button>
       </div>
       <ExportSinglePrompt inputs={inputs} responseText={responseText} />
+      
+
+{responseText && <ResponseDisplay responseText={responseText} />}
 
       {loading && (
         <div className="loading-spinner">
@@ -189,7 +196,8 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
           <div>Loading...</div>
         </div>
       )}
-      {responseText && <ResponseDisplay responseText={responseText} />}
+     
+      
     </div>
   );
 };
