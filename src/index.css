@@ -1,1 +1,51 @@
+@font-face {
+  font-family: Karla-SemiBold;
+  src: url("./assets/fonts/Karla/Karla-SemiBold.ttf");
+}
+@font-face {
+  font-family: Karla-Bold;
+  src: url("./assets/fonts/Karla/Karla-Bold.ttf");
+}
+@font-face {
+  font-family: Inconsolata-Regular;
+  src: url("./assets/fonts/Inconsolata/Inconsolata-Regular.ttf");
+}
+
+@font-face {
+  font-family: Inconsolata-Bold;
+  src: url("./assets/fonts/Inconsolata/Inconsolata-Bold.ttf");
+}
+
+@font-face {
+  font-family: Inconsolata-ExtraLight;
+  src: url("./assets/fonts/Inconsolata/Inconsolata-ExtraLight.ttf");
+}
+
 @import "tailwindcss";
+
+@theme {
+  --font-karlasemibold: Karla-SemiBold, "sans-serif";
+  --font-karlabold: Karla-Bold, "sans-serif";
+  --font-inconsolataregular: Inconsolata-Regular, monospace;
+  --font-inconsolatabold: Inconsolata-Bold, monospace;
+  --font-inconsolataextralight: Inconsolata-ExtraLight, monospace;
+}
+.font-Karla-SemiBold {
+  font-family: 'Karla-SemiBold', sans-serif;
+}
+
+.font-Karla-Bold {
+  font-family: 'Karla-Bold', sans-serif;
+}
+
+.font-Inconsolata-Regular {
+  font-family: 'Inconsolata-Regular', monospace;
+}
+
+.font-Inconsolata-Bold {
+  font-family: 'Inconsolata-Bold', monospace;
+}
+
+.font-Inconsolata-ExtraLight {
+  font-family: 'Inconsolata-ExtraLight', monospace;
+}

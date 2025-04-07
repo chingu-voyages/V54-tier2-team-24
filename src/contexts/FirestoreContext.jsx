@@ -18,7 +18,6 @@ export const FirestoreProvider = ({ children }) => {
       setHelpDataObject(data);
       setLoading(false);
     };
-
     fetchHelpData();
   }, []);
 
