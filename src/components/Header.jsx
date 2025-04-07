@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { GiSpellBook } from "react-icons/gi";
 import HelpMenu from "./helpMenu/HelpMenu";
 import {
@@ -23,6 +24,7 @@ function Header() {
   const [showHelp, setShowHelp] = useState(false);
 
   const { user, isAuthenticated } = useFirebaseAuth();
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -50,14 +52,21 @@ function Header() {
 
   return (
     // Swithc to VH
-    <header className="flex justify-evenly items-center sticky top-0 left-0 w-full bg-[#02010B] shadow-md p-4 z-50">
+    <header className="flex justify-evenly items-center sticky top-0 left-0 w-full bg-[#02010B] h-[7vh] shadow-md p-4 z-50">
       <div className="flex items-center gap-3 w-1/3 ">
         {/* <img
           src="/designAssets/robot_logo.png"
           alt="Description of AiQ Logo"
           className="w-9 h-9"
         /> */}
-        <h1 className="text-white font-karlasemibold  text-2xl">AiQ</h1>
+        <h1
+          className="text-white font-karlasemibold  text-2xl"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          AiQ
+        </h1>
       </div>
       <div className="w-1/3 text-center ">
         <h3 className="text-white  font-karlasemibold  text-sm sm:text-base">

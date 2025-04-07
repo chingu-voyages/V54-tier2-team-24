@@ -5,7 +5,7 @@ import {
   GoogleAuthProvider,
   signOut,
   onAuthStateChanged,
-  getRedirectResult
+  getRedirectResult,
 } from "firebase/auth";
 
 import {
@@ -16,6 +16,7 @@ import {
   collection,
   writeBatch,
   query,
+  getDoc,
   getDocs,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -31,6 +32,8 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
+
+const firestore = getFirestore(firebaseApp);
 
 export const db = getFirestore();
 
@@ -81,14 +84,13 @@ export const signInWithGoogle = async () => {
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;
     localStorage.setItem("token", token);
-    console.log("User", user)
+    console.log("User", user);
     return { user, token };
   } catch (error) {
     console.error("Error Message:", error.message);
-    throw error; 
+    throw error;
   }
 };
-
 
 export const logoutUser = async () => {
   try {
@@ -96,7 +98,7 @@ export const logoutUser = async () => {
     localStorage.removeItem("token");
   } catch (error) {
     console.error("Error Message:", error.message);
-    throw error; 
+    throw error;
   }
 };
 
@@ -114,3 +116,5 @@ export const useFirebaseAuth = () => {
 
   return { user, loading, isAuthenticated: !!user };
 };
+
+export { GoogleAuthProvider, firestore, signInWithPopup, doc, setDoc, getDoc };

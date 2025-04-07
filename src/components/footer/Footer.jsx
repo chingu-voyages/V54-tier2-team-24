@@ -3,7 +3,7 @@ import { FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="flex justify-between items-center boder-t-2 border-blue-400 h-[10vh] bg-[#02010B]  px-2 ">
+    <footer className="flex justify-between items-center boder-t-2 border-blue-400 h-[7vh] bg-[#02010B]  px-2 ">
       <a
         href="https://github.com/chingu-voyages/V54-tier2-team-24"
         target="_blank"

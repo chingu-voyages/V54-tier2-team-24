@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { usePentagram } from "./PentagramContext.jsx";
+import { firestore, auth } from "../../utils/firebase/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useFirestore } from "../contexts/FirestoreContext.jsx";
 
 const PromptField = ({
   personaPrompt,
@@ -13,8 +16,32 @@ const PromptField = ({
   outputPrompt,
   constraintPrompt,
 }) => {
+  const [user] = useAuthState(auth); // Check if user is logged in
   const { index, inputs, updateInput, pentaPrompts } = usePentagram();
   const [inputValue, setInputValue] = useState(inputs[index]);
+
+  useEffect(() => {
+    if (user) {
+      const docRef = firestore.collection("userData").doc(user.uid);
+      docRef.onSnapshot((doc) => {
+        if (doc.personaPrompt) {
+          setPersonaPrompt(doc.data().personaPrompt);
+        }
+        if (doc.contextPrompt) {
+          setContextPrompt(doc.data().contextPrompt);
+        }
+        if (doc.taskPrompt) {
+          setTaskPrompt(doc.data().taskPrompt);
+        }
+        if (doc.outputPrompt) {
+          setOutputPrompt(doc.data().outputPrompt);
+        }
+        if (doc.constraintPrompt) {
+          setConstraintPrompt(doc.data().constraintPrompt);
+        }
+      });
+    }
+  }, [user]);
 
   useEffect(() => {
     setInputValue(inputs[index] || "");
@@ -22,64 +49,116 @@ const PromptField = ({
 
   useEffect(() => {
     const savedPersonaPrompt = localStorage.getItem("personaPrompt");
-    if (savedPersonaPrompt) {
+    if (user) {
+      null;
+    } else if (savedPersonaPrompt) {
       setPersonaPrompt(savedPersonaPrompt);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const savedContextPrompt = localStorage.getItem("contextPrompt");
-    if (savedContextPrompt) {
+    if (user) {
+      null;
+    } else if (savedContextPrompt) {
       setContextPrompt(savedContextPrompt);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const savedTaskPrompt = localStorage.getItem("taskPrompt");
-    if (savedTaskPrompt) {
+    if (user) {
+      null;
+    } else if (savedTaskPrompt) {
       setTaskPrompt(savedTaskPrompt);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const savedOutputPrompt = localStorage.getItem("outputPrompt");
-    if (savedOutputPrompt) {
+    if (user) {
+      null;
+    } else if (savedOutputPrompt) {
       setOutputPrompt(savedOutputPrompt);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const savedConstraintPrompt = localStorage.getItem("constraintPrompt");
-    if (savedConstraintPrompt) {
+    if (user) {
+      null;
+    } else if (savedConstraintPrompt) {
       setConstraintPrompt(savedConstraintPrompt);
     }
-  }, []);
-
-  // const handleChange = (e) => {
-  //   setInputValue(e.target.value);
-  //   updateInput(e.target.value);
-  //   localStorage.setItem("inputValue", inputs);
-  // };
+  }, [user]);
 
   const handlePersonaChange = (e) => {
-    setPersonaPrompt(e.target.value);
-    localStorage.setItem("personaPrompt", e.target.value);
+    const personaPromptInput = e.target.value;
+    setPersonaPrompt(personaPromptInput);
+
+    if (user) {
+      const docRef = firestore.collection("userData").doc(user.uid);
+      docRef.set(
+        { ...prev, personaPrompt: personaPromptInput },
+        { merge: true }
+      );
+    } else {
+      localStorage.setItem("personaPrompt", e.target.value);
+    }
   };
+
   const handleContextChange = (e) => {
-    setContextPrompt(e.target.value);
-    localStorage.setItem("contextPrompt", e.target.value);
+    const contextPromptInput = e.target.value;
+    setContextPrompt(contextPromptInput);
+
+    if (user) {
+      const docRef = firestore.collection("userData").doc(user.uid);
+      docRef.set(
+        { ...prev, contextPrompt: contextPromptInput },
+        { merge: true }
+      );
+    } else {
+      localStorage.setItem("contextPrompt", e.target.value);
+    }
   };
+
   const handleTaskChange = (e) => {
-    setTaskPrompt(e.target.value);
-    localStorage.setItem("taskPrompt", e.target.value);
+    const taskPromptInput = e.target.value;
+    setTaskPrompt(taskPromptInput);
+
+    if (user) {
+      const docRef = firestore.collection("userData").doc(user.uid);
+      docRef.set({ ...prev, taskPrompt: taskPromptInput }, { merge: true });
+    } else {
+      localStorage.setItem("taskPrompt", e.target.value);
+    }
   };
+
   const handleOutputChange = (e) => {
-    setOutputPrompt(e.target.value);
-    localStorage.setItem("outputPrompt", e.target.value);
+    const outputPromptInput = e.target.value;
+    setOutputPrompt(outputPromptInput);
+
+    if (user) {
+      const docRef = firestore.collection("userData").doc(user.uid);
+      docRef.set({ ...prev, outputPrompt: outputPromptInput }, { merge: true });
+    } else {
+      localStorage.setItem("outputPrompt", e.target.value);
+    }
   };
+
   const handleConstraintChange = (e) => {
-    setConstraintPrompt(e.target.value);
-    localStorage.setItem("constraintPrompt", e.target.value);
+    const constraintPromptInput = e.target.value;
+    setConstraintPrompt(constraintPromptInput);
+
+    if (user) {
+      const docRef = firestore.collection("userData").doc(user.uid);
+      docRef.set(
+        { ...prev, constraintPrompt: constraintPromptInput },
+        { merge: true }
+      );
+    } else {
+      localStorage.setItem("constraintPrompt", e.target.value);
+    }
   };
 
   return (

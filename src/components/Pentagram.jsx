@@ -4,21 +4,15 @@ import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
-import {useFetchAPi} from "./useFetchAPi.jsx";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
 
-import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
-import PromptHistory from "./PromptHistory.jsx";
-import { toast } from "react-toastify";
-
-const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
+const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
-  const { responseText, error, loading,fetchData } = useFetchAPi();
-  // const [responseText, setResponseText] = useState(null);
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(null);
+  const [responseText, setResponseText] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [personaPrompt, setPersonaPrompt] = useState("");
   const [contextPrompt, setContextPrompt] = useState("");
   const [taskPrompt, setTaskPrompt] = useState("");
@@ -87,32 +81,16 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
     } finally {
       setLoading(false);
     }
-    
-    if (inputs.some((value) => value.trim() === "")) {
-      toast.warn("Please fill out all fields before submitting.");
-      return;
-    }
-
-    await fetchData(inputs)
-
   };
 
   return (
-    <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6">
-      <button
-        className="border border-black-500 p-2"
-        onClick={() => {
-          setPentagramShowing(false);
-        }}
-      >
-        Back to Hero
-      </button>
+    <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6 ">
       <h1 className="text-2xl text-blue-400 font-bold text-center mb-8 max-sm:text-left">
         PENTAGRAM
       </h1>
 
       <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3 ">
-        {/* //number 0: persona, 1: context, 2 : task, 3 : output, 4 : constrain */}
+        {/* //number 1: persona, 2: context, 3 : task, 4 : output, 5 : constrain */}
         {[0, 1, 2, 3, 4].map((num) => (
           <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
             <Circle
@@ -172,8 +150,6 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
           Back
         </button>
 
-        <PromptHistory />
-
         <button
           onClick={index === 4 ? handleSubmit : onNext}
           className="px-6 py-2 rounded-md bg-blue-300 text-blue-500 mt-3"
@@ -181,7 +157,6 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
           {index === 4 ? "Submit" : "Next"}
         </button>
       </div>
-      <ExportSinglePrompt inputs={inputs} responseText={responseText} />
 
       {loading && (
         <div className="loading-spinner">
@@ -189,18 +164,19 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
           <div>Loading...</div>
         </div>
       )}
-      {responseText && <ResponseDisplay responseText={responseText} />}
+      {error && <p className="text-red-500 mt-2">{error}</p>}
+      {/*{responseText && <p className="text-green-500 mt-2">{responseText}</p>}*/}
+      {responseText === null ? null : (
+        <ResponseDisplay responseText={responseText} />
+      )}
     </div>
   );
 };
 
-const Pentagram = ({ pentagramShowing, setPentagramShowing }) => {
+const Pentagram = () => {
   return (
     <PentagramProvider>
-      <PentagramContent
-        pentagramShowing={pentagramShowing}
-        setPentagramShowing={setPentagramShowing}
-      />
+      <PentagramContent />
     </PentagramProvider>
   );
 };
