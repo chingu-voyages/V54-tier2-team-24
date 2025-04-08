@@ -16,7 +16,7 @@ const PromptField = ({
   outputPrompt,
   constraintPrompt,
 }) => {
-  const [user] = useAuthState(auth); // Check if user is logged in
+  const [user] = useAuthState(auth);
   const { index, inputs, updateInput, pentaPrompts } = usePentagram();
   const [inputValue, setInputValue] = useState(inputs[index]);
 
@@ -24,7 +24,7 @@ const PromptField = ({
     if (user) {
       const docRef = firestore.collection("userData").doc(user.uid);
       docRef.onSnapshot((doc) => {
-        if (doc.personaPrompt) {
+        if (doc.data().personaPrompt) {
           setPersonaPrompt(doc.data().personaPrompt);
         }
         if (doc.contextPrompt) {
@@ -161,8 +161,38 @@ const PromptField = ({
     }
   };
 
+  const clearCurrentField = () => {
+    if (pentaPrompts[index].name === "persona") {
+      setPersonaPrompt("");
+      localStorage.removeItem("personaPrompt");
+    }
+    if (pentaPrompts[index].name === "context") {
+      setContextPrompt("");
+      localStorage.removeItem("contextPrompt");
+    }
+    if (pentaPrompts[index].name === "task") {
+      setTaskPrompt("");
+      localStorage.removeItem("taskPrompt");
+    }
+    if (pentaPrompts[index].name === "output") {
+      setOutputPrompt("");
+      localStorage.removeItem("outputPrompt");
+    }
+    if (pentaPrompts[index].name === "constraint") {
+      setConstraintPrompt("");
+      localStorage.removeItem("constraintPrompt");
+    }
+  };
+
   return (
     <div className="prompt-field flex flex-row items-center justify-center  max-sm:justify-start max-sm:w-full">
+      <button
+        onClick={() => {
+          clearCurrentField();
+        }}
+      >
+        Clear field
+      </button>
       {pentaPrompts[index].name === "persona" ? (
         <textarea
           className="border-3 h-80 border-blue-300 rounded-lg text-blue-350 w-full"

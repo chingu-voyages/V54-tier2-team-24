@@ -60,7 +60,7 @@ function Header() {
           className="w-9 h-9"
         /> */}
         <h1
-          className="text-white font-karlasemibold  text-2xl"
+          className="text-white font-karlasemibold  text-2xl cursor-pointer"
           onClick={() => {
             navigate("/");
           }}
