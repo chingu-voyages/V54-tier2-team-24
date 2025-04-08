@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../../utils/firebase/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import Image1 from "../../images/AI-PNG-Isolated-HD.png";
 import "./HeroSection.css";
 
-const HeroSection = ({ setPentagramShowing }) => {
+const HeroSection = () => {
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/pentagram");
+    }
+  }, [user]);
+
   return (
     <div className="hero-wrapper">
       <div className="hero-container">
@@ -17,7 +29,7 @@ const HeroSection = ({ setPentagramShowing }) => {
           <div
             className="get-started-button"
             onClick={() => {
-              setPentagramShowing(true);
+              navigate("/pentagram");
             }}
           >
             Get Started
