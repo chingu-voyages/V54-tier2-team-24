@@ -55,7 +55,12 @@ const PentagramContent = () => {
       </div>
 
       <div className="w-full flex justify-between pb-2">
-        <div className="flex gap-4">
+        <div
+          className="flex gap-4 rounded-full w-6"
+          onClick={() => {
+            clearCurrentField();
+          }}
+        >
           {pentaPrompts[index] && (
             <ResetButtons field={pentaPrompts[index].name} />
           )}
@@ -104,8 +109,10 @@ const PentagramContent = () => {
 };
 
 const Pentagram = () => {
+const Pentagram = () => {
   return (
     <PentagramProvider>
+      <PentagramContent />
       <PentagramContent />
     </PentagramProvider>
   );

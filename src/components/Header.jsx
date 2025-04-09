@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { GiSpellBook } from "react-icons/gi";
 import HelpMenu from "./helpMenu/HelpMenu";
 import {
@@ -24,6 +25,7 @@ function Header() {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
+  const navigate = useNavigate();
   const { user, isAuthenticated } = useFirebaseAuth();
 
   const handleLogin = async () => {
@@ -69,9 +71,16 @@ function Header() {
   };
 
   return (
-    <header className="grid grid-cols-3 items-center sticky top-0 left-0 w-full bg-[#02010B] shadow-md p-4 z-50">
+    <header className="grid grid-cols-3 items-center sticky top-0 left-0 w-full bg-[#02010B] shadow-md p-4 z-50 h-[7vh]">
       <div className="flex items-center gap-3">
-        <h1 className="text-white font-karlasemibold text-2xl">AiQ</h1>
+        <h1
+          className="text-white font-karlasemibold text-2xl cursor-pointer"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          AiQ
+        </h1>
       </div>
 
       <div className="text-center">
