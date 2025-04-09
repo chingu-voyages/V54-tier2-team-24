@@ -27,7 +27,7 @@ const PromptField = () => {
     <div className="prompt-field w-full">
       {/* Textarea */}
       <textarea
-        className={`border-3 h-80 border-blue-300 rounded-lg text-blue-350 w-full p-4 ${
+        className={`border-3 bg-white h-80 border-blue-300 rounded-lg text-blue-350 w-full p-4 ${
           errors[index] ? "border-red-300" : ""
         }`}
         placeholder={pentaPrompts[index].placeholder}

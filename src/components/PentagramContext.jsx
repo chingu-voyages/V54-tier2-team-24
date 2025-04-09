@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 // create useContext hook for switching input fields and recording user inputs
 // the user input can ba accessed by {inputs} = usePentagram(),string[]
@@ -8,8 +8,17 @@ const PentagramContext = createContext();
 
 export const PentagramProvider = ({ children }) => {
   const [index, setIndex] = useState(0);
-  const [inputs, setInputs] = useState(["", "", "", "", ""]);
+  const [inputs, setInputs] = useState(() => {
+    // Load inputs from localStorage on initialization
+    const savedInputs = JSON.parse(localStorage.getItem("inputs"));
+    return savedInputs || ["", "", "", "", ""];
+  });
   const [errors, setErrors] = useState(["", "", "", "", ""]); // Track errors for all fields
+
+  useEffect(() => {
+    // Save inputs to localStorage whenever they change
+    localStorage.setItem("inputs", JSON.stringify(inputs));
+  }, [inputs]);
 
   const updateInput = (value) => {
     setInputs((prev) => {
@@ -39,6 +48,7 @@ export const PentagramProvider = ({ children }) => {
   const resetAllFields = () => {
     setInputs(["", "", "", "", ""]);
     setErrors(["", "", "", "", ""]); // Clear all errors
+    localStorage.removeItem("inputs"); // Clear localStorage
   };
 
   const pentaPrompts = [
@@ -76,7 +86,7 @@ export const PentagramProvider = ({ children }) => {
     },
     {
       name: "constraint",
-      tooltip: "What boundries or limits would you like me to honor?",
+      tooltip: "What boundaries or limits would you like me to honor?",
       placeholder:
         "Avoid generating lots of text only a summary of the websites are needed. Also," +
         "responses should be tailored to readers with a high school level of education." +
@@ -90,7 +100,6 @@ export const PentagramProvider = ({ children }) => {
         index,
         setIndex,
         inputs,
-        setInputs,
         updateInput,
         errors,
         updateError,
