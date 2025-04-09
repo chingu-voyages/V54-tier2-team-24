@@ -19,6 +19,7 @@ const PromptField = () => {
     updateError(index, validationError); // Update error in context
     if (!validationError) {
       updateInput(value); // Update context only if input is valid
+      localStorage.setItem(pentaPrompts[index].name + "Prompt", value); // Update local storage
     }
   };
 
@@ -49,4 +50,3 @@ const PromptField = () => {
 };
 
 export default PromptField;
-
