@@ -4,7 +4,7 @@ import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
-import {useFetchAPi} from "./useFetchAPi.jsx";
+import { useFetchAPi } from "./useFetchAPi.jsx";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
@@ -13,7 +13,7 @@ import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
 import PromptHistory from "./PromptHistory.jsx";
 import { toast } from "react-toastify";
 
-const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
+const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
   const { fetchData } = useFetchAPi();
   const [responseText, setResponseText] = useState("");
@@ -29,16 +29,14 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
   const onNext = () => setIndex(index === 4 ? 4 : index + 1);
 
-  
-
   const handleSubmit = async () => {
     const inputs = [
       personaPrompt,
-      contextPrompt, 
+      contextPrompt,
       taskPrompt,
-      outputPrompt, 
-      constraintPrompt, 
-    ]
+      outputPrompt,
+      constraintPrompt,
+    ];
     if (inputs.some((value) => value.trim() === "")) {
       toast.warn("Please fill out all fields before submitting.");
       return;
@@ -62,13 +60,13 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
         constraintPrompt;
       console.log(concatenatedText);
       const result = await model.generateContent(concatenatedText);
-      console.log("result", result)
+      console.log("result", result);
 
-      const text = await result.response.text() //text is in model.generateContent
-      console.log("API result", text)
+      const text = await result.response.text(); //text is in model.generateContent
+      console.log("API result", text);
       setResponseText(text || "No response text found");
-      console.log("updated response text", result.response.text)
-     
+      console.log("updated response text", result.response.text);
+
       setError(null);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -94,23 +92,35 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
     } finally {
       setLoading(false);
     }
-    
-  
 
-   await fetchData(inputs)
+    await fetchData(inputs);
+  };
 
+  const clearCurrentField = () => {
+    if (pentaPrompts[index].name === "persona") {
+      setPersonaPrompt("");
+      localStorage.removeItem("personaPrompt");
+    }
+    if (pentaPrompts[index].name === "context") {
+      setContextPrompt("");
+      localStorage.removeItem("contextPrompt");
+    }
+    if (pentaPrompts[index].name === "task") {
+      setTaskPrompt("");
+      localStorage.removeItem("taskPrompt");
+    }
+    if (pentaPrompts[index].name === "output") {
+      setOutputPrompt("");
+      localStorage.removeItem("outputPrompt");
+    }
+    if (pentaPrompts[index].name === "constraint") {
+      setConstraintPrompt("");
+      localStorage.removeItem("constraintPrompt");
+    }
   };
 
   return (
     <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6 ">
-      <button
-        className="border border-black-500 p-2"
-        onClick={() => {
-          setPentagramShowing(false);
-        }}
-      >
-        Back to Hero
-      </button>
       <h1 className="text-2xl text-blue-400 font-bold text-center mb-8 max-sm:text-left">
         PENTAGRAM
       </h1>
@@ -132,7 +142,12 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
       </div>
 
       <div className="w-full flex justify-between pb-2">
-        <div className="flex gap-4">
+        <div
+          className="flex gap-4 rounded-full w-6"
+          onClick={() => {
+            clearCurrentField();
+          }}
+        >
           {pentaPrompts[index] && (
             <ResetButtons field={pentaPrompts[index].name} />
           )}
@@ -186,9 +201,8 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
         </button>
       </div>
       <ExportSinglePrompt inputs={inputs} responseText={responseText} />
-      
 
-{responseText && <ResponseDisplay responseText={responseText} />}
+      {responseText && <ResponseDisplay responseText={responseText} />}
 
       {loading && (
         <div className="loading-spinner">
@@ -196,19 +210,14 @@ const PentagramContent = ({ pentagramShowing, setPentagramShowing }) => {
           <div>Loading...</div>
         </div>
       )}
-     
-      
     </div>
   );
 };
 
-const Pentagram = ({ pentagramShowing, setPentagramShowing }) => {
+const Pentagram = () => {
   return (
     <PentagramProvider>
-      <PentagramContent
-        pentagramShowing={pentagramShowing}
-        setPentagramShowing={setPentagramShowing}
-      />
+      <PentagramContent />
     </PentagramProvider>
   );
 };
