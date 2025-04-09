@@ -13,7 +13,8 @@ import { toast } from "react-toastify";
 import { validateInput } from "../utils/validationUtils.js";
 
 const PentagramContent = () => {
-  const { index, setIndex, pentaPrompts, inputs } = usePentagram();
+  const { index, setIndex, pentaPrompts, inputs, resetField, resetAllFields } =
+    usePentagram();
   const { responseText, loading, fetchData } = useFetchAPi();
 
   const onChangeIndex = (num) => setIndex(num);
@@ -109,10 +110,8 @@ const PentagramContent = () => {
 };
 
 const Pentagram = () => {
-const Pentagram = () => {
   return (
     <PentagramProvider>
-      <PentagramContent />
       <PentagramContent />
     </PentagramProvider>
   );
