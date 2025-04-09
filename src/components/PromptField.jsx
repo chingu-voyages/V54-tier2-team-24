@@ -5,10 +5,10 @@ import { validateInput } from "../utils/validationUtils.js";
 const PromptField = () => {
   const { index, inputs, updateInput, errors, updateError, pentaPrompts } =
     usePentagram();
-  const [inputValue, setInputValue] = useState(inputs[index]);
+  const [inputValue, setInputValue] = useState(inputs[index] ?? ""); // Default to empty string
 
   useEffect(() => {
-    setInputValue(inputs[index] || "");
+    setInputValue(inputs[index] ?? ""); // Sync with context when index or inputs change
   }, [index, inputs]);
 
   const handleChange = (e) => {
@@ -17,8 +17,8 @@ const PromptField = () => {
 
     const validationError = validateInput(value);
     updateError(index, validationError); // Update error in context
+    updateInput(value || ""); // Ensure empty values are explicitly set to ""
     if (!validationError) {
-      updateInput(value); // Update context only if input is valid
       localStorage.setItem(pentaPrompts[index].name + "Prompt", value); // Update local storage
     }
   };

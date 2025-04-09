@@ -23,7 +23,7 @@ export const PentagramProvider = ({ children }) => {
   const updateInput = (value) => {
     setInputs((prev) => {
       const updated = [...prev];
-      updated[index] = value;
+      updated[index] = value || "";
       return updated;
     });
   };
