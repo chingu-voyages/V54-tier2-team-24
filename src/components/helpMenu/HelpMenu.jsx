@@ -48,13 +48,13 @@ const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
 
   return (
     <div
-      className={`fixed top-0 right-0 bg-black/[0.65] w-full h-screen z-40 transition-opacity duration-300
+      className={`font-Inconsolata-Regular fixed top-0 right-0 bg-black/[0.65] w-full h-screen z-40 transition-opacity duration-300
         ${isOpen ? "opacity-100" : "opacity-0"} ${
         isVisible ? "" : "invisible"
       }`}
     >
       <div
-        className={`bg-gray-300 pt-12 ${width} absolute ${position} h-screen shadow-lg transform transition-transform duration-700
+        className={`bg-gray-300 ${width} absolute ${position} h-screen shadow-lg transform transition-transform duration-700
           ${isOpen ? "translate-x-0" : "translate-x-full"} overflow-y-auto`}
       >
         <div className=" w-full flex flex-col gap-5">
