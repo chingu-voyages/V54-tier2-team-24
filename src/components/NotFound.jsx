@@ -2,23 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import lostRobot from "../assets/lost-robot.json";
-import backgroundImage from "../assets/404-bg.jpg";
+// import backgroundImage from "../assets/404-bg.jpg";
 
 const NotFound = () => {
   return (
     <div
-      className="flex flex-1 flex-col md:flex-row items-center justify-center text-white p-6 md:gap-20"
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        minHeight: "80vh",
-        width: "100vw",
-      }}
+      className="flex flex-1 flex-col md:flex-row items-center justify-center bg text-white p-6 md:gap-20"
+      // style={{
+      //   backgroundImage: `url(${backgroundImage})`,
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      //   backgroundRepeat: "no-repeat",
+      //   minHeight: "80vh",
+      //   width: "100vw",
+      // }}
     >
       {/* Lottie Animation */}
-      <div className="w-64 h-64 md:w-80 md:h-80 mt-6 md:order-2">
+      <div className="w-64 h-64 md:w-80 md:h-80 mt-0 md:order-2">
         <Lottie animationData={lostRobot} loop={true} />
       </div>
       {/* Text Section */}
@@ -33,13 +33,13 @@ const NotFound = () => {
         <div className="flex flex-col sm:flex-row justify-center md:justify-start space-y-2 sm:space-y-0 sm:space-x-4">
           <Link
             to="/"
-            className="px-4 py-2 bg-blue-300 text-white rounded hover:bg-blue-400 transition"
+            className="font-inconsolataregular px-4 py-2 bg-blue-300 text-black rounded hover:bg-blue-400 transition"
           >
             Return To Homepage
           </Link>
           <button
             onClick={() => window.history.back()}
-            className="px-4 py-2 bg-blue-300 text-white rounded hover:bg-blue-400 transition cursor-pointer"
+            className="font-inconsolataregular px-4 py-2 bg-blue-300 text-black rounded hover:bg-blue-400 transition cursor-pointer"
           >
             Go Back
           </button>
