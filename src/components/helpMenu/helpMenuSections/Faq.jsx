@@ -13,7 +13,7 @@ export default function Faq({ data, toggleSection, isSectionOpen }) {
       </button>
 
       <div
-        className={`transition-all duration-300 overflow-hidden ${
+        className={`transition-all duration-300 overflow-y-auto ${
           isSectionOpen === sectionId
             ? "max-h-screen opacity-100 mt-4"
             : "max-h-0 opacity-0"

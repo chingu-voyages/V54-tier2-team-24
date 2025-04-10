@@ -48,23 +48,23 @@ const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
 
   return (
     <div
-      className={`fixed top-0 right-0 bg-black/[0.65] w-full h-screen z-40 transition-opacity duration-300
+      className={`font-Inconsolata-Regular fixed top-0 right-0 bg-black/[0.65] w-full h-screen z-40 transition-opacity duration-300
         ${isOpen ? "opacity-100" : "opacity-0"} ${
         isVisible ? "" : "invisible"
       }`}
     >
       <div
-        className={`bg-gray-300 pt-12 ${width} absolute ${position} h-screen shadow-lg transform transition-transform duration-700
+        className={`bg-gray-300 ${width} absolute ${position} h-full shadow-lg transform transition-transform duration-700
           ${isOpen ? "translate-x-0" : "translate-x-full"} overflow-y-auto`}
       >
         <div className=" w-full flex flex-col gap-5">
-          <div className="flex items-center justify-between px-2 ">
-            <h2 className="text-neutral-900  text-2xl font-bold pt-20 sm:pt-40 md:pt-40 underline">
+          <div className="flex items-center justify-between px-2 pt-10 ">
+            <h2 className="text-neutral-900  text-2xl font-bold underline">
               {helpDataObject?.introduction.title}
             </h2>
             <button
               onClick={onRequestClose}
-              className="sm:pt-30 md:pt-40 text-neutral-900    text-4xl hover:text-gray-700  cursor-pointer rounded-2xl"
+              className="sm:pt-10 md:pt-10 text-neutral-900 text-4xl hover:text-gray-700  cursor-pointer rounded-2xl"
             >
               <FaWindowClose />
             </button>
