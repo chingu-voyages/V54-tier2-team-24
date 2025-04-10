@@ -54,12 +54,12 @@ const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
       }`}
     >
       <div
-        className={`bg-white pt-12 ${width} absolute ${position} h-screen shadow-lg transform transition-transform duration-700
+        className={`bg-gray-300 pt-12 ${width} absolute ${position} h-screen shadow-lg transform transition-transform duration-700
           ${isOpen ? "translate-x-0" : "translate-x-full"} overflow-y-auto`}
       >
         <div className=" w-full flex flex-col gap-5">
           <div className="flex items-center justify-between px-2 ">
-            <h2 className="text-neutral-900  text-2xl font-bold pt-40 sm:pt-40 md:pt-40 underline">
+            <h2 className="text-neutral-900  text-2xl font-bold pt-20 sm:pt-40 md:pt-40 underline">
               {helpDataObject?.introduction.title}
             </h2>
             <button
