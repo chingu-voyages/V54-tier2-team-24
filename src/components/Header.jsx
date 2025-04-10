@@ -63,7 +63,9 @@ function Header() {
   const toggleHelp = () => {
     setShowHelp(!showHelp);
   };
-
+ const closeHelpMenu = () => {
+  setShowHelp(false)
+ }
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -130,7 +132,11 @@ function Header() {
         </button>
       </div>
 
-      {showHelp && <HelpMenu onClose={toggleHelp} />}
+      {showHelp && <HelpMenu 
+      isOpen={showHelp}
+      onRequestClose={closeHelpMenu}
+      width="w-full sm:w-[80%] md:w-[40%]"
+      position="right-0" />}
     </header>
   );
 }
