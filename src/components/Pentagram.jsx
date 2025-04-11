@@ -1,131 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
 import { Circle } from "lucide-react";
 import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
 import { useFetchAPi } from "./useFetchAPi.jsx";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
-
 import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
 import PromptHistory from "./PromptHistory.jsx";
 import { toast } from "react-toastify";
+import { validateInput } from "../utils/validationUtils.js";
 
 const PentagramContent = () => {
-  const { index, setIndex, pentaPrompts, inputs } = usePentagram();
-  const { fetchData } = useFetchAPi();
-  const [responseText, setResponseText] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [personaPrompt, setPersonaPrompt] = useState("");
-  const [contextPrompt, setContextPrompt] = useState("");
-  const [taskPrompt, setTaskPrompt] = useState("");
-  const [outputPrompt, setOutputPrompt] = useState("");
-  const [constraintPrompt, setConstraintPrompt] = useState("");
+  const { index, setIndex, pentaPrompts, inputs, resetField, resetAllFields } =
+    usePentagram();
+  const { responseText, loading, fetchData } = useFetchAPi();
 
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
   const onNext = () => setIndex(index === 4 ? 4 : index + 1);
 
   const handleSubmit = async () => {
-    const inputs = [
-      personaPrompt,
-      contextPrompt,
-      taskPrompt,
-      outputPrompt,
-      constraintPrompt,
-    ];
-    if (inputs.some((value) => value.trim() === "")) {
+    const hasEmptyFields = inputs.some((value) => value.trim() === "");
+    const hasErrors = inputs.some((value) => validateInput(value) !== "");
+
+    if (hasEmptyFields || hasErrors) {
       toast.warn("Please fill out all fields before submitting.");
       return;
-    }
-    setLoading(true);
-
-    try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-      const concatenatedText =
-        personaPrompt +
-        " " +
-        contextPrompt +
-        " " +
-        taskPrompt +
-        " " +
-        outputPrompt +
-        " " +
-        constraintPrompt;
-      console.log(concatenatedText);
-      const result = await model.generateContent(concatenatedText);
-      console.log("result", result);
-
-      const text = await result.response.text(); //text is in model.generateContent
-      console.log("API result", text);
-      setResponseText(text || "No response text found");
-      console.log("updated response text", result.response.text);
-
-      setError(null);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-
-      if (error.message.includes("Failed to fetch")) {
-        setResponseText(
-          "Network error: Please check your internet connection."
-        );
-      } else if (error.response && error.response.status === 429) {
-        setResponseText("Rate limit exceeded: Please try again later.");
-      } else if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        setResponseText(`API error: ${error.response.data.message}`);
-      } else {
-        setResponseText("An error occurred while fetching data.");
-      }
-
-      setError(error.message);
-      setResponse(null);
-    } finally {
-      setLoading(false);
     }
 
     await fetchData(inputs);
   };
 
-  const clearCurrentField = () => {
-    if (pentaPrompts[index].name === "persona") {
-      setPersonaPrompt("");
-      localStorage.removeItem("personaPrompt");
-    }
-    if (pentaPrompts[index].name === "context") {
-      setContextPrompt("");
-      localStorage.removeItem("contextPrompt");
-    }
-    if (pentaPrompts[index].name === "task") {
-      setTaskPrompt("");
-      localStorage.removeItem("taskPrompt");
-    }
-    if (pentaPrompts[index].name === "output") {
-      setOutputPrompt("");
-      localStorage.removeItem("outputPrompt");
-    }
-    if (pentaPrompts[index].name === "constraint") {
-      setConstraintPrompt("");
-      localStorage.removeItem("constraintPrompt");
-    }
-  };
-
   return (
-    <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6 ">
+    <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6">
       <h1 className="text-2xl text-blue-400 font-bold text-center mb-8 max-sm:text-left">
         PENTAGRAM
       </h1>
 
-      <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3">
+      <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3 ">
         {/* //number 0: persona, 1: context, 2 : task, 3 : output, 4 : constrain */}
         {[0, 1, 2, 3, 4].map((num) => (
           <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
@@ -142,40 +56,18 @@ const PentagramContent = () => {
       </div>
 
       <div className="w-full flex justify-between pb-2">
-        <div
-          className="flex gap-4 rounded-full w-6"
-          onClick={() => {
-            clearCurrentField();
-          }}
-        >
+        <div className="flex gap-4 rounded-full w-6">
           {pentaPrompts[index] && (
             <ResetButtons field={pentaPrompts[index].name} />
           )}
-          <ResetButtons
-            isResetAll={true}
-            setPersonaPrompt={setPersonaPrompt}
-            setContextPrompt={setContextPrompt}
-            setTaskPrompt={setTaskPrompt}
-            setOutputPrompt={setOutputPrompt}
-            setConstraintPrompt={setConstraintPrompt}
-          />
+
+          <ResetButtons isResetAll={true} />
         </div>
         {pentaPrompts[index] && <Tooltips pentaPrompts={pentaPrompts[index]} />}
       </div>
 
       <div className="w-full">
-        <PromptField
-          personaPrompt={personaPrompt}
-          contextPrompt={contextPrompt}
-          taskPrompt={taskPrompt}
-          outputPrompt={outputPrompt}
-          constraintPrompt={constraintPrompt}
-          setPersonaPrompt={setPersonaPrompt}
-          setContextPrompt={setContextPrompt}
-          setTaskPrompt={setTaskPrompt}
-          setOutputPrompt={setOutputPrompt}
-          setConstraintPrompt={setConstraintPrompt}
-        />
+        <PromptField />
       </div>
 
       <div className="flex justify-between items-center mb-8">
@@ -202,14 +94,13 @@ const PentagramContent = () => {
       </div>
       <ExportSinglePrompt inputs={inputs} responseText={responseText} />
 
-      {responseText && <ResponseDisplay responseText={responseText} />}
-
       {loading && (
         <div className="loading-spinner">
           <div className="spinner"></div>
           <div>Loading...</div>
         </div>
       )}
+      {responseText && <ResponseDisplay responseText={responseText} />}
     </div>
   );
 };
