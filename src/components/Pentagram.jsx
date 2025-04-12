@@ -35,11 +35,14 @@ const PentagramContent = () => {
 
   return (
     <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6">
-      <h1 className="text-2xl text-blue-400 font-bold text-center mb-8 max-sm:text-left">
-        PENTAGRAM
+      <h1 className="text-4xl text-blue-400 font-karlabold font-bold text-center mb-2 max-sm:text-left">
+        AiQ
       </h1>
+      <p className="text-white text-lg text-center font-inconsolataregular max-sm:text-left mb-8 max-sm:mb-12">
+        AI Prompting. Simplified. Perfected.
+      </p>
 
-      <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3 ">
+      <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3">
         {/* //number 0: persona, 1: context, 2 : task, 3 : output, 4 : constrain */}
         {[0, 1, 2, 3, 4].map((num) => (
           <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
@@ -55,15 +58,33 @@ const PentagramContent = () => {
         ))}
       </div>
 
-      <div className="w-full flex justify-between pb-2">
-        <div className="flex gap-4 rounded-full w-6">
+      <div className="w-full">
+        {/* Pentagram Category and Tooltip */}
+        <div className="flex justify-between items-center">
           {pentaPrompts[index] && (
-            <ResetButtons field={pentaPrompts[index].name} />
+            <div className="flex items-center gap-2">
+              <span className="text-white font-medium text-xl capitalize">
+                {pentaPrompts[index].name}
+              </span>
+              <Tooltips pentaPrompts={pentaPrompts[index]} />
+            </div>
           )}
-
-          <ResetButtons isResetAll={true} />
         </div>
-        {pentaPrompts[index] && <Tooltips pentaPrompts={pentaPrompts[index]} />}
+
+        {/* Tooltip Message and Reset Buttons */}
+        <div className="flex justify-between items-center pb-3 font-karlabold">
+          {pentaPrompts[index] && (
+            <div className="text-white/70 text-base leading-6 font-inconsolataregular">
+              {pentaPrompts[index].tooltip}
+            </div>
+          )}
+          <div className="flex gap-4">
+            {pentaPrompts[index] && (
+              <ResetButtons field={pentaPrompts[index].name} />
+            )}
+            <ResetButtons isResetAll={true} />
+          </div>
+        </div>
       </div>
 
       <div className="w-full">
