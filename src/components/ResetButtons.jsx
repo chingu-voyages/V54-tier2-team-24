@@ -6,13 +6,7 @@ import Eraser from "/src/assets/svg_assets/eraser.svg";
 
 const ResetButtons = ({
   field,
-  isResetAll = false,
-  setPersonaPrompt,
-  setContextPrompt,
-  setTaskPrompt,
-  setOutputPrompt,
-  setConstraintPrompt,
-}) => {
+  isResetAll = false,}) => {
   const { pentaPrompts, resetField, resetAllFields } = usePentagram();
 
   const handleResetField = () => {

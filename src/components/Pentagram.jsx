@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import { Circle } from "lucide-react";
 import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
 import {useFetchAPi} from "./useFetchAPi.jsx";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
-
-import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
 import PromptHistory from "./PromptHistory.jsx";
 import { toast } from "react-toastify";
 import Rectangle from "./Rectangle.jsx";
@@ -20,16 +16,7 @@ import { validateInput } from "../utils/validationUtils.js";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
-  //const { responseText, error, loading,fetchData } = useFetchAPi();
-  const [personaPrompt, setPersonaPrompt] = useState("");
-  const [contextPrompt, setContextPrompt] = useState("");
-  const [taskPrompt, setTaskPrompt] = useState("");
-  const [outputPrompt, setOutputPrompt] = useState("");
-  const [constraintPrompt, setConstraintPrompt] = useState("");
-  const [responseText, setResponseText] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
+  const { responseText, error, loading,fetchData } = useFetchAPi();
 
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
@@ -75,62 +62,31 @@ const PentagramContent = () => {
           {pentaPrompts[index] && (
             <ResetButtons field={pentaPrompts[index].name} />
           )}
-            <ResetButtons
-            isResetAll={true}
-            setPersonaPrompt={setPersonaPrompt}
-            setContextPrompt={setContextPrompt}
-            setTaskPrompt={setTaskPrompt}
-            setOutputPrompt={setOutputPrompt}
-            setConstraintPrompt={setConstraintPrompt}
-          />
-
           <ResetButtons isResetAll={true} />
         </div>
         {pentaPrompts[index] && <Tooltips pentaPrompts={pentaPrompts[index]} />}
       </div>
 
       <div className="md:w-1/2 w-7/8 ">
-          <PromptField
-          personaPrompt={personaPrompt}
-          contextPrompt={contextPrompt}
-          taskPrompt={taskPrompt}
-          outputPrompt={outputPrompt}
-          constraintPrompt={constraintPrompt}
-          setPersonaPrompt={setPersonaPrompt}
-          setContextPrompt={setContextPrompt}
-          setTaskPrompt={setTaskPrompt}
-          setOutputPrompt={setOutputPrompt}
-          setConstraintPrompt={setConstraintPrompt}
-        />
-      <div className="w-full">
-        <PromptField />
-      </div>
+          <PromptField/></div>
 
       <div className="flex justify-between items-center mb-8 w-7/8 md:w-1/2
       font-inconsolataexpanded text-[20px] lg:text-[26px] md:text-[22px]">
-
-        <button
-          onClick={onPrevious}
-          className={`px-6 py-2 rounded-md font-medium transition-colors ${
-            index === 0
-              ? "bg-gray-100 text-gray-300 cursor-not-allowed"
-              : "bg-blue-300 text-blue-500"
-          }`}
-          disabled={index === 0}
-        >
-            <div className="flex gap-2 mt-2 items-center">
+          <button onClick={onPrevious}>
+          <div className="flex gap-2 mt-2 items-center">
                 <img src={Triangle} alt="Back Button" className="w-8 rotate-90"
                      style={{filter: "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
                              "hue-rotate(185deg) brightness(103%) contrast(96%) " +
                              "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))"}}
                 />
                 <span>Back</span>
-            </div>
-        </button>
+          </div>
+         </button>
 
         <PromptHistory />
 
-          {index === 4
+            <button onClick={index === 4 ? handleSubmit : onNext}>
+                {index === 4
               ? (
               <div className="flex gap-2 mt-2 items-center">
                   <img src={Lightbulb} alt="Submit Button" className="w-6"
@@ -148,8 +104,7 @@ const PentagramContent = () => {
                              "hue-rotate(185deg) brightness(103%) contrast(96%) " +
                              "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))"}}
                 />
-              </div>)}
-        </button>
+              </div>)}</button>
       </div>
 
 
@@ -159,8 +114,6 @@ const PentagramContent = () => {
           <div>Loading...</div>
         </div>
       )}
-      {error && <p className="text-red-500 mt-2">{error}</p>}
-      {/*{responseText && <p className="text-green-500 mt-2">{responseText}</p>}*/}
       <ResponseDisplay responseText={responseText}/>
     </div>
   );
