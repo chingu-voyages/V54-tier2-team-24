@@ -1,10 +1,11 @@
 import React from "react";
+import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import { jsPDF } from "jspdf";
 
 const ExportSinglePrompt = ({ inputs, responseText }) => {
   const handleExport = () => {
     const doc = new jsPDF();
-    const lineHeight =4;
+    const lineHeight = 4;
     const margin = 10;
     const pageWidth = doc.internal.pageSize.getWidth() - 2 * margin;
     const pageHeight = doc.internal.pageSize.getHeight() - 2 * margin;
@@ -14,7 +15,7 @@ const ExportSinglePrompt = ({ inputs, responseText }) => {
 
     // Pentagram inputs
     doc.setFontSize(12);
-    let yPosition = margin+15;
+    let yPosition = margin + 15;
     doc.text("Your Prompt:", 10, yPosition);
     yPosition += margin;
     // input fields
@@ -22,7 +23,7 @@ const ExportSinglePrompt = ({ inputs, responseText }) => {
     const labels = ["Persona", "Context", "Task", "Output", "Constraint"];
     inputs.forEach((input, index) => {
       const label = labels[index] || `Input ${index + 1}`;
-      let theString = doc.splitTextToSize(`${label}: ${input}` , pageWidth);
+      let theString = doc.splitTextToSize(`${label}: ${input}`, pageWidth);
       theString.forEach((splitString) => {
         doc.text(splitString, 10, yPosition);
         yPosition += lineHeight;
@@ -66,9 +67,10 @@ const ExportSinglePrompt = ({ inputs, responseText }) => {
 
   return (
     <div>
-      <button onClick={handleExport} className="px-4 py-2 bg-blue-500 text-white rounded">
-        Export to PDF
-      </button>
+      <SaveOutlinedIcon
+        style={{ fontSize: 34, color: "white", cursor: "pointer" }}
+        onClick={handleExport}
+      />
     </div>
   );
 };

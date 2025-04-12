@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../utils/firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Image1 from "../../images/AI-PNG-Isolated-HD.png";
+import Image1 from "../../images/AI-PNG-File.png";
 import "./HeroSection.css";
 
 const HeroSection = () => {
@@ -14,6 +14,10 @@ const HeroSection = () => {
       navigate("/pentagram");
     }
   }, [user]);
+
+  const imageStyle = {
+    transform: "scaleX(-1)",
+  };
 
   return (
     <div className="hero-wrapper">
@@ -36,7 +40,7 @@ const HeroSection = () => {
           </div>
         </div>
         <div className="hero-right">
-          <img src={Image1} className="hero-img" />
+          <img src={Image1} style={imageStyle} className="hero-img" />
         </div>
       </div>
     </div>

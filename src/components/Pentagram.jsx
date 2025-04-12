@@ -8,7 +8,7 @@ import { useFetchAPi } from "./useFetchAPi.jsx";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
-
+import CopyButton from "./CopyButton.jsx";
 import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
 import PromptHistory from "./PromptHistory.jsx";
 import { toast } from "react-toastify";
@@ -200,7 +200,6 @@ const PentagramContent = () => {
           {index === 4 ? "Submit" : "Next"}
         </button>
       </div>
-      <ExportSinglePrompt inputs={inputs} responseText={responseText} />
 
       {responseText && <ResponseDisplay responseText={responseText} />}
 
