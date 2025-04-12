@@ -1,17 +1,21 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
+import { Circle } from "lucide-react";
 import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
 import {useFetchAPi} from "./useFetchAPi.jsx";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import ResponseDisplay from './ResponseDisplay.jsx';
+import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
+
 import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
+import PromptHistory from "./PromptHistory.jsx";
 import { toast } from "react-toastify";
 import Rectangle from "./Rectangle.jsx";
 import Triangle from "/src/assets/svg_assets/triangle-svgrepo-com.svg";
 import Lightbulb from "/src/assets/svg_assets/lightbulb.svg";
+import { validateInput } from "../utils/validationUtils.js";
 
 
 const PentagramContent = () => {
@@ -32,78 +36,15 @@ const PentagramContent = () => {
   const onNext = () => setIndex(index === 4 ? 4 : index + 1);
 
   const handleSubmit = async () => {
-    if (
-      personaPrompt === "" ||
-      contextPrompt === "" ||
-      taskPrompt === "" ||
-      outputPrompt === "" ||
-      constraintPrompt === ""
-    ) {
-      alert("Please fill out all fields before submitting.");
-      return;
-    }
-        if (
-      personaPrompt === "" ||
-      contextPrompt === "" ||
-      taskPrompt === "" ||
-      outputPrompt === "" ||
-      constraintPrompt === ""
-    ) {
-      alert("Please fill out all fields before submitting.");
-      return;
-    }
+    const hasEmptyFields = inputs.some((value) => value.trim() === "");
+    const hasErrors = inputs.some((value) => validateInput(value) !== "");
 
-    setLoading(true);
-
-    try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-      const concatenatedText =
-        personaPrompt +
-        " " +
-        contextPrompt +
-        " " +
-        taskPrompt +
-        " " +
-        outputPrompt +
-        " " +
-        constraintPrompt;
-      console.log(concatenatedText);
-      const result = await model.generateContent(concatenatedText);
-
-      setResponseText(result.response.text || "No response text found");
-      setError(null);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-
-      if (error.message.includes("Failed to fetch")) {
-        setResponseText(
-          "Network error: Please check your internet connection."
-        );
-      } else if (error.response && error.response.status === 429) {
-        setResponseText("Rate limit exceeded: Please try again later.");
-      } else if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        setResponseText(`API error: ${error.response.data.message}`);
-      } else {
-        setResponseText("An error occurred while fetching data.");
-      }
-
-      setError(error.message);
-      setResponseText(null);
-    } finally {
-      setLoading(false);
-    }
-
-    if (inputs.some((value) => value.trim() === "")) {
+    if (hasEmptyFields || hasErrors) {
       toast.warn("Please fill out all fields before submitting.");
       return;
     }
+
+    await fetchData(inputs);
   };
 
   return (
@@ -142,6 +83,8 @@ const PentagramContent = () => {
             setOutputPrompt={setOutputPrompt}
             setConstraintPrompt={setConstraintPrompt}
           />
+
+          <ResetButtons isResetAll={true} />
         </div>
         {pentaPrompts[index] && <Tooltips pentaPrompts={pentaPrompts[index]} />}
       </div>
@@ -159,6 +102,8 @@ const PentagramContent = () => {
           setOutputPrompt={setOutputPrompt}
           setConstraintPrompt={setConstraintPrompt}
         />
+      <div className="w-full">
+        <PromptField />
       </div>
 
       <div className="flex justify-between items-center mb-8 w-7/8 md:w-1/2
@@ -166,12 +111,12 @@ const PentagramContent = () => {
 
         <button
           onClick={onPrevious}
-  /*        className={`px-6 py-2 rounded-md font-medium transition-colors ${
+          className={`px-6 py-2 rounded-md font-medium transition-colors ${
             index === 0
               ? "bg-gray-100 text-gray-300 cursor-not-allowed"
               : "bg-blue-300 text-blue-500"
           }`}
-          disabled={index === 0}*/
+          disabled={index === 0}
         >
             <div className="flex gap-2 mt-2 items-center">
                 <img src={Triangle} alt="Back Button" className="w-8 rotate-90"
@@ -183,7 +128,7 @@ const PentagramContent = () => {
             </div>
         </button>
 
-        <button onClick={index === 4 ? handleSubmit : onNext}>
+        <PromptHistory />
 
           {index === 4
               ? (

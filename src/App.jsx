@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import Header from "./components/Header";
 import Pentagram from "./components/Pentagram";
@@ -9,16 +14,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/footer/Footer";
 function App() {
-  const [pentagramShowing, setPentagramShowing] = useState(false);
-
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen bg-gradient-to-b from-[#02010B] to-[#0D00A4]">
         <Header />
         <main className="flex-1 flex">
           <Routes>
-            <Route path="/" element={<HeroSection pentagramShowing={pentagramShowing}
-          setPentagramShowing={setPentagramShowing} />} />
+            <Route path="/" element={<HeroSection />} />
             <Route path="/pentagram" element={<Pentagram />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

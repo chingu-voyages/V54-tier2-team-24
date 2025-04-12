@@ -1,6 +1,7 @@
 import React from "react";
-import { RotateCcw } from "lucide-react";
+import { RotateCcw, ListRestart } from "lucide-react";
 import { usePentagram } from "./PentagramContext.jsx";
+import { toast } from "react-toastify";
 import Eraser from "/src/assets/svg_assets/eraser.svg";
 
 const ResetButtons = ({
@@ -24,19 +25,37 @@ const ResetButtons = ({
   };
 
   const handleResetAll = () => {
-    if (window.confirm("Are you sure you want to reset all fields?")) {
-      resetAllFields();
-      setPersonaPrompt("");
-      setContextPrompt("");
-      setTaskPrompt("");
-      setOutputPrompt("");
-      setConstraintPrompt("");
-      localStorage.removeItem("personaPrompt");
-      localStorage.removeItem("contextPrompt");
-      localStorage.removeItem("taskPrompt");
-      localStorage.removeItem("outputPrompt");
-      localStorage.removeItem("constraintPrompt");
-    }
+    toast(
+      ({ closeToast }) => (
+        <div>
+          <p className="mt-1">Are you sure you want to reset all fields?</p>
+          <div className="flex justify-start gap-2">
+            <button
+              onClick={() => {
+                resetAllFields();
+                toast.success("All fields have been reset.");
+                closeToast();
+              }}
+              className="px-4 py-1 rounded-md bg-green-500 text-black mt-3 text-sm shadow-md cursor-pointer"
+            >
+              OK
+            </button>
+            <button
+              onClick={closeToast}
+              className="px-4 py-1 rounded-md bg-red-500 text-black mt-3 text-sm shadow-md cursor-pointer"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        autoClose: 5000,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+      }
+    );
   };
 
   return (

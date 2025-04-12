@@ -1,9 +1,10 @@
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
+import FooterContent from "./FooterContent";
 
 export default function Footer() {
   return (
-    <footer className="flex justify-between items-center boder-t-2 border-blue-400 h-[10vh] bg-[#02010B]  px-2 ">
+    <footer className="flex justify-between items-center boder-t-2 border-blue-400 h-[7vh] bg-[#02010B]  px-2 ">
       <a
         href="https://github.com/chingu-voyages/V54-tier2-team-24"
         target="_blank"
@@ -15,30 +16,7 @@ export default function Footer() {
           <p className="text-sm">GitHub Repository</p>
         </div>
       </a>
-      {/* Links to LI or GitHub Flip action with LINKED and GIThub */}
-      <div className="text-sm md:flex sm:max-w-3xl w-3/4 justify-evenly hidden text-blue-300 sm:items-center ">
-        <div className="text-center">
-          <p>Carissa Abraham</p>
-          <p>Aaron Goodwin</p>
-        </div>
-        <div className="text-center">
-          <p>Jessica Hackett</p>
-          <p>Christin Martin </p>
-        </div>
-        <div className="text-center">
-          <p>Matthew Neie</p>
-          <p>Luis Solar</p>
-        </div>
-
-        <div className="text-center">
-          <p>Benjamin Corbett</p>
-          <p>Sokuen Ryan</p>
-        </div>
-        <div className="text-center">
-          <p>Christel Looky</p>
-          <p>Gentiana Han</p>
-        </div>
-      </div>
+      <FooterContent />
     </footer>
   );
 }

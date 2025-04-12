@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { usePentagram } from "./PentagramContext.jsx";
+import { validateInput } from "../utils/validationUtils.js";
+
+const PromptField = () => {
+  const { index, inputs, updateInput, errors, updateError, pentaPrompts } =
+    usePentagram();
+  const [inputValue, setInputValue] = useState(inputs[index] ?? ""); // Default to empty string
 const style = `border-3 border-icon bg-white rounded-lg w-full h-[30vh] m-0 p-0`
 const PromptField = ({
   personaPrompt,
@@ -17,20 +23,18 @@ const PromptField = ({
   const [inputValue, setInputValue] = useState(inputs[index]);
 
   useEffect(() => {
-    setInputValue(inputs[index] || "");
+    setInputValue(inputs[index] ?? ""); // Sync with context when index or inputs change
   }, [index, inputs]);
 
-  useEffect(() => {
-    const savedPersonaPrompt = localStorage.getItem("personaPrompt");
-    if (savedPersonaPrompt) {
-      setPersonaPrompt(savedPersonaPrompt);
-    }
-  }, []);
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
 
-  useEffect(() => {
-    const savedContextPrompt = localStorage.getItem("contextPrompt");
-    if (savedContextPrompt) {
-      setContextPrompt(savedContextPrompt);
+    const validationError = validateInput(value);
+    updateError(index, validationError); // Update error in context
+    updateInput(value || ""); // Ensure empty values are explicitly set to ""
+    if (!validationError) {
+      localStorage.setItem(pentaPrompts[index].name + "Prompt", value); // Update local storage
     }
   }, []);
 
@@ -83,6 +87,27 @@ const PromptField = ({
   };
 
   return (
+    <div className="prompt-field w-full">
+      {/* Textarea */}
+      <textarea
+        className={`border-3 bg-white h-80 border-blue-300 rounded-lg text-blue-350 w-full p-4 ${
+          errors[index] ? "border-red-300" : ""
+        }`}
+        placeholder={pentaPrompts[index].placeholder}
+        value={inputValue}
+        required={true}
+        onChange={handleChange}
+      />
+      {/* Error Message */}
+      {errors[index] && (
+        <div
+          className="my-2 bg-red-400 text-white text-base py-4 px-4 rounded-lg shadow-md"
+          role="alert"
+          aria-live="assertive"
+        >
+          {errors[index]}
+        </div>
+      )}
     <div className="prompt-field flex flex-row items-start justify-start w-full
     font-inconsolataregular text-black
     lg:items-center lg:justify-center ">
@@ -134,4 +159,5 @@ const PromptField = ({
     </div>
   );
 };
+
 export default PromptField;

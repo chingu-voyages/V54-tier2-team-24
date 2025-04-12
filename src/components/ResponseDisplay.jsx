@@ -1,13 +1,18 @@
-import { useEffect } from "react";
 import ReactMarkdown from "react-markdown";
+import '../index.css'
 
-const ResponseDisplay = ({ responseText }) => {
-  return (
-    <section className="p-5 bg-blue-300 rounded-lg leading-7">
-      <h1 className="flex justify-center text-lg pb-5 font-bold">Response</h1>
-      <ReactMarkdown children={responseText} />
+const ResponseDisplay = ({ responseText })=>{
+
+   
+return (
+    <section className="p-5 text-white rounded-lg leading-7">
+        <h1 className="flex justify-center text-lg pb-5 font-Inconsolata-Bold">Response</h1>
+    <ReactMarkdown className="font-Inconsolata-Regular lg:text-base/9 md:text-[22px]/8 sm:text-base/7"
+     components={{
+      strong: ({ children }) => <span className="font-Inconsolata-Bold">{children}</span>
+    }}>{responseText}</ReactMarkdown>
     </section>
   );
 };
-
+    
 export default ResponseDisplay;

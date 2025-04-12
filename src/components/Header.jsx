@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { GiSpellBook } from "react-icons/gi";
 import HelpMenu from "./helpMenu/HelpMenu";
 import {
@@ -21,7 +22,10 @@ function getDate() {
 function Header() {
   const [currentDate, setCurrentDate] = useState(getDate());
   const [showHelp, setShowHelp] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
+  const navigate = useNavigate();
   const { user, isAuthenticated } = useFirebaseAuth();
 
   const handleLogin = async () => {
@@ -35,6 +39,7 @@ function Header() {
   const handleLogout = async () => {
     try {
       await logoutUser();
+      setShowDropdown(false);
     } catch (error) {
       console.error(error);
     }
@@ -44,60 +49,103 @@ function Header() {
     setCurrentDate(format(getDate(), "MM/dd/yyyy"));
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const toggleHelp = () => {
     setShowHelp(!showHelp);
   };
+ const closeHelpMenu = () => {
+  setShowHelp(false)
+ }
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
 
   return (
-    // Swithc to VH
-    <header className="flex justify-evenly items-center sticky top-0 left-0 w-full bg-[#02010B] shadow-md p-4 z-50">
-      <div className="flex items-center gap-3 w-1/3 ">
-        {/* <img
-          src="/designAssets/robot_logo.png"
-          alt="Description of AiQ Logo"
-          className="w-9 h-9"
-        /> */}
-        <h1 className="text-white font-karlasemibold  text-2xl">AiQ</h1>
+    <header className="grid grid-cols-3 items-center sticky top-0 left-0 w-full bg-[#02010B] shadow-md p-4 z-50 h-[7vh]">
+      <div className="flex items-center gap-3">
+        <h1
+          className="text-white font-karlasemibold text-2xl cursor-pointer"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          AiQ
+        </h1>
       </div>
-      <div className="w-1/3 text-center ">
-        <h3 className="text-white  font-karlasemibold  text-sm sm:text-base">
+
+      <div className="text-center">
+        <h3 className="text-white font-karlasemibold text-xs sm:text-base">
           {currentDate}
         </h3>
       </div>
 
-      <div className="flex justify-end items-center gap-2 w-1/3">
+      <div className="flex justify-end items-center gap-2">
         {isAuthenticated ? (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 relative" ref={dropdownRef}>
             <div className="flex items-center">
               <img
-                className="w-8 h-8 rounded-full mr-2"
+                className="w-8 h-8 rounded-full cursor-pointer"
                 src={user.photoURL}
                 alt={`${user.displayName}s Avatar`}
                 referrerPolicy="no-referrer"
+                onClick={toggleDropdown}
               />
-              <span className="text-white font-karlasemibold  ">
+              <span className="hidden sm:inline text-white font-karlasemibold ml-2">
                 {user.displayName || "User"}
               </span>
             </div>
+
             <button
               onClick={handleLogout}
-              className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-4xl text-sm  font-karlasemibold  cursor-pointer"
+              className="hidden sm:block bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-4xl text-sm font-karlasemibold cursor-pointer"
             >
               Sign Out
             </button>
+
+            {showDropdown && (
+              <div className="absolute right-0 top-10 bg-[#1a1a2e] rounded-md shadow-lg py-2 z-50 min-w-[120px]">
+                <div className="px-4 py-2 text-white text-sm border-b border-gray-700 hidden sm:block">
+                  {user.displayName || "User"}
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left px-4 py-2 text-white text-sm hover:bg-[#2a2a40] transition-colors"
+                >
+                  Sign Out
+                </button>
+              </div>
+            )}
           </div>
         ) : (
           <button
             onClick={handleLogin}
-            className="bg-blue-700 hover:bg-blue-500 text-white px-5 py-1 rounded-4xl text-sm font-karlasemibold  cursor-pointer"
+            className="bg-blue-700 hover:bg-blue-500 text-white px-3 sm:px-5 py-1 rounded-4xl text-sm font-karlasemibold cursor-pointer"
           >
             Sign In
           </button>
-        )}{" "}
-        <button onClick={toggleHelp} className="cursor-pointer ">
+        )}
+        <button onClick={toggleHelp} className="cursor-pointer ml-2">
           <FaRegQuestionCircle className="text-white h-5 w-5" />
         </button>
       </div>
+
+      {showHelp && <HelpMenu 
+      isOpen={showHelp}
+      onRequestClose={closeHelpMenu}
+      width="w-full sm:w-[80%] md:w-[40%]"
+      position="right-0" />}
     </header>
   );
 }
