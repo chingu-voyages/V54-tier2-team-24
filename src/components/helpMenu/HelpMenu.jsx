@@ -48,30 +48,30 @@ const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
 
   return (
     <div
-      className={`font-Inconsolata-Regular fixed top-0 right-0 bg-black/[0.65] w-full h-screen z-40 transition-opacity duration-300
+      className={`font-Inconsolata-Regular fixed top-0 right-0 bg-white/[0.65] w-full h-screen z-40 transition-opacity duration-300
         ${isOpen ? "opacity-100" : "opacity-0"} ${
         isVisible ? "" : "invisible"
       }`}
     >
       <div
-        className={`bg-blue-100 ${width} absolute ${position} h-full shadow-lg transform transition-transform duration-700
+        className={`bg-gradient-to-b from-[#02010B] to-[#0D00A4] ${width} absolute ${position} h-full shadow-lg transform transition-transform duration-700
           ${isOpen ? "translate-x-0" : "translate-x-full"} overflow-y-auto`}
       >
         <div className=" w-full flex flex-col gap-5">
           <div className="flex items-center justify-between px-2 pt-10 ">
-            <h2 className="text-neutral-900  text-2xl font-bold underline">
+            <h2 className="text-gray-300  text-2xl font-bold underline">
               {helpDataObject?.introduction.title}
             </h2>
             <button
               onClick={onRequestClose}
-              className="sm:pt-10 md:pt-10 text-neutral-900 text-4xl hover:text-gray-700  cursor-pointer rounded-2xl"
+              className="sm:pt-10 md:pt-10 text-white text-4xl hover:text-blue-400  cursor-pointer rounded-2xl"
             >
               <FaWindowClose />
             </button>
           </div>
           <div className="text-center flex flex-col gap-3 mb-4">
-            <h2 className="text-center text-3xl font-bold">{welcome}</h2>
-            <p className="mx-1">{welcomeContent}</p>
+            <h2 className="text-center text-white text-3xl font-bold">{welcome}</h2>
+            <p className="text-white mx-2">{welcomeContent}</p>
           </div>
         </div>
 
