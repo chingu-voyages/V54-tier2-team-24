@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
@@ -16,7 +16,7 @@ import { validateInput } from "../utils/validationUtils.js";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
-  const { responseText, error, loading,fetchData } = useFetchAPi();
+  const { responseText, loading,fetchData } = useFetchAPi();
 
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);

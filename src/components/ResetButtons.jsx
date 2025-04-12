@@ -1,5 +1,5 @@
 import React from "react";
-import { RotateCcw, ListRestart } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import { usePentagram } from "./PentagramContext.jsx";
 import { toast } from "react-toastify";
 import Eraser from "/src/assets/svg_assets/eraser.svg";
