@@ -54,7 +54,7 @@ const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
       }`}
     >
       <div
-        className={`bg-gray-300 ${width} absolute ${position} h-full shadow-lg transform transition-transform duration-700
+        className={`bg-blue-100 ${width} absolute ${position} h-full shadow-lg transform transition-transform duration-700
           ${isOpen ? "translate-x-0" : "translate-x-full"} overflow-y-auto`}
       >
         <div className=" w-full flex flex-col gap-5">
