@@ -58,13 +58,13 @@ const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
           ${isOpen ? "translate-x-0" : "translate-x-full"} overflow-y-auto`}
       >
         <div className=" w-full flex flex-col gap-5">
-          <div className="flex items-center justify-between px-2 pt-10 ">
-            <h2 className="text-gray-300  text-2xl font-bold underline">
+          <div className="flex items-center justify-between px-2 pt-5 ">
+            <h2 className="text-gray-300 text-2xl font-bold underline">
               {helpDataObject?.introduction.title}
             </h2>
             <button
               onClick={onRequestClose}
-              className="sm:pt-10 md:pt-10 text-blue-300 text-4xl hover:text-blue-400  cursor-pointer rounded-2xl"
+              className=" text-blue-300 text-4xl hover:text-blue-400  cursor-pointer rounded-2xl"
             >
               <FaWindowClose />
             </button>
