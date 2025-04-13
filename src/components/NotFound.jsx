@@ -2,20 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import lostRobot from "../assets/lost-robot.json";
-// import backgroundImage from "../assets/404-bg.jpg";
+import backgroundImage from "../assets/404-bg.jpg";
 
 const NotFound = () => {
   return (
     <div
       className="flex flex-1 flex-col md:flex-row items-center justify-center bg text-white p-6 md:gap-20"
-      // style={{
-      //   backgroundImage: `url(${backgroundImage})`,
-      //   backgroundSize: "cover",
-      //   backgroundPosition: "center",
-      //   backgroundRepeat: "no-repeat",
-      //   minHeight: "80vh",
-      //   width: "100vw",
-      // }}
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "80vh",
+        width: "100vw",
+      }}
     >
       {/* Lottie Animation */}
       <div className="w-64 h-64 md:w-80 md:h-80 mt-0 md:order-2">
@@ -26,7 +26,7 @@ const NotFound = () => {
         <h1 className="text-4xl md:text-5xl font-bold mb-4 font-karlabold">
           Something went wrong!
         </h1>
-        <p className="mb-4 font-inconsolataregular">
+        <p className="mb-4 font-inconsolataregular text-white/70">
           Looks like the AiQ Elves took a coffee break, or are out partying
           again!
         </p>
