@@ -27,13 +27,13 @@ const ResetButtons = ({ field, isResetAll = false }) => {
                 toast.success("All fields have been reset.");
                 closeToast();
               }}
-              className="px-4 py-1 rounded-md bg-green-500 text-black mt-3 text-sm shadow-md cursor-pointer"
+              className="px-4 py-1 rounded-md border-1 border-green-400 text-green-400 mt-3 text-sm shadow-md cursor-pointer"
             >
               OK
             </button>
             <button
               onClick={closeToast}
-              className="px-4 py-1 rounded-md bg-red-500 text-black mt-3 text-sm shadow-md cursor-pointer"
+              className="px-4 py-1 rounded-md border-1 border-red-400 text-red-400 mt-3 text-sm shadow-md cursor-pointer"
             >
               Cancel
             </button>
