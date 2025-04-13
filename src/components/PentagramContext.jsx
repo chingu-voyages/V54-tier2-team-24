@@ -85,7 +85,7 @@ export const PentagramProvider = ({ children }) => {
         "to the site, it's name, and cost information.",
     },
     {
-      name: "constraint",
+      name: "constraints",
       tooltip: "What boundaries or limits would you like me to honor?",
       placeholder:
         "Avoid generating lots of text only a summary of the websites are needed. Also," +
