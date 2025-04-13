@@ -48,13 +48,13 @@ const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
 
   return (
     <div
-      className={`font-Inconsolata-Regular fixed top-0 right-0 bg-white/[0.65] w-full h-screen z-40 transition-opacity duration-300
+      className={`font-Inconsolata-Regular fixed top-0 right-0 backdrop-blur-xs w-full h-screen z-40 transition-blur duration-300
         ${isOpen ? "opacity-100" : "opacity-0"} ${
         isVisible ? "" : "invisible"
       }`}
     >
       <div
-        className={`bg-gradient-to-b from-[#02010B] to-[#0D00A4] ${width} absolute ${position} h-full shadow-lg transform transition-transform duration-700
+        className={`bg-black ${width} absolute ${position} h-full shadow-lg transform transition-transform duration-700
           ${isOpen ? "translate-x-0" : "translate-x-full"} overflow-y-auto`}
       >
         <div className=" w-full flex flex-col gap-5">
@@ -64,7 +64,7 @@ const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
             </h2>
             <button
               onClick={onRequestClose}
-              className="sm:pt-10 md:pt-10 text-white text-4xl hover:text-blue-400  cursor-pointer rounded-2xl"
+              className="sm:pt-10 md:pt-10 text-blue-300 text-4xl hover:text-blue-400  cursor-pointer rounded-2xl"
             >
               <FaWindowClose />
             </button>
