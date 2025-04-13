@@ -74,7 +74,7 @@ const PentagramContent = () => {
         {/* Tooltip Message and Reset Buttons */}
         <div className="flex justify-between items-center pb-5 font-karlabold gap-4">
           {pentaPrompts[index] && (
-            <div className="text-white/70 text-base leading-6 font-inconsolataregular">
+            <div className="text-white/70 text-base leading-5 font-inconsolataregular">
               {pentaPrompts[index].tooltip}
             </div>
           )}
