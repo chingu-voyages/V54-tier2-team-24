@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { toast } from "react-toastify";
+import { FaCheckCircle } from "react-icons/fa";
 
 export const useFetchAPi = () => {
   const [responseText, setResponseText] = useState(null);
@@ -26,7 +27,9 @@ export const useFetchAPi = () => {
 
       // Show success toast only if this was a retry
       if (isRetry) {
-        toast.success("Successfully reconnected and fetched data!");
+        toast.success("Successfully reconnected and fetched data!", {
+          icon: <FaCheckCircle className="text-blue-400 text-xl" />,
+        });
         setRetrying(false); // Reset retrying state
       }
     } catch (error) {

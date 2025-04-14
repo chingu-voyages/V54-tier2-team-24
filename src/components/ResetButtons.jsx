@@ -2,6 +2,7 @@ import React from "react";
 import { RotateCcw, ListRestart } from "lucide-react";
 import { usePentagram } from "./PentagramContext.jsx";
 import { toast } from "react-toastify";
+import { FaCheckCircle } from "react-icons/fa";
 
 const ResetButtons = ({ field, isResetAll = false }) => {
   const { pentaPrompts, resetField, resetAllFields } = usePentagram();
@@ -24,10 +25,12 @@ const ResetButtons = ({ field, isResetAll = false }) => {
             <button
               onClick={() => {
                 resetAllFields();
-                toast.success("All fields have been reset.");
+                toast.success("All fields have been reset.", {
+                  icon: <FaCheckCircle className="text-blue-400 text-xl" />,
+                });
                 closeToast();
               }}
-              className="px-4 py-1 rounded-md border-1 border-green-400 text-green-400 mt-3 text-sm shadow-md cursor-pointer"
+              className="px-4 py-1 rounded-md border-1 border-blue-400 text-blue-400 mt-3 text-sm shadow-md cursor-pointer"
             >
               OK
             </button>
