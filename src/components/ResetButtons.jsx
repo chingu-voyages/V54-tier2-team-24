@@ -1,12 +1,10 @@
 import React from "react";
-import { RotateCcw } from "lucide-react";
+import { RotateCcw, ListRestart } from "lucide-react";
 import { usePentagram } from "./PentagramContext.jsx";
 import { toast } from "react-toastify";
-import Eraser from "/src/assets/svg_assets/eraser.svg";
+import { FaCheckCircle } from "react-icons/fa";
 
-const ResetButtons = ({
-  field,
-  isResetAll = false,}) => {
+const ResetButtons = ({ field, isResetAll = false }) => {
   const { pentaPrompts, resetField, resetAllFields } = usePentagram();
 
   const handleResetField = () => {
@@ -27,16 +25,18 @@ const ResetButtons = ({
             <button
               onClick={() => {
                 resetAllFields();
-                toast.success("All fields have been reset.");
+                toast.success("All fields have been reset.", {
+                  icon: <FaCheckCircle className="text-blue-400 text-xl" />,
+                });
                 closeToast();
               }}
-              className="px-4 py-1 rounded-md bg-green-500 text-black mt-3 text-sm shadow-md cursor-pointer"
+              className="px-4 py-1 rounded-md border-1 border-blue-400 text-blue-400 mt-3 text-sm shadow-md cursor-pointer"
             >
               OK
             </button>
             <button
               onClick={closeToast}
-              className="px-4 py-1 rounded-md bg-red-500 text-black mt-3 text-sm shadow-md cursor-pointer"
+              className="px-4 py-1 rounded-md border-1 border-red-400 text-red-400 mt-3 text-sm shadow-md cursor-pointer"
             >
               Cancel
             </button>
@@ -55,19 +55,9 @@ const ResetButtons = ({
   return (
     <button
       onClick={isResetAll ? handleResetAll : handleResetField}
-      className="p-1 rounded-full cursor-pointer"
+      className="p-1 bg-[#A3CAF6] hover:bg-[#A3CAF6]/70 text-black rounded-full cursor-pointer"
     >
-      {isResetAll ?
-          (<div className="flex items-center gap-1 font-inconsolataexpanded text-[20px] lg:text-[26px] md:text-[22px]">
-            <img src={Eraser} alt="Reset All Fields Button" className="w-8"
-                     style={{filter: "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
-                             "hue-rotate(185deg) brightness(103%) contrast(96%) " +
-                             "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))"}}
-                />
-            <span>Clear All</span>
-          </div>) :
-          (<div className="flex items-center gap-1 font-inconsolataexpanded text-[20px] lg:text-[26px] md:text-[22px]">
-            <RotateCcw color="#A3CAF6" size={24} />Clear This</div>)}
+      {isResetAll ? <ListRestart size={16} /> : <RotateCcw size={16} />}
     </button>
   );
 };
