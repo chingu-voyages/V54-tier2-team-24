@@ -46,7 +46,7 @@ function Header() {
   };
 
   useEffect(() => {
-    setCurrentDate(format(getDate(), "MM/dd/yyyy"));
+    setCurrentDate(format(getDate(), "MM.dd.yyyy"));
   }, []);
 
   useEffect(() => {
