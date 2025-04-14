@@ -35,7 +35,7 @@ const PentagramContent = () => {
 
   return (
     <div className="mx-auto px-4 py-6 w-screen justify-items-center">
-      <h1 className="text-4xl text-blue-400 font-karlabold font-bold text-center mb-2">
+      <h1 className="text-4xl text-[#A3CAF6] font-karlabold font-bold text-center mb-2">
         AiQ
       </h1>
       <p className="text-white text-lg text-center font-inconsolataregular mb-8 max-sm:mb-12">
