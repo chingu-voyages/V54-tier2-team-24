@@ -60,7 +60,7 @@ const PentagramContent = () => {
 
       <div className="w-full">
         {/* Pentagram Category and Tooltip */}
-        <div className="flex justify-between items-center pb-1">
+        <div className="flex justify-between items-center pb-2">
           {pentaPrompts[index] && (
             <div className="flex items-center gap-2">
               <span className="text-white font-medium text-xl capitalize">
