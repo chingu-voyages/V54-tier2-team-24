@@ -29,6 +29,7 @@
   --font-inconsolataregular: Inconsolata-Regular, monospace;
   --font-inconsolatabold: Inconsolata-Bold, monospace;
   --font-inconsolataextralight: Inconsolata-ExtraLight, monospace;
+  --color-icon:#A3CAF6;
 }
 .font-Karla-SemiBold {
   font-family: 'Karla-SemiBold', sans-serif;

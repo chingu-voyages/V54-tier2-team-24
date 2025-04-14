@@ -7,14 +7,14 @@ import ResetButtons from "./ResetButtons.jsx";
 import { useFetchAPi } from "./useFetchAPi.jsx";
 import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
-import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
 import PromptHistory from "./PromptHistory.jsx";
 import { toast } from "react-toastify";
+import Triangle from "/src/assets/svg_assets/triangle-svgrepo-com.svg";
+import Lightbulb from "/src/assets/svg_assets/lightbulb.svg";
 import { validateInput } from "../utils/validationUtils.js";
 
 const PentagramContent = () => {
-  const { index, setIndex, pentaPrompts, inputs, resetField, resetAllFields } =
-    usePentagram();
+  const { index, setIndex, pentaPrompts, inputs } = usePentagram();
   const { responseText, loading, fetchData } = useFetchAPi();
 
   const onChangeIndex = (num) => setIndex(num);
@@ -34,7 +34,7 @@ const PentagramContent = () => {
   };
 
   return (
-    <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6">
+    <div className="mx-auto px-4 py-6 w-screen justify-items-center">
       <h1 className="text-4xl text-blue-400 font-karlabold font-bold text-center mb-2">
         AiQ
       </h1>
@@ -47,6 +47,9 @@ const PentagramContent = () => {
         {[0, 1, 2, 3, 4].map((num) => (
           <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
             <Circle
+              // key={num}
+              // isFilled={inputs[num]}
+              // isSelected={index === num}
               size={28}
               className={
                 index === num
@@ -58,7 +61,7 @@ const PentagramContent = () => {
         ))}
       </div>
 
-      <div className="w-full">
+      <div className="md:w-1/2 w-7/8">
         {/* Pentagram Category and Tooltip */}
         <div className="flex justify-between items-center pb-2">
           {pentaPrompts[index] && (
@@ -87,33 +90,67 @@ const PentagramContent = () => {
         </div>
       </div>
 
-      <div className="w-full">
+      <div className="md:w-1/2 w-7/8 ">
         <PromptField />
       </div>
 
-      <div className="flex justify-between items-center mb-8">
-        <button
-          onClick={onPrevious}
-          className={`px-6 py-2 rounded-md font-medium transition-colors ${
-            index === 0
-              ? "bg-gray-100 text-gray-300 cursor-not-allowed"
-              : "bg-blue-300 text-blue-500"
-          }`}
-          disabled={index === 0}
-        >
-          Back
+      <div
+        className="flex justify-between items-center mb-8 w-7/8 md:w-1/2
+      font-inconsolataexpanded text-[20px] lg:text-[26px] md:text-[22px]"
+      >
+        <button onClick={onPrevious}>
+          <div className="flex gap-2 mt-2 items-center">
+            <img
+              src={Triangle}
+              alt="Back Button"
+              className="w-8 rotate-90"
+              style={{
+                filter:
+                  "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
+                  "hue-rotate(185deg) brightness(103%) contrast(96%) " +
+                  "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))",
+              }}
+            />
+            <span>Back</span>
+          </div>
         </button>
 
         <PromptHistory />
 
-        <button
-          onClick={index === 4 ? handleSubmit : onNext}
-          className="px-6 py-2 rounded-md bg-blue-300 text-blue-500 mt-3"
-        >
-          {index === 4 ? "Submit" : "Next"}
+        <button onClick={index === 4 ? handleSubmit : onNext}>
+          {index === 4 ? (
+            <div className="flex gap-2 mt-2 items-center">
+              <img
+                src={Lightbulb}
+                alt="Submit Button"
+                className="w-6"
+                style={{
+                  filter:
+                    "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
+                    "hue-rotate(185deg) brightness(103%) contrast(96%) " +
+                    "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))",
+                }}
+              />
+              <span>Generate Prompt</span>
+            </div>
+          ) : (
+            <div className="flex gap-2 mt-2 items-center">
+              <span>Next</span>
+              <img
+                src={Triangle}
+                alt="Submit Button"
+                className="w-8 rotate-270"
+                style={{
+                  filter:
+                    "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
+                    "hue-rotate(185deg) brightness(103%) contrast(96%) " +
+                    "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))",
+                }}
+              />
+            </div>
+          )}
         </button>
       </div>
-      <ExportSinglePrompt inputs={inputs} responseText={responseText} />
 
       {loading && (
         <div className="loading-spinner">
