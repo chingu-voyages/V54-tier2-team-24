@@ -33,7 +33,7 @@ const ResponseDisplay = ({ responseText }) => {
       {!responseText ? null : (
         <div className="flex justify-between">
           <div className="flex justify-center items-center text-center">
-            <CopyButton />
+            <CopyButton responseText={responseText} />
             <p className="ml-2 text-white">Copy</p>
           </div>
           <div className="flex justify-center items-center text-center">

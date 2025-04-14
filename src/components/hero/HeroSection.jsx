@@ -16,7 +16,7 @@ const HeroSection = () => {
   }, [user]);
 
   const imageStyle = {
-    transform: "scaleX(-1)",
+    // transform: "scaleX(-1)",
   };
 
   return (
