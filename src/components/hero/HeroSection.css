@@ -37,12 +37,15 @@
 .hero-title {
   margin-bottom: 2vh;
   color: white;
+  letter-spacing: 5px;
   font-size: 3vw;
 }
 
 .hero-desc {
+  width: 50vw;
   color: white;
-  font-size: 1vw;
+  letter-spacing: 2px;
+  font-size: 0.7vw;
 }
 
 .get-started-button {
@@ -109,21 +112,22 @@
   .hero-title {
     margin-bottom: 2vh;
     color: white;
-    font-size: 7vw;
+    font-size: 10vw;
   }
   .hero-desc {
+    width: 90vw;
     color: white;
-    font-size: 1.9vw;
+    font-size: 2.5vw;
   }
 
   .get-started-button {
     margin-top: 2vh;
     color: white;
-    padding: 0.7vw;
-    width: 18vw;
+    padding: 1.2vw;
+    width: 25vw;
     border: solid 1px white;
     border-radius: 10px;
-    font-size: 1.5vw;
+    font-size: 2.5vw;
   }
   .hero-right {
     flex: 0;
