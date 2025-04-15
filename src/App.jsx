@@ -18,7 +18,7 @@ import BackgroundEffect from "./components/BackgroundEffect";
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen bg-gradient-to-tr from-[#02010B] to-[#0D00A4]">
+      <div className="flex flex-col min-h-screen bg-gradient-to-tr from-[#02010B] to-[#070062]">
         <BackgroundEffect />
         <Header />
         <main className="flex-1 relative z-10 flex">

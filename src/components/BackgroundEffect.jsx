@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const primary = "#0D00A4";
+const primary = "#02010B";
 const secondary = "#A3CAF6";
 const tertiary = "#02caa0";
 
@@ -28,14 +28,14 @@ const BackgroundEffect = () => {
           rotate: [0, 360],
         }}
         transition={{
-          duration: 30,
+          duration: 120,
           repeat: Infinity,
           repeatType: "mirror",
         }}
       />
 
       {/* Floating particles */}
-      {[...Array(25)].map((_, i) => (
+      {/* {[...Array(25)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 bg-white/50 rounded-full"
@@ -54,7 +54,7 @@ const BackgroundEffect = () => {
             repeatType: "reverse",
           }}
         />
-      ))}
+      ))} */}
     </motion.div>
   );
 };
