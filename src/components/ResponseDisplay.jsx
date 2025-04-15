@@ -37,8 +37,8 @@ const ResponseDisplay = ({ responseText }) => {
             <p className="ml-2 text-white">Copy</p>
           </div>
           <div className="flex justify-center items-center text-center">
-            <ExportSinglePrompt />
-            <p className="ml-2 text-white">Export</p>
+            {/* <ExportSinglePrompt /> */}
+            {/* <p className="ml-2 text-white">Export</p> */}
           </div>
         </div>
       )}
