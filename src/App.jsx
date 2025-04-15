@@ -26,9 +26,13 @@ function App() {
           </Routes>
           <ToastContainer
             position="top-center"
-            theme="dark"
             autoClose={3000}
             hideProgressBar
+            toastStyle={{
+              backgroundColor: "#000",
+              color: "#fff", // #B3B3B3
+              boxShadow: "0px 0px 10px rgba(0,0,0,0.3)",
+            }}
           />
         </main>
         <Footer />

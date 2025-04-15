@@ -31,11 +31,9 @@ const ExportSinglePrompt = ({ inputs, responseText }) => {
       yPosition += lineHeight;
     });
 
-    doc.setFontSize(12);
     yPosition += margin;
     doc.text("Response:", 10, yPosition);
     yPosition += margin;
-    doc.setFontSize(10);
     let formattedResponse = responseText;
 
     //bold

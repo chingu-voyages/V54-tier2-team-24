@@ -5,12 +5,12 @@ export default function Tooltips({ pentaPrompts }) {
   const { tooltip } = pentaPrompts;
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="relative inline-block cursor-pointer">
+    <div className="relative inline-block cursor-pointer font-inconsolataregular">
       <div
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
       >
-        <BsQuestionCircleFill className="text-2xl text-blue-500 transform transition-transform duration-300 hover:scale-110" />
+        <BsQuestionCircleFill className="text-2xl text-icon transform transition-transform duration-300 hover:scale-110" />
       </div>
 
       {isOpen && (

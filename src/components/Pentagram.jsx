@@ -1,135 +1,57 @@
-import React, { useState } from "react";
+import React from "react";
 import { Circle } from "lucide-react";
 import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
 import { useFetchAPi } from "./useFetchAPi.jsx";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
 import CopyButton from "./CopyButton.jsx";
 import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
 import PromptHistory from "./PromptHistory.jsx";
 import { toast } from "react-toastify";
+import Triangle from "/src/assets/svg_assets/triangle-svgrepo-com.svg";
+import Lightbulb from "/src/assets/svg_assets/lightbulb.svg";
+import { validateInput } from "../utils/validationUtils.js";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
-  const { fetchData } = useFetchAPi();
-  const [responseText, setResponseText] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [personaPrompt, setPersonaPrompt] = useState("");
-  const [contextPrompt, setContextPrompt] = useState("");
-  const [taskPrompt, setTaskPrompt] = useState("");
-  const [outputPrompt, setOutputPrompt] = useState("");
-  const [constraintPrompt, setConstraintPrompt] = useState("");
+  const { responseText, loading, fetchData } = useFetchAPi();
 
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
   const onNext = () => setIndex(index === 4 ? 4 : index + 1);
 
   const handleSubmit = async () => {
-    const inputs = [
-      personaPrompt,
-      contextPrompt,
-      taskPrompt,
-      outputPrompt,
-      constraintPrompt,
-    ];
-    if (inputs.some((value) => value.trim() === "")) {
+    const hasEmptyFields = inputs.some((value) => value.trim() === "");
+    const hasErrors = inputs.some((value) => validateInput(value) !== "");
+
+    if (hasEmptyFields || hasErrors) {
       toast.warn("Please fill out all fields before submitting.");
       return;
-    }
-    setLoading(true);
-
-    try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-      const concatenatedText =
-        personaPrompt +
-        " " +
-        contextPrompt +
-        " " +
-        taskPrompt +
-        " " +
-        outputPrompt +
-        " " +
-        constraintPrompt;
-      console.log(concatenatedText);
-      const result = await model.generateContent(concatenatedText);
-      console.log("result", result);
-
-      const text = await result.response.text(); //text is in model.generateContent
-      console.log("API result", text);
-      setResponseText(text || "No response text found");
-      console.log("updated response text", result.response.text);
-
-      setError(null);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-
-      if (error.message.includes("Failed to fetch")) {
-        setResponseText(
-          "Network error: Please check your internet connection."
-        );
-      } else if (error.response && error.response.status === 429) {
-        setResponseText("Rate limit exceeded: Please try again later.");
-      } else if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        setResponseText(`API error: ${error.response.data.message}`);
-      } else {
-        setResponseText("An error occurred while fetching data.");
-      }
-
-      setError(error.message);
-      setResponse(null);
-    } finally {
-      setLoading(false);
     }
 
     await fetchData(inputs);
   };
 
-  const clearCurrentField = () => {
-    if (pentaPrompts[index].name === "persona") {
-      setPersonaPrompt("");
-      localStorage.removeItem("personaPrompt");
-    }
-    if (pentaPrompts[index].name === "context") {
-      setContextPrompt("");
-      localStorage.removeItem("contextPrompt");
-    }
-    if (pentaPrompts[index].name === "task") {
-      setTaskPrompt("");
-      localStorage.removeItem("taskPrompt");
-    }
-    if (pentaPrompts[index].name === "output") {
-      setOutputPrompt("");
-      localStorage.removeItem("outputPrompt");
-    }
-    if (pentaPrompts[index].name === "constraint") {
-      setConstraintPrompt("");
-      localStorage.removeItem("constraintPrompt");
-    }
-  };
-
   return (
-    <div className="flex flex-1 flex-col max-w-4xl mx-auto px-4 py-6 ">
-      <h1 className="text-2xl text-blue-400 font-bold text-center mb-8 max-sm:text-left">
-        PENTAGRAM
+    <div className="mx-auto px-4 py-6 w-screen justify-items-center">
+      <h1 className="text-4xl text-[#A3CAF6] font-karlabold font-bold text-center mb-2">
+        AiQ
       </h1>
+      <p className="text-white text-lg text-center font-inconsolataregular mb-8 max-sm:mb-12">
+        AI Prompting. Simplified. Perfected.
+      </p>
 
-      <div className="flex justify-center items-center gap-6 mb-8 max-sm:justify-start max-sm:gap-2 max-sm:mb-3">
+      <div className="flex justify-center items-center gap-6 mb-10 max-sm:gap-2">
         {/* //number 0: persona, 1: context, 2 : task, 3 : output, 4 : constrain */}
         {[0, 1, 2, 3, 4].map((num) => (
           <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
             <Circle
+              // key={num}
+              // isFilled={inputs[num]}
+              // isSelected={index === num}
               size={28}
               className={
                 index === num
@@ -141,63 +63,94 @@ const PentagramContent = () => {
         ))}
       </div>
 
-      <div className="w-full flex justify-between pb-2">
-        <div
-          className="flex gap-4 rounded-full w-6"
-          onClick={() => {
-            clearCurrentField();
-          }}
-        >
+      <div className="md:w-1/2 w-7/8">
+        {/* Pentagram Category and Tooltip */}
+        <div className="flex justify-between items-center pb-2">
           {pentaPrompts[index] && (
-            <ResetButtons field={pentaPrompts[index].name} />
+            <div className="flex items-center gap-2">
+              <span className="text-white font-medium text-xl capitalize">
+                {pentaPrompts[index].name}
+              </span>
+              <Tooltips pentaPrompts={pentaPrompts[index]} />
+            </div>
           )}
-          <ResetButtons
-            isResetAll={true}
-            setPersonaPrompt={setPersonaPrompt}
-            setContextPrompt={setContextPrompt}
-            setTaskPrompt={setTaskPrompt}
-            setOutputPrompt={setOutputPrompt}
-            setConstraintPrompt={setConstraintPrompt}
-          />
         </div>
-        {pentaPrompts[index] && <Tooltips pentaPrompts={pentaPrompts[index]} />}
+
+        {/* Tooltip Message and Reset Buttons */}
+        <div className="flex justify-between items-center pb-5 font-karlabold gap-4">
+          {pentaPrompts[index] && (
+            <div className="text-white/70 text-base leading-5 font-inconsolataregular">
+              {pentaPrompts[index].tooltip}
+            </div>
+          )}
+          <div className="flex gap-4">
+            {pentaPrompts[index] && (
+              <ResetButtons field={pentaPrompts[index].name} />
+            )}
+            <ResetButtons isResetAll={true} />
+          </div>
+        </div>
       </div>
 
-      <div className="w-full">
-        <PromptField
-          personaPrompt={personaPrompt}
-          contextPrompt={contextPrompt}
-          taskPrompt={taskPrompt}
-          outputPrompt={outputPrompt}
-          constraintPrompt={constraintPrompt}
-          setPersonaPrompt={setPersonaPrompt}
-          setContextPrompt={setContextPrompt}
-          setTaskPrompt={setTaskPrompt}
-          setOutputPrompt={setOutputPrompt}
-          setConstraintPrompt={setConstraintPrompt}
-        />
+      <div className="md:w-1/2 w-7/8 ">
+        <PromptField />
       </div>
 
-      <div className="flex justify-between items-center mb-8">
-        <button
-          onClick={onPrevious}
-          className={`px-6 py-2 rounded-md font-medium transition-colors ${
-            index === 0
-              ? "bg-gray-100 text-gray-300 cursor-not-allowed"
-              : "bg-blue-300 text-blue-500"
-          }`}
-          disabled={index === 0}
-        >
-          Back
+      <div
+        className="flex justify-between items-center mb-8 w-7/8 md:w-1/2
+      font-inconsolataexpanded text-[20px] lg:text-[26px] md:text-[22px]"
+      >
+        <button onClick={onPrevious}>
+          <div className="flex gap-2 mt-2 items-center">
+            <img
+              src={Triangle}
+              alt="Back Button"
+              className="w-8 rotate-90"
+              style={{
+                filter:
+                  "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
+                  "hue-rotate(185deg) brightness(103%) contrast(96%) " +
+                  "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))",
+              }}
+            />
+            <span>Back</span>
+          </div>
         </button>
 
         <PromptHistory />
 
-        <button
-          onClick={index === 4 ? handleSubmit : onNext}
-          className="px-6 py-2 rounded-md bg-blue-300 text-blue-500 mt-3"
-        >
-          {index === 4 ? "Submit" : "Next"}
+        <button onClick={index === 4 ? handleSubmit : onNext}>
+          {index === 4 ? (
+            <div className="flex gap-2 mt-2 items-center">
+              <img
+                src={Lightbulb}
+                alt="Submit Button"
+                className="w-6"
+                style={{
+                  filter:
+                    "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
+                    "hue-rotate(185deg) brightness(103%) contrast(96%) " +
+                    "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))",
+                }}
+              />
+              <span>Generate Prompt</span>
+            </div>
+          ) : (
+            <div className="flex gap-2 mt-2 items-center">
+              <span>Next</span>
+              <img
+                src={Triangle}
+                alt="Submit Button"
+                className="w-8 rotate-270"
+                style={{
+                  filter:
+                    "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
+                    "hue-rotate(185deg) brightness(103%) contrast(96%) " +
+                    "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))",
+                }}
+              />
+            </div>
+          )}
         </button>
       </div>
 
@@ -209,6 +162,7 @@ const PentagramContent = () => {
           <div>Loading...</div>
         </div>
       )}
+      {responseText && <ResponseDisplay responseText={responseText} />}
     </div>
   );
 };

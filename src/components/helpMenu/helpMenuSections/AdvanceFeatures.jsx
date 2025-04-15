@@ -10,7 +10,7 @@ export default function AdvanceFeatures({
     <section className="p-4">
         <button
         onClick={() => toggleSection(sectionId)}
-        className="w-full text-left flex justify-between items-center bg-gray-100 p-3 rounded-md hover:bg-gray-200"
+        className="w-full text-left flex justify-between items-center bg-blue-200 p-3 rounded-md hover:bg-blue-300"
       >
         <h2 className="text-2xl font-bold">{data.title}</h2>
         <span className="text-xl">
@@ -27,9 +27,9 @@ export default function AdvanceFeatures({
       >
         {data.sections.map((section, index) => (
           <div key={index} className="mb-8">
-            <h3 className="mb-3">{section.heading}</h3>
+            <h3 className="text-white mb-3">{section.heading}</h3>
 
-            <ul className="list-disc pl-5 space-y-2 text-gray-700">
+            <ul className="list-disc pl-5 space-y-2 text-gray-400">
               {section.features.map((feature, i) => (
                 <li key={i}>{feature}</li>
               ))}
