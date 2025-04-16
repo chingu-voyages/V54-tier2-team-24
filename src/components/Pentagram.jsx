@@ -101,7 +101,7 @@ const PentagramContent = () => {
           onClick={onPrevious}
           className={`font-inconsolataregular px-4 py-1 transition-colors text-black text-base rounded ${
             index === 0
-              ? "bg-gray-100 text-gray-300 cursor-not-allowed"
+              ? "bg-gray-100 text-gray-500 cursor-not-allowed"
               : "bg-blue-300  hover:bg-blue-400 cursor-pointer"
           }`}
           disabled={index === 0}
