@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import Triangle from "/src/assets/svg_assets/triangle-svgrepo-com.svg";
 import Lightbulb from "/src/assets/svg_assets/lightbulb.svg";
 import { validateInput } from "../utils/validationUtils.js";
+import { Link } from "react-router-dom";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
@@ -163,6 +164,14 @@ const PentagramContent = () => {
         </div>
       )}
       {responseText && <ResponseDisplay responseText={responseText} />}
+
+      {/* Broken Link */}
+      <Link
+        to="/this-page-does-not-exist"
+        className="text-red-400 text-base underline font-inconsolataregular"
+      >
+        Click here to demo the 404 Page
+      </Link>
     </div>
   );
 };
