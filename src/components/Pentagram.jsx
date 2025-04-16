@@ -99,10 +99,10 @@ const PentagramContent = () => {
       <div className="flex justify-between items-center mb-8 md:w-1/2 w-7/8">
         <button
           onClick={onPrevious}
-          className={`px-6 py-2 rounded-md font-medium transition-colors ${
+          className={`font-inconsolataregular px-4 py-1 transition-colors text-black text-base rounded ${
             index === 0
               ? "bg-gray-100 text-gray-300 cursor-not-allowed"
-              : "font-inconsolataregular px-4 py-2 bg-blue-300 text-black rounded hover:bg-blue-400 transition cursor-pointer"
+              : "bg-blue-300  hover:bg-blue-400 cursor-pointer"
           }`}
           disabled={index === 0}
         >
@@ -111,13 +111,13 @@ const PentagramContent = () => {
 
         <button
           onClick={index === 4 ? handleSubmit : onNext}
-          className="font-inconsolataregular px-4 py-2 bg-blue-300 text-black rounded hover:bg-blue-400 transition cursor-pointer"
+          className="font-inconsolataregular px-4 py-1 bg-blue-300 text-black text-base rounded hover:bg-blue-400 transition cursor-pointer"
         >
           {index === 4 ? "Generate" : "Next"}
         </button>
       </div>
 
-        {responseText && <ResponseDisplay responseText={responseText} />}
+      {responseText && <ResponseDisplay responseText={responseText} />}
 
       {loading && (
         <div className="loading-spinner">
