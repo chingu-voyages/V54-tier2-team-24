@@ -29,24 +29,75 @@
   --font-inconsolataregular: Inconsolata-Regular, monospace;
   --font-inconsolatabold: Inconsolata-Bold, monospace;
   --font-inconsolataextralight: Inconsolata-ExtraLight, monospace;
-  --color-icon:#A3CAF6;
+  --color-icon: #a3caf6;
 }
 .font-Karla-SemiBold {
-  font-family: 'Karla-SemiBold', sans-serif;
+  font-family: "Karla-SemiBold", sans-serif;
 }
 
 .font-Karla-Bold {
-  font-family: 'Karla-Bold', sans-serif;
+  font-family: "Karla-Bold", sans-serif;
 }
 
 .font-Inconsolata-Regular {
-  font-family: 'Inconsolata-Regular', monospace;
+  font-family: "Inconsolata-Regular", monospace;
 }
 
 .font-Inconsolata-Bold {
-  font-family: 'Inconsolata-Bold', monospace;
+  font-family: "Inconsolata-Bold", monospace;
 }
 
 .font-Inconsolata-ExtraLight {
-  font-family: 'Inconsolata-ExtraLight', monospace;
+  font-family: "Inconsolata-ExtraLight", monospace;
+}
+
+.response-display {
+  width: 60vw;
+  border-bottom: solid 2px;
+}
+
+.back-button {
+  margin-top: 1vh;
+  color: white;
+  background-color: #0d00a4;
+  padding: 0.4vw;
+  border-radius: 10px;
+  width: 5vw;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9vw;
+  cursor: pointer;
+}
+
+.next-button {
+  color: white;
+}
+
+.submit-button {
+  margin-top: 1vh;
+  color: white;
+  background-color: #0d00a4;
+  padding: 0.4vw;
+  border-radius: 10px;
+  width: 5vw;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9vw;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1024px) {
+  .response-display {
+    width: 70vw;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .response-display {
+    width: 95vw;
+  }
 }

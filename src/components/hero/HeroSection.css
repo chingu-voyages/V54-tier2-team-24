@@ -31,6 +31,7 @@
 }
 
 .hero-img {
+  margin-right: 6vw;
   width: 60vw;
 }
 
@@ -59,7 +60,7 @@
 }
 
 .get-started-button:hover {
-  background-color: black;
+  background-color: #3584df;
   cursor: pointer;
 }
 

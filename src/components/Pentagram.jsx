@@ -68,7 +68,7 @@ const PentagramContent = () => {
         <div className="flex justify-between items-center pb-2">
           {pentaPrompts[index] && (
             <div className="flex items-center gap-2">
-              <span className="text-white font-medium text-xl capitalize">
+              <span className="text-white font-medium text-2xl capitalize">
                 {pentaPrompts[index].name}
               </span>
               <Tooltips pentaPrompts={pentaPrompts[index]} />
@@ -79,8 +79,8 @@ const PentagramContent = () => {
         {/* Tooltip Message and Reset Buttons */}
         <div className="flex justify-between items-center pb-5 font-karlabold gap-4">
           {pentaPrompts[index] && (
-            <div className="text-white/70 text-base leading-5 font-inconsolataregular">
-              {pentaPrompts[index].tooltip}
+            <div className="text-white/70 text-base leading-5 mt-5">
+              {pentaPrompts[index].prompt}
             </div>
           )}
           <div className="flex gap-4">
@@ -100,62 +100,29 @@ const PentagramContent = () => {
         className="flex justify-between items-center mb-8 w-7/8 md:w-1/2
       font-inconsolataexpanded text-[20px] lg:text-[26px] md:text-[22px]"
       >
-        <button onClick={onPrevious}>
-          <div className="flex gap-2 mt-2 items-center">
-            <img
-              src={Triangle}
-              alt="Back Button"
-              className="w-8 rotate-90"
-              style={{
-                filter:
-                  "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
-                  "hue-rotate(185deg) brightness(103%) contrast(96%) " +
-                  "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))",
-              }}
-            />
-            <span>Back</span>
+        <button className="back-button" onClick={onPrevious}>
+          <div className="flex items-center">
+            <p>Back</p>
           </div>
         </button>
 
         <PromptHistory />
 
-        <button onClick={index === 4 ? handleSubmit : onNext}>
+        <button
+          className="submit-button"
+          onClick={index === 4 ? handleSubmit : onNext}
+        >
           {index === 4 ? (
-            <div className="flex gap-2 mt-2 items-center">
-              <img
-                src={Lightbulb}
-                alt="Submit Button"
-                className="w-6"
-                style={{
-                  filter:
-                    "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
-                    "hue-rotate(185deg) brightness(103%) contrast(96%) " +
-                    "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))",
-                }}
-              />
-              <span>Generate Prompt</span>
+            <div className="flex items-center">
+              <p>Submit</p>
             </div>
           ) : (
-            <div className="flex gap-2 mt-2 items-center">
-              <span>Next</span>
-              <img
-                src={Triangle}
-                alt="Submit Button"
-                className="w-8 rotate-270"
-                style={{
-                  filter:
-                    "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
-                    "hue-rotate(185deg) brightness(103%) contrast(96%) " +
-                    "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))",
-                }}
-              />
+            <div className="next-button flex items-center">
+              <p>Next</p>
             </div>
           )}
         </button>
       </div>
-
-      {responseText && <ResponseDisplay responseText={responseText} />}
-
       {loading && (
         <div className="loading-spinner">
           <div className="spinner"></div>

@@ -14,16 +14,18 @@ const ResponseDisplay = ({ responseText }) => {
   }, [responseText]);
 
   return (
-    <div ref={responseEndRef}>
-      <section className="p-5 text-white rounded-lg leading-7 mt-20">
-        <h1 className="flex justify-center text-lg pb-5 font-Inconsolata-Bold">
-          Response
-        </h1>
+    <div>
+      <section
+        ref={responseEndRef}
+        className="response-display p-5 text-white rounded-lg leading-7 mt-20"
+      >
         <ReactMarkdown
-          className="font-Inconsolata-Regular lg:text-base/9 md:text-[22px]/8 sm:text-base/7"
+          className=" lg:text-base/9 md:text-[22px]/8 sm:text-base/7 mt-20 mb-4"
           components={{
             strong: ({ children }) => (
-              <span className="font-Inconsolata-Bold">{children}</span>
+              <span className="font-Inconsolata-Bold text-2xl text-center">
+                {children}
+              </span>
             ),
           }}
         >
@@ -31,14 +33,14 @@ const ResponseDisplay = ({ responseText }) => {
         </ReactMarkdown>
       </section>
       {!responseText ? null : (
-        <div className="flex justify-between">
+        <div className="flex justify-between mb-20 mt-5">
           <div className="flex justify-center items-center text-center">
             <CopyButton responseText={responseText} />
             <p className="ml-2 text-white">Copy</p>
           </div>
           <div className="flex justify-center items-center text-center">
-            {/* <ExportSinglePrompt /> */}
-            {/* <p className="ml-2 text-white">Export</p> */}
+            {/* <ExportSinglePrompt />
+            <p className="ml-2 text-white">Export</p> */}
           </div>
         </div>
       )}
