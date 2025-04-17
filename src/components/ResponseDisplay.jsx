@@ -4,7 +4,7 @@ import ExportSinglePrompt from "./ExportSinglePrompt";
 import CopyButton from "./CopyButton";
 import "../index.css";
 
-const ResponseDisplay = ({ responseText }) => {
+const ResponseDisplay = ({ responseText, setResponseText, inputs }) => {
   const responseEndRef = useRef(null);
 
   useEffect(() => {
@@ -13,10 +13,18 @@ const ResponseDisplay = ({ responseText }) => {
     }
   }, [responseText]);
 
+  const newPrompt = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
+
   return (
-    <div ref={responseEndRef}>
-      <section className="p-5 text-white rounded-lg leading-7 mt-20">
-        <h1 className="flex justify-center text-lg pb-5 font-Inconsolata-Bold">
+    <div>
+      <section
+        ref={responseEndRef}
+        className="response-display p-5 text-white rounded-lg leading-7 mt-20"
+      >
+        <h1 className="flex justify-center text-lg pb-5 font-Inconsolata-Bold mt-20">
           Response
         </h1>
         <ReactMarkdown
@@ -34,11 +42,17 @@ const ResponseDisplay = ({ responseText }) => {
         <div className="flex justify-between">
           <div className="flex justify-center items-center text-center">
             <CopyButton responseText={responseText} />
-            <p className="ml-2 text-white">Copy</p>
+          </div>
+          <div
+            className="new-prompt-button"
+            onClick={() => {
+              newPrompt();
+            }}
+          >
+            New Prompt
           </div>
           <div className="flex justify-center items-center text-center">
-            {/* <ExportSinglePrompt /> */}
-            {/* <p className="ml-2 text-white">Export</p> */}
+            <ExportSinglePrompt responseText={responseText} inputs={inputs} />
           </div>
         </div>
       )}

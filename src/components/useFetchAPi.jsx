@@ -73,5 +73,5 @@ export const useFetchAPi = () => {
     }
   };
 
-  return { responseText, loading, fetchData };
+  return { responseText, setResponseText, loading, fetchData };
 };
