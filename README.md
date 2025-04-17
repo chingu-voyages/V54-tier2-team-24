@@ -1,55 +1,127 @@
-# voyage-tasks
+# AiQ
 
-Your project's `readme` is as important to success as your code. For
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
+## Overview
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point -
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+Building an app, which is not just any AI tool, but a game-changer. An app, which enhances the end-users' learning experience by helping them become better at building prompts and improving their proficiency in AI communication.
 
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
+A structured productivity tool that makes AI responses more useful, accurate, and efficient, while removing the frustration of bad AI responses, and replacing it with structured, meaningful interactions. This app will transform AI from an unpredictable tool into a powerful and reliable assistant.
 
-> Own it & Make it your Own!
+## Core Features
 
-## Team Documents
+- **Structured Input Fields** - Based off of the pentagram methodology (Persona, Context, Task, Output, Constraint)
+- **AI Integration** - Uses Google Gemini API to fetch AI-generated responses
+- **Input Validation** - Ensures users complete all necessary input fields
+- **Editable Prompts** - Users can refine their prompt and regenerate AI responses
+- **Formatted AI Output** - Displays responses in a readable, structured format
+- **Error Handling** - Displays errors when input fields are empty or invalid
+- **Help Menu** - Used to guide users with a separate separated into 3 sections Getting Started, FAQs, and Advanced Features
+- **Google Authentication** - Users have the ability to save their prompts in Google Firestore by logging in with their Google account
+- **User Guidance** - Tooltips and example prompts to help guide users
+- **Responsive UI** - Works across all devices
 
-You may find these helpful as you work together to organize your project.
+## Getting Started
 
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
+The following commands can be easily copied and pasted directly into your terminal:
 
-Meeting Agenda templates (located in the `/docs` directory in this repo):
+Clone the project
 
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
+```bash
+git clone https://github.com/chingu-voyages/V54-tier2-team-24
+```
 
-## Our Team
+Navigate to the project folder
 
-Everyone on your team should add their name along with a link to their GitHub
-& optionally their LinkedIn profiles below. Do this in Sprint #1 to validate
-your repo access and to practice PR'ing with your team _before_ you start
-coding!
+```bash
+cd V54-tier2-team-24
+```
 
-- zephyr_koryami (Sokuen Ryan)[GitHub](https://github.com/sokuenryan) / [LinkedIn](https://linkedin.com/in/sokuenryan)
+Install dependencies
 
-- moonshark26 (Benjamin Corbett)[GitHub](https://github.com/bcsurf2822) / [LinkedIn](https://linkedin.com/in/benjamin-corbett-84822424a/)
+```bash
+npm install
+```
 
-- solarluiso (Luis Solar)[GitHub](https://github.com/solarluiso) / [LinkedIn](https://www.linkedin.com/in/solarluiso/)
+Run the development server
 
-- codingpaige (Christin Martin)[GitHub](https://github.com/Christin-paige) / [LinkedIn](https://www.linkedin.com/in/christin-martin/)
+```bash
+npm run dev
+```
 
-- Matthew Neie (Developer): [GitHub](https://github.com/MatthewNeie) / [LinkedIn](https://linkedin.com/in/matthew-neie)
+Open browser
 
-- carissa.yeaaa (Carissa Abraham)[GitHub](https://github.com/carissayeaaa) / [LinkedIn](https://www.linkedin.com/in/carissa-abraham/)
+```bash
+http://localhost:5173/
+```
 
-- moogle_moxie0018 (Jessica Hackett)[GitHub](https://github.com/mooglemoxie0018) / [LinkedIn](https://www.linkedin.com/in/jessica-hackett-6725a4325/)
+## Links
 
-- christel_l (Christel)[GitHub](https://github.com/christel-l) / [LinkedIn](https://www.linkedin.com/in/welahlookymba/)
+[![live_Demo](https://img.shields.io/badge/AIQ_live_Demo-0?style=for-the-badge&logo=ko-fi&logoColor=white)](https://getaiq.netlify.app/)
 
-- eloquentsage (Aaron Goodwin)[GitHub](https://github.com/tradingwait) / [LinkedIn](https://www.linkedin.com/in/goodwinaaron/)
+[![live_Demo](https://img.shields.io/badge/Chingu-003?style=for-the-badge&logo=ko-fi&logoColor=white)](https://www.chingu.io/)
 
-- Gentiana.z (Gentiana)[GitHub](https://github.com/gentianaZ1) / [LinkedIn](https://www.linkedin.com/in/gentiana-han-006b39353)
+## Dev Dependencies
+
+- [@emotion/react](https://emotion.sh/docs/@emotion/react)
+- [@emotion/styled](https://emotion.sh/docs/@emotion/styled)
+- [@google/generative-ai](https://github.com/google/generative-ai-js)
+- [@mui/icons-material](https://mui.com/material-ui/material-icons/)
+- [@mui/material](https://mui.com/)
+- [@tailwindcss/vite](https://github.com/tailwindlabs/tailwindcss-vite)
+- [date-fns](https://date-fns.org/)
+- [dotenv](https://github.com/motdotla/dotenv)
+- [firebase](https://firebase.google.com/)
+- [framer-motion](https://www.framer.com/motion/)
+- [jspdf](https://github.com/parallax/jsPDF)
+- [lottie-react](https://github.com/Gamote/lottie-react)
+- [lucide-react](https://lucide.dev/guide/packages/lucide-react)
+- [motion](https://github.com/framer/motion)
+- [react](https://react.dev/)
+- [react-dom](https://react.dev/)
+- [react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks)
+- [react-icons](https://react-icons.github.io/react-icons/)
+- [react-markdown](https://github.com/remarkjs/react-markdown)
+- [react-router-dom](https://reactrouter.com/)
+- [react-toastify](https://fkhadra.github.io/react-toastify/introduction)
+- [tailwindcss](https://tailwindcss.com/)
+- [@eslint/js](https://eslint.org/docs/latest/use/getting-started)
+- [@types/react](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react)
+- [@types/react-dom](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-dom)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
+- [eslint](https://eslint.org/)
+- [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks)
+- [eslint-plugin-react-refresh](https://github.com/ArnaudBarre/eslint-plugin-react-refresh)
+- [globals](https://github.com/sindresorhus/globals)
+- [tailwindcss](https://tailwindcss.com/)
+- [vite](https://vitejs.dev/)
+
+## Team 24
+
+- **Carissa Abraham**: Scrum Master [GitHub](https://github.com/carissayeaaa) | [LinkedIn](https://www.linkedin.com/in/carissa-abraham/)
+- **Aaron Goodwin**: Scrum Master [GitHub](https://github.com/tradingwait) | [LinkedIn](https://www.linkedin.com/in/goodwinaaron/)
+- **Christel**: Product Owner [GitHub](https://github.com/christel-l) | [LinkedIn](https://www.linkedin.com/in/welahlookymba/)
+
+- **Jessica Hackett**: UI/UX Designer [GitHub](https://github.com/mooglemoxie0018) | [LinkedIn](https://www.linkedin.com/in/jessica-hackett-6725a4325/)
+- **Sokuen Ryan**: Developer [GitHub](https://github.com/sokuenryan) | [LinkedIn](https://linkedin.com/in/sokuenryan)
+- **Benjamin Corbett**: Developer [GitHub](https://github.com/bcsurf2822) | [LinkedIn](https://linkedin.com/in/benjamin-corbett-84822424a/)
+- **Luis Solar**: Developer [GitHub](https://github.com/solarluiso) | [LinkedIn](https://www.linkedin.com/in/solarluiso/)
+- **Christin Martin**: Developer [GitHub](https://github.com/Christin-paige) | [LinkedIn](https://www.linkedin.com/in/christin-martin/)
+- **Matthew Neie**: Developer [GitHub](https://github.com/MatthewNeie) | [LinkedIn](https://linkedin.com/in/matthew-neie)
+- **Gentiana**: Developer [GitHub](https://github.com/gentianaZ1) | [LinkedIn](https://www.linkedin.com/in/gentiana-han-006b39353)
+
+## Screenshots
+
+### Desktop
+
+![Desktop Hero Section](screenshots/desktop/desktop_hero.png)
+
+![Desktop Main Interface](screenshots/desktop/desktop_main.png)
+
+![Desktop Response Interface](screenshots/desktop/desktop_response.png)
+
+### Mobile
+
+![Mobile Hero Section](screenshots/mobile/mobile_hero.png)
+
+![Mobile Main Interface](screenshots/mobile/mobile_main.png)
+
+![Mobile Response Interface](screenshots/mobile/mobile_response.png)
