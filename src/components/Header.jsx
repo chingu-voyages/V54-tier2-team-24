@@ -75,7 +75,7 @@ function Header() {
   return (
     <header className="grid grid-cols-3 items-center sticky top-0 left-0 w-full bg-[#02010B] shadow-md p-2 md:p-4 z-50 h-[7vh]">
       <div className="flex items-center gap-3">
-        <img src={Logo} alt="Logo" className="w-15 md:w-35" onClick={()=> {
+        <img src={Logo} alt="Logo" className="w-15 md:w-30" onClick={()=> {
           navigate("/");
         }} />
        
