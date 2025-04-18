@@ -79,7 +79,7 @@ export const PentagramProvider = ({ children }) => {
     {
       name: "output",
       tooltip:
-        "How should the results appear? Do you need a numbered list, an essay, or something else? Should the response be a certain number of words or paragraphs?",
+        "How should the results appear? Do you need a numbered list, or an essay? Should the response be a certain number of words or paragraphs?",
       prompt: "Is there a tone or format in how you would like me to respond?",
       placeholder:
         "Ex: “Use a friendly tone, keep it under 200 words, include practical tips, and avoid complex language.”",

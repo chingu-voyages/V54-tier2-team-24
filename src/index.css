@@ -73,4 +73,11 @@
   .response-display {
     width: 95vw;
   }
+  .tooltip-wrapper {
+    width: 220px;
+    left: 20px;
+  }
+  .tooltip-desc {
+    font-size: 12px;
+  }
 }
