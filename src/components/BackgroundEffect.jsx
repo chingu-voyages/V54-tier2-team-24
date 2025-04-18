@@ -18,8 +18,8 @@ const BackgroundEffect = () => {
         style={{
           background: `
             radial-gradient(circle at 20% 30%, ${primary}40 0%, transparent 40%),
-            radial-gradient(circle at 80% 70%, ${secondary}40 0%, transparent 40%),
-            radial-gradient(circle at 50% 50%, ${tertiary}40 0%, transparent 40%)
+            radial-gradient(circle at 80% 70%, ${secondary}30 0%, transparent 40%),
+            radial-gradient(circle at 50% 50%, ${tertiary}30 0%, transparent 40%)
           `,
           filter: "blur(100px)",
         }}
@@ -33,28 +33,6 @@ const BackgroundEffect = () => {
           repeatType: "mirror",
         }}
       />
-
-      {/* Floating particles */}
-      {/* {[...Array(25)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-white/50 rounded-full"
-          style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            y: [0, Math.random() * 100 - 50],
-            x: [0, Math.random() * 100 - 50],
-            opacity: [0, 0.8, 0],
-          }}
-          transition={{
-            duration: Math.random() * 15 + 10,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        />
-      ))} */}
     </motion.div>
   );
 };
