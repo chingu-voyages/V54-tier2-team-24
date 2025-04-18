@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import { jsPDF } from "jspdf";
 
@@ -60,15 +60,20 @@ const ExportSinglePrompt = ({ inputs, responseText }) => {
       });
     });
 
-    doc.save("singlePrompt.pdf");
+    doc.save("AiQPrompt.pdf");
   };
 
   return (
-    <div>
+    <div
+      onClick={() => {
+        handleExport();
+      }}
+      className="flex justify-center items-center text-center cursor-pointer"
+    >
       <SaveOutlinedIcon
         style={{ fontSize: 34, color: "white", cursor: "pointer" }}
-        onClick={handleExport}
       />
+      <p className="ml-2 text-white cursor-pointer">Export</p>
     </div>
   );
 };

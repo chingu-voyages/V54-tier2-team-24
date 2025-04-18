@@ -17,8 +17,7 @@ import { validateInput } from "../utils/validationUtils.js";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
-  const { responseText, loading, fetchData } = useFetchAPi();
-
+  const { responseText, setResponseText, loading, fetchData } = useFetchAPi();
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
   const onNext = () => setIndex(index === 4 ? 4 : index + 1);
@@ -80,7 +79,7 @@ const PentagramContent = () => {
         <div className="flex justify-between items-center pb-5 font-karlabold gap-4">
           {pentaPrompts[index] && (
             <div className="text-white/70 text-base leading-5 font-inconsolataregular">
-              {pentaPrompts[index].tooltip}
+              {pentaPrompts[index].prompt}
             </div>
           )}
           <div className="flex gap-4">
@@ -117,7 +116,13 @@ const PentagramContent = () => {
         </button>
       </div>
 
-      {responseText && <ResponseDisplay responseText={responseText} />}
+      {responseText && (
+        <ResponseDisplay
+          responseText={responseText}
+          setResponseText={setResponseText}
+          inputs={inputs}
+        />
+      )}
 
       {loading && (
         <div className="loading-spinner">
