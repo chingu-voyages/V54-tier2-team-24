@@ -15,14 +15,17 @@ const CopyButton = ({ responseText }) => {
   };
 
   return (
-    <div>
+    <div
+      onClick={handleCopy}
+      className="flex justify-center items-center text-center cursor-pointer"
+    >
       <button
-        onClick={handleCopy}
         className="text-white transition cursor-pointer"
         style={{ fontSize: 40 }}
       >
         {copied ? <Check size={30} /> : <Copy size={30} />}
       </button>
+      <p className="ml-2 text-white">Copy</p>
       {copied && (
         <span className="absolute top-full mt-1 px-2 py-1 text-xs text-white bg-gray-800 rounded-md opacity-100 transition">
           Copied!

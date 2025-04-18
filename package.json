@@ -19,6 +19,7 @@
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "firebase": "^11.5.0",
+    "html2canvas": "^1.4.1",
     "framer-motion": "^12.7.3",
     "jspdf": "^3.0.1",
     "lottie-react": "^2.4.1",

@@ -22,24 +22,24 @@ const NotFound = () => {
         <Lottie animationData={lostRobot} loop={true} />
       </div>
       {/* Text Section */}
-      <div className="text-center md:text-left max-w-[320px] md:order-1 md:mt-6 text-white">
+      <div className="text-center md:text-left max-w-[320px] md:order-1 md:mt-2 text-white">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 font-karlabold">
           Something went wrong!
         </h1>
-        <p className="mb-4 font-inconsolataregular text-white/70">
+        <p className="mb-6 font-inconsolataregular text-white/70">
           Looks like the AiQ Elves took a coffee break, or are out partying
           again!
         </p>
         <div className="flex flex-col sm:flex-row justify-center md:justify-start space-y-2 sm:space-y-0 sm:space-x-4">
           <Link
             to="/"
-            className="font-inconsolataregular px-4 py-2 bg-blue-300 text-black rounded hover:bg-blue-400 transition"
+            className="font-inconsolataregular px-4 py-1 bg-blue-300 text-base text-black rounded hover:bg-blue-400 transition"
           >
             Return To Homepage
           </Link>
           <button
             onClick={() => window.history.back()}
-            className="font-inconsolataregular px-4 py-2 bg-blue-300 text-black rounded hover:bg-blue-400 transition cursor-pointer"
+            className="font-inconsolataregular px-4 py-1 bg-blue-300 text-base text-black rounded hover:bg-blue-400 transition cursor-pointer"
           >
             Go Back
           </button>

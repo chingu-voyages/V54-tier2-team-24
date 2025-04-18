@@ -17,8 +17,7 @@ import { validateInput } from "../utils/validationUtils.js";
 
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
-  const { responseText, loading, fetchData } = useFetchAPi();
-
+  const { responseText, setResponseText, loading, fetchData } = useFetchAPi();
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
   const onNext = () => setIndex(index === 4 ? 4 : index + 1);
@@ -80,7 +79,7 @@ const PentagramContent = () => {
         <div className="flex justify-between items-center pb-5 font-karlabold gap-4">
           {pentaPrompts[index] && (
             <div className="text-white/70 text-base leading-5 font-inconsolataregular">
-              {pentaPrompts[index].tooltip}
+              {pentaPrompts[index].prompt}
             </div>
           )}
           <div className="flex gap-4">
@@ -92,69 +91,38 @@ const PentagramContent = () => {
         </div>
       </div>
 
-      <div className="md:w-1/2 w-7/8 ">
+      <div className="md:w-1/2 w-7/8 mb-6">
         <PromptField />
       </div>
 
-      <div
-        className="flex justify-between items-center mb-8 w-7/8 md:w-1/2
-      font-inconsolataexpanded text-[20px] lg:text-[26px] md:text-[22px]"
-      >
-        <button onClick={onPrevious}>
-          <div className="flex gap-2 mt-2 items-center">
-            <img
-              src={Triangle}
-              alt="Back Button"
-              className="w-8 rotate-90"
-              style={{
-                filter:
-                  "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
-                  "hue-rotate(185deg) brightness(103%) contrast(96%) " +
-                  "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))",
-              }}
-            />
-            <span>Back</span>
-          </div>
+      <div className="flex justify-between items-center mb-8 md:w-1/2 w-7/8">
+        <button
+          onClick={onPrevious}
+          className={`font-inconsolataregular px-4 py-1 transition-colors text-black text-base rounded ${
+            index === 0
+              ? "bg-gray-100 text-gray-500 cursor-not-allowed"
+              : "bg-blue-300  hover:bg-blue-400 cursor-pointer"
+          }`}
+          disabled={index === 0}
+        >
+          Back
         </button>
 
-        <PromptHistory />
-
-        <button onClick={index === 4 ? handleSubmit : onNext}>
-          {index === 4 ? (
-            <div className="flex gap-2 mt-2 items-center">
-              <img
-                src={Lightbulb}
-                alt="Submit Button"
-                className="w-6"
-                style={{
-                  filter:
-                    "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
-                    "hue-rotate(185deg) brightness(103%) contrast(96%) " +
-                    "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))",
-                }}
-              />
-              <span>Generate Prompt</span>
-            </div>
-          ) : (
-            <div className="flex gap-2 mt-2 items-center">
-              <span>Next</span>
-              <img
-                src={Triangle}
-                alt="Submit Button"
-                className="w-8 rotate-270"
-                style={{
-                  filter:
-                    "brightness(0) saturate(100%) invert(73%) sepia(19%) saturate(1090%) " +
-                    "hue-rotate(185deg) brightness(103%) contrast(96%) " +
-                    "drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3))",
-                }}
-              />
-            </div>
-          )}
+        <button
+          onClick={index === 4 ? handleSubmit : onNext}
+          className="font-inconsolataregular px-4 py-1 bg-blue-300 text-black text-base rounded hover:bg-blue-400 transition cursor-pointer"
+        >
+          {index === 4 ? "Generate" : "Next"}
         </button>
       </div>
 
-      {responseText && <ResponseDisplay responseText={responseText} />}
+      {responseText && (
+        <ResponseDisplay
+          responseText={responseText}
+          setResponseText={setResponseText}
+          inputs={inputs}
+        />
+      )}
 
       {loading && (
         <div className="loading-spinner">
@@ -162,7 +130,6 @@ const PentagramContent = () => {
           <div>Loading...</div>
         </div>
       )}
-      {responseText && <ResponseDisplay responseText={responseText} />}
     </div>
   );
 };
