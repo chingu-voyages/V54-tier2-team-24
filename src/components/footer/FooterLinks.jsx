@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+
 
 const FooterLink = ({ text, linkedIn, github, linkedInUrl, githubUrl }) => {
   return (
