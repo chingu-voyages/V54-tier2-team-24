@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 @font-face {
   font-family: Karla-SemiBold;
   src: url("./assets/fonts/Karla/Karla-SemiBold.ttf");
@@ -20,8 +22,6 @@
   font-family: Inconsolata-ExtraLight;
   src: url("./assets/fonts/Inconsolata/Inconsolata-ExtraLight.ttf");
 }
-
-@import "tailwindcss";
 
 @theme {
   --font-karlasemibold: Karla-SemiBold, "sans-serif";
