@@ -4,7 +4,7 @@ import ExportSinglePrompt from "./ExportSinglePrompt";
 import CopyButton from "./CopyButton";
 import "../index.css";
 
-const ResponseDisplay = ({ responseText, setResponseText, inputs }) => {
+const ResponseDisplay = ({ responseText,  inputs }) => {
   const responseEndRef = useRef(null);
 
   useEffect(() => {
