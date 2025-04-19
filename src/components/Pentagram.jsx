@@ -7,12 +7,9 @@ import ResetButtons from "./ResetButtons.jsx";
 import { useFetchAPi } from "./useFetchAPi.jsx";
 import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
-import CopyButton from "./CopyButton.jsx";
-import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
-import PromptHistory from "./PromptHistory.jsx";
+
 import { toast } from "react-toastify";
-import Triangle from "/src/assets/svg_assets/triangle-svgrepo-com.svg";
-import Lightbulb from "/src/assets/svg_assets/lightbulb.svg";
+
 import { validateInput } from "../utils/validationUtils.js";
 
 const PentagramContent = () => {
