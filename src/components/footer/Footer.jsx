@@ -1,6 +1,7 @@
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import FooterContent from "./FooterContent";
+import MobileFooter from "./MobileFooter";
 
 export default function Footer() {
   return (
@@ -17,6 +18,7 @@ export default function Footer() {
         </div>
       </a>
       <FooterContent />
+      <MobileFooter />
     </footer>
   );
 }
