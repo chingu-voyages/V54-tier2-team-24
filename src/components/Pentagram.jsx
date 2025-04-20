@@ -1,18 +1,15 @@
 import React from "react";
 import { Circle } from "lucide-react";
-import { PentagramProvider, usePentagram } from "./PentagramContext.jsx";
+import { usePentagram } from "./PentagramContext.jsx";
 import PromptField from "./PromptField.jsx";
 import Tooltips from "./tooltips/Tooltips.jsx";
 import ResetButtons from "./ResetButtons.jsx";
 import { useFetchAPi } from "./useFetchAPi.jsx";
 import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
-import CopyButton from "./CopyButton.jsx";
-import ExportSinglePrompt from "./ExportSinglePrompt.jsx";
-import PromptHistory from "./PromptHistory.jsx";
+
 import { toast } from "react-toastify";
-import Triangle from "/src/assets/svg_assets/triangle-svgrepo-com.svg";
-import Lightbulb from "/src/assets/svg_assets/lightbulb.svg";
+
 import { validateInput } from "../utils/validationUtils.js";
 
 const PentagramContent = () => {
@@ -35,7 +32,7 @@ const PentagramContent = () => {
   };
 
   return (
-    <div className="mx-auto px-4 py-6 w-screen justify-items-center">
+    <div className="flex flex-col items-center w-full max-w-3xl mx-auto px-4 py-6">
       <h1 className="text-4xl text-[#A3CAF6] font-karlabold font-bold text-center mb-2">
         AiQ
       </h1>
@@ -48,9 +45,6 @@ const PentagramContent = () => {
         {[0, 1, 2, 3, 4].map((num) => (
           <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
             <Circle
-              // key={num}
-              // isFilled={inputs[num]}
-              // isSelected={index === num}
               size={28}
               className={
                 index === num
@@ -62,7 +56,7 @@ const PentagramContent = () => {
         ))}
       </div>
 
-      <div className="md:w-1/2 w-7/8">
+      <div className="w-full">
         {/* Pentagram Category and Tooltip */}
         <div className="flex justify-between items-center pb-2">
           {pentaPrompts[index] && (
@@ -91,11 +85,11 @@ const PentagramContent = () => {
         </div>
       </div>
 
-      <div className="md:w-1/2 w-7/8 mb-6">
+      <div className="w-full mb-6">
         <PromptField />
       </div>
 
-      <div className="flex justify-between items-center mb-8 md:w-1/2 w-7/8">
+      <div className="flex justify-between items-center mb-8 w-full">
         <button
           onClick={onPrevious}
           className={`font-inconsolataregular px-4 py-1 transition-colors text-black text-base rounded ${
@@ -134,12 +128,4 @@ const PentagramContent = () => {
   );
 };
 
-const Pentagram = () => {
-  return (
-    <PentagramProvider>
-      <PentagramContent />
-    </PentagramProvider>
-  );
-};
-
-export default Pentagram;
+export default PentagramContent;
