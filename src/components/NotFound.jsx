@@ -7,14 +7,12 @@ import backgroundImage from "../assets/404-bg.jpg";
 const NotFound = () => {
   return (
     <div
-      className="flex flex-1 flex-col md:flex-row items-center justify-center bg text-white p-6 md:gap-20"
+      className="flex flex-1 flex-col md:flex-row items-center justify-center bg text-white p-6 md:gap-20 w-full h-full"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        minHeight: "80vh",
-        width: "100vw",
       }}
     >
       {/* Lottie Animation */}
