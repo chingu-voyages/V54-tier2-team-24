@@ -4,7 +4,7 @@ import ExportSinglePrompt from "./ExportSinglePrompt";
 import CopyButton from "./CopyButton";
 import "../index.css";
 
-const ResponseDisplay = ({ responseText,  inputs }) => {
+const ResponseDisplay = ({ responseText, inputs }) => {
   const responseEndRef = useRef(null);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const ResponseDisplay = ({ responseText,  inputs }) => {
   };
 
   return (
-    <div>
+    <div className="px-4">
       <section
         ref={responseEndRef}
         className="response-display p-5 text-white rounded-lg leading-7 mt-20"
@@ -27,22 +27,26 @@ const ResponseDisplay = ({ responseText,  inputs }) => {
         <h1 className="flex justify-center text-lg pb-5 font-Inconsolata-Bold mt-20">
           Response
         </h1>
-        <ReactMarkdown
-          className="font-Inconsolata-Regular lg:text-base/9 md:text-[22px]/8 sm:text-base/7"
-          components={{
-            strong: ({ children }) => (
-              <span className="font-Inconsolata-Bold">{children}</span>
-            ),
-          }}
-        >
-          {responseText}
-        </ReactMarkdown>
+
+        <div className="font-Inconsolata-Regular lg:text-base/9 md:text-[22px]/8 sm:text-base/7 space-y-4">
+          <ReactMarkdown
+            components={{
+              strong: ({ children }) => (
+                <span className="font-Inconsolata-Bold">{children}</span>
+              ),
+              p: ({ children }) => <p className="mb-4">{children}</p>,
+            }}
+          >
+            {responseText}
+          </ReactMarkdown>
+        </div>
       </section>
       {!responseText ? null : (
         <div className="flex justify-between">
           <div className="flex justify-center items-center text-center">
             <CopyButton responseText={responseText} />
           </div>
+
           <div
             className="new-prompt-button"
             onClick={() => {

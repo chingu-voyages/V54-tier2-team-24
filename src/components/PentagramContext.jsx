@@ -58,7 +58,7 @@ export const PentagramProvider = ({ children }) => {
         "Persona typically includes job role, expertise, background, personality traits, values, and interests.",
       prompt: "Can you tell me a little bit about yourself?",
       placeholder:
-        "Ex: “You are a busy parent who wants quick and healthy meal ideas.”",
+        "Eg: “You are a busy parent who wants quick and healthy meal ideas.”",
     },
     {
       name: "context",
@@ -66,7 +66,7 @@ export const PentagramProvider = ({ children }) => {
         "Context typically includes the purpose of the prompt, the audience it's intended for, or specific details about the task.",
       prompt: "What type of background information can you provide?",
       placeholder:
-        "Ex: “You are someone planning a low-budget trip for the first time.”",
+        "Eg: “You are someone planning a low-budget trip for the first time.”",
     },
     {
       name: "task",
@@ -74,7 +74,7 @@ export const PentagramProvider = ({ children }) => {
         "Task outlines the action you want AI to perform. Eg: I want to “research”, “determine”, “calculate”, “detect”.",
       prompt: "What would you like me to do?",
       placeholder:
-        "Ex: “Help with a list of fun activities to do on weekends.”",
+        "Eg: “Help with a list of fun activities to do on weekends.”",
     },
     {
       name: "output",
@@ -82,7 +82,7 @@ export const PentagramProvider = ({ children }) => {
         "How should the results appear? Do you need a numbered list, or an essay? Should the response be a certain number of words or paragraphs?",
       prompt: "Is there a tone or format in how you would like me to respond?",
       placeholder:
-        "Ex: “Use a friendly tone, keep it under 200 words, include practical tips, and avoid complex language.”",
+        "Eg: “Use a friendly tone, keep it under 200 words, include practical tips, and avoid complex language.”",
     },
     {
       name: "constraints",
@@ -90,7 +90,7 @@ export const PentagramProvider = ({ children }) => {
         "Constraints refer to guidelines you set for the AI model. What, if included/ignored, would create an unwanted output?",
       prompt: "What boundaries or limits would you like me to honor?",
       placeholder:
-        "Ex: “Give the answer as a simple checklist with short descriptions.”",
+        "Eg: “Give the answer as a simple checklist with short descriptions.”",
     },
   ];
 
