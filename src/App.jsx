@@ -1,4 +1,11 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 import Header from "./components/Header";
 import HeroSection from "./components/hero/HeroSection";
@@ -10,6 +17,60 @@ import BackgroundEffect from "./components/BackgroundEffect";
 import PentagramContent from "./components/Pentagram";
 import { PentagramProvider } from "./components/PentagramContext.jsx";
 
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route
+          path="/"
+          element={
+            <motion.div
+              initial={{ y: 0, opacity: 1 }} // Start fully visible
+              animate={{ y: 0, opacity: 1 }} // Stay fully visible
+              exit={{
+                y: "-100%", // Slide up
+                opacity: 0, // Fully fade out
+                transition: { duration: 1.2, ease: "circIn" }, // Extended duration for smoother fade
+              }}
+              style={{
+                position: "relative",
+                zIndex: 1,
+              }}
+            >
+              <HeroSection />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/pentagram"
+          element={
+            <motion.div
+              initial={{ y: "100%" }} // Start below the screen when navigating to Pentagram
+              animate={{ y: 0 }} // Slide into view
+              exit={{
+                y: "100%", // Exit downwards when navigating back to Hero
+                transition: { duration: 1.2, ease: "circIn" }, // Match duration for consistency
+              }}
+              style={{
+                position: "absolute", // Ensure it doesn't affect layout
+                top: 0,
+                left: 0,
+                width: "100%", // Ensure it takes the full width
+                height: "100%", // Ensure it takes the full height
+              }}
+            >
+              <PentagramContent />
+            </motion.div>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
+
 function App() {
   return (
     <Router>
@@ -18,11 +79,7 @@ function App() {
         <Header />
         <main className="flex-1 relative flex flex-col items-center">
           <PentagramProvider>
-            <Routes>
-              <Route path="/" element={<HeroSection />} />
-              <Route path="/pentagram" element={<PentagramContent />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <AnimatedRoutes />
           </PentagramProvider>
 
           <ToastContainer
@@ -31,7 +88,7 @@ function App() {
             hideProgressBar
             toastStyle={{
               backgroundColor: "#000",
-              color: "#fff", // #B3B3B3
+              color: "#fff",
               boxShadow: "0px 0px 10px rgba(0,0,0,0.3)",
             }}
           />
