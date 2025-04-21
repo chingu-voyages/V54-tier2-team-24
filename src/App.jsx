@@ -40,6 +40,24 @@ function AnimatedRoutes() {
               }}
             >
               <HeroSection />
+              <motion.div
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "20%", // Adjust height for blending
+                  background:
+                    "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #02010B 100%)",
+                  pointerEvents: "none", // Prevent interaction with the gradient
+                }}
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 1 }}
+                exit={{
+                  opacity: 0, // Fade out the gradient
+                  transition: { duration: 1.2, ease: "circIn" },
+                }}
+              />
             </motion.div>
           }
         />
