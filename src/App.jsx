@@ -27,12 +27,12 @@ function AnimatedRoutes() {
           path="/"
           element={
             <motion.div
-              initial={{ y: 0, opacity: 1 }} // Start fully visible
-              animate={{ y: 0, opacity: 1 }} // Stay fully visible
+              initial={{ y: 0, opacity: 1 }}
+              animate={{ y: 0, opacity: 1 }}
               exit={{
-                y: "-100%", // Slide up
-                opacity: 0, // Fully fade out
-                transition: { duration: 1.2, ease: "circIn" }, // Extended duration for smoother fade
+                y: "-100%",
+                opacity: 0,
+                transition: { duration: 1.2, ease: "circIn" },
               }}
               style={{
                 position: "relative",
@@ -49,7 +49,7 @@ function AnimatedRoutes() {
                   height: "20%", // Adjust height for blending
                   background:
                     "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #02010B 100%)",
-                  pointerEvents: "none", // Prevent interaction with the gradient
+                  pointerEvents: "none",
                 }}
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
@@ -65,18 +65,17 @@ function AnimatedRoutes() {
           path="/pentagram"
           element={
             <motion.div
-              initial={{ y: "100%" }} // Start below the screen when navigating to Pentagram
-              animate={{ y: 0 }} // Slide into view
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
               exit={{
-                y: "100%", // Exit downwards when navigating back to Hero
-                transition: { duration: 1.2, ease: "circIn" }, // Match duration for consistency
+                y: "100%",
+                transition: { duration: 1.2, ease: "circIn" },
               }}
               style={{
-                position: "absolute", // Ensure it doesn't affect layout
-                top: 0,
-                left: 0,
-                width: "100%", // Ensure it takes the full width
-                height: "100%", // Ensure it takes the full height
+                position: "relative",
+                zIndex: 1,
+                width: "100%",
+                height: "100%",
               }}
             >
               <PentagramContent />
