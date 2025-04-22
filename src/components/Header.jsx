@@ -65,9 +65,9 @@ function Header() {
   const toggleHelp = () => {
     setShowHelp(!showHelp);
   };
- const closeHelpMenu = () => {
-  setShowHelp(false)
- }
+  const closeHelpMenu = () => {
+    setShowHelp(false);
+  };
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -75,10 +75,14 @@ function Header() {
   return (
     <header className="grid grid-cols-3 items-center sticky top-0 left-0 w-full bg-[#02010B] shadow-md p-2 md:p-4 z-50 h-[7vh]">
       <div className="flex items-center gap-3">
-        <img src={Logo} alt="Logo" className="w-15 md:w-30" onClick={()=> {
-          navigate("/");
-        }} />
-       
+        <img
+          src={Logo}
+          alt="Logo"
+          className="w-15 md:w-30 cursor-pointer"
+          onClick={() => {
+            navigate("/");
+          }}
+        />
       </div>
 
       <div className="text-center">
@@ -137,11 +141,14 @@ function Header() {
         </button>
       </div>
 
-      {showHelp && <HelpMenu 
-      isOpen={showHelp}
-      onRequestClose={closeHelpMenu}
-      width="w-full sm:w-[80%] md:w-[40%]"
-      position="right-0" />}
+      {showHelp && (
+        <HelpMenu
+          isOpen={showHelp}
+          onRequestClose={closeHelpMenu}
+          width="w-full sm:w-[80%] md:w-[40%]"
+          position="right-0"
+        />
+      )}
     </header>
   );
 }

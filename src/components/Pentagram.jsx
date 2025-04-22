@@ -110,19 +110,19 @@ const PentagramContent = () => {
         </button>
       </div>
 
+      {loading && (
+        <div className="loading-spinner">
+          <div className="spinner"></div>
+          <div>Loading...</div>
+        </div>
+      )}
+
       {responseText && (
         <ResponseDisplay
           responseText={responseText}
           setResponseText={setResponseText}
           inputs={inputs}
         />
-      )}
-
-      {loading && (
-        <div className="loading-spinner">
-          <div className="spinner"></div>
-          <div>Loading...</div>
-        </div>
       )}
     </div>
   );

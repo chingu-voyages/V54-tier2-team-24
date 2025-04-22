@@ -14,7 +14,7 @@ export default function Footer() {
       >
         <div className="flex gap-2 justify-center items-center">
           <FaGithub />
-          <p className="text-sm">GitHub Repository</p>
+          <p className="text-sm font-medium">GitHub Repository</p>
         </div>
       </a>
       <FooterContent />
