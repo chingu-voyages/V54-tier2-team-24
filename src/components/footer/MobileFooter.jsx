@@ -75,7 +75,7 @@ const MobileFooter = () => {
   const member = teamMembers[index];
 
   return (
-    <div className="md:hidden text-center text-2xl text-blue-300 py-4 animate-fade-in">
+    <div className="md:hidden text-center text-sm text-blue-300 py-4 animate-fade-in">
       <a
         href={member.linkedInUrl}
         target="_blank"
@@ -83,7 +83,7 @@ const MobileFooter = () => {
         className="block transition-opacity duration-300 ease-in-out"
       >
         <div className="flex justify-center items-center gap-2">
-          <span className="text-base font-medium">{member.text}</span>
+          <span className="font-medium">{member.text}</span>
           {roleIcons[member.role]}
         </div>
       </a>
