@@ -63,6 +63,24 @@
   cursor: pointer;
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100%;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 @media only screen and (max-width: 1024px) {
   .response-display {
     width: 70vw;
