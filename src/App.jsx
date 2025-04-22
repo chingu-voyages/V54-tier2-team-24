@@ -94,11 +94,13 @@ function App() {
       <div className="flex flex-col min-h-screen bg-gradient-to-tr from-[#02010B] to-[#070062]">
         <BackgroundEffect />
         <Header />
-        <main className="flex-1 relative flex flex-col items-center w-full h-full">
+        <main
+          className="flex-1 relative flex flex-col items-center w-full h-full"
+          style={{ overflow: "hidden" }}
+        >
           <PentagramProvider>
             <AnimatedRoutes />
           </PentagramProvider>
-
           <ToastContainer
             position="top-center"
             autoClose={3000}
@@ -110,7 +112,7 @@ function App() {
             }}
           />
         </main>
-        <Footer />
+        <Footer style={{ position: "relative", zIndex: 10 }} />
       </div>
     </Router>
   );
