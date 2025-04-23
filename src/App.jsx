@@ -112,7 +112,7 @@ function App() {
             }}
           />
         </main>
-        <Footer style={{ position: "relative", zIndex: 10 }} />
+        <Footer />
       </div>
     </Router>
   );
