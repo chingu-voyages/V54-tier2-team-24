@@ -9,7 +9,15 @@ const ResponseDisplay = ({ responseText, inputs }) => {
 
   useEffect(() => {
     if (responseEndRef.current) {
-      responseEndRef.current.scrollIntoView({ behavior: "smooth" });
+      const headerHeight = window.innerHeight * 0.09; // 7vh - The height of the header + the top margin
+      const elementPosition =
+        responseEndRef.current.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   }, [responseText]);
 
