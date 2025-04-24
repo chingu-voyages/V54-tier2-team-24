@@ -45,6 +45,14 @@ function Header() {
     }
   };
 
+  const navigateToHome = () => {
+    if (!user) {
+      navigate("/");
+    } else {
+      null;
+    }
+  };
+
   useEffect(() => {
     setCurrentDate(format(getDate(), "MM.dd.yyyy"));
   }, []);
@@ -80,7 +88,7 @@ function Header() {
           alt="Logo"
           className="w-15 md:w-30 cursor-pointer"
           onClick={() => {
-            navigate("/");
+            navigateToHome();
           }}
         />
       </div>

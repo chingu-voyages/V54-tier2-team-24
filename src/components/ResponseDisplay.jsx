@@ -48,12 +48,12 @@ const ResponseDisplay = ({ responseText, inputs }) => {
           </div>
 
           <div
-            className="new-prompt-button"
+            className="font-inconsolataregular px-4 py-1 bg-blue-300 text-black text-base rounded hover:bg-blue-400 transition cursor-pointer"
             onClick={() => {
               newPrompt();
             }}
           >
-            New Prompt
+            + New Prompt
           </div>
           <div className="flex justify-center items-center text-center">
             <ExportSinglePrompt responseText={responseText} inputs={inputs} />
