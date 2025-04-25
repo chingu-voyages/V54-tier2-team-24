@@ -9,7 +9,15 @@ const ResponseDisplay = ({ responseText, inputs }) => {
 
   useEffect(() => {
     if (responseEndRef.current) {
-      responseEndRef.current.scrollIntoView({ behavior: "smooth" });
+      const headerHeight = window.innerHeight * 0.09; // 7vh - The height of the header + the top margin
+      const elementPosition =
+        responseEndRef.current.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   }, [responseText]);
 
@@ -19,16 +27,15 @@ const ResponseDisplay = ({ responseText, inputs }) => {
   };
 
   return (
-    <div className="px-4">
+    <div className="w-full">
       <section
         ref={responseEndRef}
-        className="response-display p-5 text-white rounded-lg leading-7 mt-20"
+        className="p-5 text-white rounded-lg leading-7 bg-white/20" // Translucent background and matching width
       >
-        <h1 className="flex justify-center text-lg pb-5 font-Inconsolata-Bold mt-20">
+        {/* <h1 className="flex justify-center text-lg pb-5 font-Inconsolata-Bold mt-20">
           Response
-        </h1>
-
-        <div className="font-Inconsolata-Regular lg:text-base/9 md:text-[22px]/8 sm:text-base/7 space-y-4">
+        </h1> */}
+        <div className="font-Inconsolata-Regular lg:text-base/9 md:text-base/8 sm:text-base/7 space-y-4">
           <ReactMarkdown
             components={{
               strong: ({ children }) => (

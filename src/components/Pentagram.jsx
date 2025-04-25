@@ -32,7 +32,7 @@ const PentagramContent = () => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full max-w-3xl mx-auto px-4 py-6">
+    <div className="flex flex-col items-center w-full max-w-3xl lg:max-w-4xl mx-auto px-4 py-6">
       <h1 className="text-4xl text-[#A3CAF6] font-karlabold font-bold text-center mb-2">
         AiQ
       </h1>

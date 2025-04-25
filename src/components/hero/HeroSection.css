@@ -39,13 +39,15 @@
   color: white;
   letter-spacing: 5px;
   font-size: 3vw;
+  font-family: var(--font-karlabold); /* Use Karla-Bold */
 }
 
 .hero-desc {
   width: 50vw;
   color: white;
-  letter-spacing: 2px;
-  font-size: 0.7vw;
+  letter-spacing: 1px;
+  font-size: 0.8vw;
+  font-family: var(--font-inconsolataregular); /* Use Inconsolata-Regular */
 }
 
 .get-started-button {
@@ -73,7 +75,7 @@
   }
   .hero-desc {
     color: white;
-    font-size: 1vw;
+    font-size: 1.5vw;
   }
 
   .get-started-button {

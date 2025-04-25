@@ -6,7 +6,7 @@ const PromptField = () => {
   const { index, inputs, updateInput, errors, updateError, pentaPrompts } =
     usePentagram();
   const [inputValue, setInputValue] = useState(inputs[index] ?? ""); // Default to empty string
-  const style = `border-3 border-icon bg-blue-100 rounded-lg w-full h-[30vh] m-0 p-2`;
+  const style = `border-3 border-icon bg-white/20 rounded-lg w-full h-[30vh] py-2 px-4`;
 
   useEffect(() => {
     setInputValue(inputs[index] ?? ""); // Sync with context when index or inputs change
@@ -25,8 +25,7 @@ const PromptField = () => {
 
   return (
     <div
-      className="prompt-field flex flex-col items-start justify-start w-full
-    font-inconsolataregular text-black
+      className="prompt-field flex flex-col items-start justify-start w-full font-Inconsolata-Regular lg:text-base/9 md:text-base/8 sm:text-base/7 text-white
     lg:items-center lg:justify-center"
     >
       {/* Textarea */}

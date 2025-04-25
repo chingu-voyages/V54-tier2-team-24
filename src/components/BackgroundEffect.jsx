@@ -18,7 +18,7 @@ const BackgroundEffect = () => {
         style={{
           background: `
             radial-gradient(circle at 20% 30%, ${primary}40 0%, transparent 40%),
-            radial-gradient(circle at 80% 70%, ${secondary}30 0%, transparent 40%),
+            radial-gradient(circle at 70% 30%, ${secondary}30 0%, transparent 40%),
             radial-gradient(circle at 50% 50%, ${tertiary}30 0%, transparent 40%)
           `,
           filter: "blur(100px)",
