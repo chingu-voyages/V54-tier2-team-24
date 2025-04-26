@@ -3,23 +3,25 @@ import ReactMarkdown from "react-markdown";
 import ExportSinglePrompt from "./ExportSinglePrompt";
 import CopyButton from "./CopyButton";
 import "../index.css";
+import { Link } from "react-router-dom";
 
-const ResponseDisplay = ({ responseText, inputs }) => {
+const ResponseDisplay = ({ responseText, inputs,toScroll }) => {
   const responseEndRef = useRef(null);
 
   useEffect(() => {
-    if (responseEndRef.current) {
+    if (responseEndRef.current && toScroll) {
       const headerHeight = window.innerHeight * 0.09; // 7vh - The height of the header + the top margin
       const elementPosition =
         responseEndRef.current.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - headerHeight;
 
-      window.scrollTo({
+       window.scrollTo({
         top: offsetPosition,
         behavior: "smooth",
       });
     }
   }, [responseText]);
+
 
   const newPrompt = () => {
     localStorage.clear();
@@ -60,7 +62,10 @@ const ResponseDisplay = ({ responseText, inputs }) => {
               newPrompt();
             }}
           >
-            + New Prompt
+            <Link
+          to={"/pentagram"}
+        >
+              + New Prompt</Link>
           </div>
           <div className="flex justify-center items-center text-center">
             <ExportSinglePrompt responseText={responseText} inputs={inputs} />

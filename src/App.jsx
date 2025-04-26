@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/footer/Footer";
 import BackgroundEffect from "./components/BackgroundEffect";
 import PentagramContent from "./components/Pentagram";
+import HistoryView from "./components/HistoryView";
 import { PentagramProvider } from "./components/PentagramContext.jsx";
 
 function AnimatedRoutes() {
@@ -82,6 +83,33 @@ function AnimatedRoutes() {
             </motion.div>
           }
         />
+        <Route
+          path="/user-history/:userId/:historyId"
+          element={
+            <motion.div
+              initial={{ y: "100%" }}
+              animate={{ y: "0%" }}
+              exit={{
+                y: "100%",
+                transition: { duration: 1.2, ease: "easeInOut" }
+              }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              style={{
+                position: "relative",
+                zIndex: 1,
+                width: "100%",
+                height: "100%",
+                top: 0,
+                left: 0,
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <HistoryView />
+            </motion.div>
+          }
+        />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>

@@ -9,6 +9,7 @@ import {
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { format } from "date-fns";
 import Logo from "../images/AiQlogo.png";
+import History from "../components/Dashboard/History";
 
 function getDate() {
   const today = new Date();
@@ -122,8 +123,14 @@ function Header() {
               Sign Out
             </button>
 
-            {showDropdown && (
-              <div className="absolute right-0 top-10 bg-[#1a1a2e] rounded-md shadow-lg py-2 z-50 min-w-[120px]">
+            {showDropdown && (<div>
+                <History
+                    isOpen={true}
+                    user={user}
+                    width="w-full sm:w-[80%] md:w-[60%]"
+                    position="right-0"
+                    onRequestClose={toggleDropdown}/>
+                  {/*<div className="absolute right-0 top-10 bg-[#1a1a2e] rounded-md shadow-lg py-2 z-50 min-w-[120px]">
                 <div className="px-4 py-2 text-white text-sm border-b border-gray-700 hidden sm:block">
                   {user.displayName || "User"}
                 </div>
@@ -133,7 +140,7 @@ function Header() {
                 >
                   Sign Out
                 </button>
-              </div>
+           </div>*/}</div>
             )}
           </div>
         ) : (
