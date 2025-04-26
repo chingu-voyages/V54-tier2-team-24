@@ -25,9 +25,9 @@ export default function Faq({ data, toggleSection, isSectionOpen }) {
 
             <div className="space-y-4">
               {section.questions.map((qa, i) => (
-                <div key={i} className="bg-blue-100 shadow rounded-lg p-4">
-                  <p className="font-medium ">{qa.question}</p>
-                  <p className="text-sm whitespace-pre-line">{qa.answer}</p>
+                <div key={i} className="bg-black  shadow rounded-lg p-4">
+                  <p className="font-medium text-white">{qa.question}</p>
+                  <p className="text-sm text-gray-400 whitespace-pre-line">{qa.answer}</p>
                 </div>
               ))}
             </div>
