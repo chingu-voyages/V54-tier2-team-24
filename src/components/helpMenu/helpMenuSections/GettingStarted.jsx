@@ -6,7 +6,7 @@ export default function GettingStarted({ data, toggleSection, isSectionOpen }) {
         onClick={() => toggleSection(sectionId)}
         className="w-full text-left flex justify-between items-center bg-blue-200 p-3 rounded-md hover:bg-blue-300"
       >
-        <h2 className="text-2xl font-bold">{data.title}</h2>
+        <h2 className="text-2xl text-black font-bold">{data.title}</h2>
         <span className="text-xl">
           {isSectionOpen === sectionId ? "−" : "+"}
         </span>
@@ -23,10 +23,10 @@ export default function GettingStarted({ data, toggleSection, isSectionOpen }) {
           <div key={idx} className="mb-6">
             <h3 className="text-xl text-white font-semibold mb-2">{section.heading}</h3>
             {section.content && (
-              <p className="text-base text-white mb-2">{section.content}</p>
+              <p className="text-base text-gray-400 mb-2">{section.content}</p>
             )}
             {section.steps && (
-              <ol className="text-white list-decimal list-inside space-y-1">
+              <ol className="text-gray-400 list-decimal list-inside space-y-1">
                 {section.steps.map((step, i) => (
                   <li key={i}>{step}</li>
                 ))}
@@ -37,7 +37,7 @@ export default function GettingStarted({ data, toggleSection, isSectionOpen }) {
                 {section.subsections.map((sub, i) => (
                   <div key={i} className="pl-4 border-l-4 border-blue-300">
                     <p className="font-medium text-white">{sub.name}</p>
-                    <p className="text-sm text-white">{sub.description}</p>
+                    <p className="text-sm text-gray-400">{sub.description}</p>
                   </div>
                 ))}
               </div>
