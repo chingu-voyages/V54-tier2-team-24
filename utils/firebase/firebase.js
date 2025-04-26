@@ -156,8 +156,6 @@ export const deleteUserHistory = async (historyDocId) => {
     const historyDocRef = doc(db, "userHistory", historyDocId);
 
     await deleteDoc(historyDocRef);
-
-    console.log("User history successfully deleted");
     return true;
   } catch (error) {
     console.error("Error deleting user history: ", error);
@@ -166,19 +164,13 @@ export const deleteUserHistory = async (historyDocId) => {
 };
 export const getHistoryItemById = async (userId, itemId) => {
   try {
-    console.log("Getting item with userId:", userId, "itemId:", itemId);
-
     const historyDocRef = doc(db, "userHistory", itemId);
     const docSnap = await getDoc(historyDocRef);
-
-    console.log("Document exists:", docSnap.exists());
-
     if (docSnap.exists()) {
       const data = {
         id: docSnap.id,
         ...docSnap.data()
       };
-      console.log("Document data:", data);
       return data;
     } else {
       return null;
