@@ -17,7 +17,8 @@ export const useFetchAPi = () => {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       const concatenatedText = inputs.join(" ");
       const result = await model.generateContent(concatenatedText);
-      setResponseText(result.response.text || "No response text found");
+      const resultText=result.response.text() || "No response text found"
+      setResponseText(resultText);
 
       // Dismiss the network error toast if it exists
       if (networkErrorToastId) {
@@ -32,6 +33,8 @@ export const useFetchAPi = () => {
         });
         setRetrying(false); // Reset retrying state
       }
+
+      return resultText;
     } catch (error) {
       console.error("Error fetching data:", error); // Log the error for debugging
 
@@ -68,6 +71,7 @@ export const useFetchAPi = () => {
         toast.error("An error occurred while fetching data.");
       }
       setResponseText(null);
+      return null;
     } finally {
       setLoading(false);
     }
