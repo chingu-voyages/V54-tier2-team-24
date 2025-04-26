@@ -9,6 +9,7 @@ import {
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { format } from "date-fns";
 import Logo from "../images/AiQlogo.png";
+import History from "../components/Dashboard/History";
 
 function getDate() {
   const today = new Date();
@@ -133,6 +134,13 @@ function Header() {
                 >
                   Sign Out
                 </button>
+                <History
+                  isOpen={true}
+                  user={user}
+                  width="w-full sm:w-[80%] md:w-[60%]"
+                  position="right-0"
+                  onRequestClose={toggleDropdown}
+                />
               </div>
             )}
           </div>

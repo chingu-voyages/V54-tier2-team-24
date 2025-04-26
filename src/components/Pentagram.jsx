@@ -7,6 +7,8 @@ import ResetButtons from "./ResetButtons.jsx";
 import { useFetchAPi } from "./useFetchAPi.jsx";
 import ResponseDisplay from "./ResponseDisplay.jsx";
 import "../HandleLoading.css";
+import { addUserHistory, useFirebaseAuth } from  "../../utils/firebase/firebase";
+import Rectangle from "./Rectangle";
 
 import { toast } from "react-toastify";
 
@@ -15,10 +17,23 @@ import { validateInput } from "../utils/validationUtils.js";
 const PentagramContent = () => {
   const { index, setIndex, pentaPrompts, inputs } = usePentagram();
   const { responseText, setResponseText, loading, fetchData } = useFetchAPi();
+  const { user } = useFirebaseAuth();
   const onChangeIndex = (num) => setIndex(num);
   const onPrevious = () => setIndex(index === 0 ? 0 : index - 1);
   const onNext = () => setIndex(index === 4 ? 4 : index + 1);
 
+  const saveUserHistory = async (historyData) => {
+    if (user) {
+      try {
+        await addUserHistory(user.uid, historyData);
+        console.log("User prompt saved");
+      } catch (error) {
+        console.error("Error saving user history: ", error);
+      }
+    } else {
+      console.log("User not logged in.");
+    }
+  };
   const handleSubmit = async () => {
     const hasEmptyFields = inputs.some((value) => value.trim() === "");
     const hasErrors = inputs.some((value) => validateInput(value) !== "");
@@ -28,7 +43,17 @@ const PentagramContent = () => {
       return;
     }
 
-    await fetchData(inputs);
+    try {
+        const updatedResponseText = await fetchData(inputs);
+        console.log(updatedResponseText);
+        if (updatedResponseText) {
+        const historyData = {
+            input: inputs,
+            response: updatedResponseText,}
+        await saveUserHistory(historyData);
+        console.log("User prompt saved");
+        }
+    } catch (e) { toast.warn("Error saving user history: ", e)}
   };
 
   return (
@@ -44,14 +69,14 @@ const PentagramContent = () => {
         {/* //number 0: persona, 1: context, 2 : task, 3 : output, 4 : constrain */}
         {[0, 1, 2, 3, 4].map((num) => (
           <button key={num} onClick={() => onChangeIndex(num)} className="p-1">
-            <Circle
+              {     /* <Circle
               size={28}
               className={
                 index === num
                   ? "fill-blue-400 stroke-1 stroke-blue-400"
                   : "stroke-1 stroke-gray-300"
               }
-            />
+            />*/}<Rectangle key={num} isFilled={inputs[num]} isSelected={index===num}/>
           </button>
         ))}
       </div>
@@ -122,6 +147,7 @@ const PentagramContent = () => {
           responseText={responseText}
           setResponseText={setResponseText}
           inputs={inputs}
+          toScroll={true}
         />
       )}
     </div>

@@ -1,6 +1,6 @@
 export default function Rectangle({ isFilled,isSelected}) {
     const borderStyle = isSelected ? "border-double border-white" : "border-solid border-icon";
-    const rectStyle = "w-12 h-3 border-4 rounded-lg md:w-15 md:h-5"
+    const rectStyle = "w-3 h-3 border-4 rounded-full md:w-8 md:h-8"
     return (
         <div
             className={
