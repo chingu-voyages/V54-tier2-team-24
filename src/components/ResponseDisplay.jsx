@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
+import geminiLogo from "../images/gemini-logo.png";
 import ExportSinglePrompt from "./ExportSinglePrompt";
 import CopyButton from "./CopyButton";
 import "../index.css";
@@ -9,7 +10,7 @@ const ResponseDisplay = ({ responseText, inputs }) => {
 
   useEffect(() => {
     if (responseEndRef.current) {
-      const headerHeight = window.innerHeight * 0.09; // 7vh - The height of the header + the top margin
+      const headerHeight = window.innerHeight * 0.09;
       const elementPosition =
         responseEndRef.current.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - headerHeight;
@@ -30,11 +31,12 @@ const ResponseDisplay = ({ responseText, inputs }) => {
     <div className="w-full">
       <section
         ref={responseEndRef}
-        className="p-5 text-white rounded-lg leading-7 bg-white/20" // Translucent background and matching width
+        className="p-5 text-white rounded-lg leading-7 bg-white/20 mb-6"
       >
-        {/* <h1 className="flex justify-center text-lg pb-5 font-Inconsolata-Bold mt-20">
-          Response
-        </h1> */}
+        <h1 className="flex items-center gap-2 text-4xl mb-4">
+          <img src={geminiLogo} alt="Gemini Logo" className="h-6 w-auto" />
+        </h1>
+        <hr className="border-white/30 mb-4" />
         <div className="font-Inconsolata-Regular lg:text-base/9 md:text-base/8 sm:text-base/7 space-y-4">
           <ReactMarkdown
             components={{
