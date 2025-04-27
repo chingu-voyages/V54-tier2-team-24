@@ -48,7 +48,8 @@ const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
 
   return (
     <div
-      className={`font-Inconsolata-Regular fixed top-0 right-0 bg-black/[0.70] w-full h-screen z-40 transition-blur duration-300
+      style={{ zIndex: 9999 }}
+      className={`font-Inconsolata-Regular fixed top-0 left-0 bg-black/[0.70] w-full h-screen transition-blur duration-300
         ${isOpen ? "opacity-100" : "opacity-0"} ${
         isVisible ? "" : "invisible"
       }`}
