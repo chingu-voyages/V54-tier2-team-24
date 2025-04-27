@@ -1,19 +1,33 @@
 # AiQ | Voyage 54 Team 24
 
 ## Screenshots
+
 ### Hero
+
 ![Hero Section](screenshots/hero.png)
+
 ### Prompt Field
+
 ![Prompt Field Section](screenshots/prompt_field_1.png)
+
 ### Response
+
 ![Response Section](screenshots/response.png)
+
 ### Prompt History Menu
-![prompt history menu](screenshots/prompt_history.png)
+
+![prompt history menu](screenshots/prompt_history_menu.png)
+
 ### Prompt History
-![prompt history view](screenshots/prompt_history_1.png)
+
+![prompt history view](screenshots/prompt_history_view.png)
+
 ### Help Menu
+
 ![help menu](screenshots/help_menu.png)
+
 ### 404 Page
+
 ![404 page](screenshots/404.png)
 
 ## Overview
