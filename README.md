@@ -1,4 +1,20 @@
-# AiQ
+# AiQ | Voyage 54 Team 24
+
+## Screenshots
+### Hero
+![Hero Section](screenshots/hero.png)
+### Prompt Field
+![Prompt Field Section](screenshots/prompt_field_1.png)
+### Response
+![Response Section](screenshots/response.png)
+### Prompt History Menu
+![prompt history menu](screenshots/prompt_history.png)
+### Prompt History
+![prompt history view](screenshots/prompt_history_1.png)
+### Help Menu
+![help menu](screenshots/help_menu.png)
+### 404 Page
+![404 page](screenshots/404.png)
 
 ## Overview
 
@@ -15,7 +31,7 @@ A structured productivity tool that makes AI responses more useful, accurate, an
 - **Formatted AI Output** - Displays responses in a readable, structured format
 - **Error Handling** - Displays errors when input fields are empty or invalid
 - **Help Menu** - Used to guide users with a separate separated into 3 sections Getting Started, FAQs, and Advanced Features
-- **Google Authentication** - Users have the ability to save their prompts in Google Firestore by logging in with their Google account
+- **Google Authentication** - Users have the ability to save their prompts in Google Firestore by logging through their Google account
 - **User Guidance** - Tooltips and example prompts to help guide users
 - **Responsive UI** - Works across all devices
 
@@ -107,21 +123,3 @@ http://localhost:5173/
 - **Christin Martin**: Developer [GitHub](https://github.com/Christin-paige) | [LinkedIn](https://www.linkedin.com/in/christin-martin/)
 - **Matthew Neie**: Developer [GitHub](https://github.com/MatthewNeie) | [LinkedIn](https://linkedin.com/in/matthew-neie)
 - **Gentiana**: Developer [GitHub](https://github.com/gentianaZ1) | [LinkedIn](https://www.linkedin.com/in/gentiana-han-006b39353)
-
-## Screenshots
-
-### Desktop
-
-![Desktop Hero Section](screenshots/desktop/desktop_hero.png)
-
-![Desktop Main Interface](screenshots/desktop/desktop_main.png)
-
-![Desktop Response Interface](screenshots/desktop/desktop_response.png)
-
-### Mobile
-
-![Mobile Hero Section](screenshots/mobile/mobile_hero.png)
-
-![Mobile Main Interface](screenshots/mobile/mobile_main.png)
-
-![Mobile Response Interface](screenshots/mobile/mobile_response.png)
