@@ -5,7 +5,6 @@ import HistoryItem from "./HistoryItem.jsx";
 
 const History = ({ isOpen,user,onRequestClose, position,width}) => {
   const [isVisible, setIsVisible] = useState(isOpen);
-  const [isItemOpen, setIsItemOpen] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [userHistory, setUserHistory] = useState([]);
@@ -94,6 +93,7 @@ const wordCountOfResponse = ()=>{
             </h2>
             <button
               onClick={onRequestClose}
+              id="history-dropdown-close"
               className=" text-blue-300 text-4xl hover:text-blue-400  cursor-pointer rounded-2xl"
             >
               <FaWindowClose />
