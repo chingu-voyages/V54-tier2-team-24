@@ -1,4 +1,4 @@
-# AiQ | Voyage 54 Team 24
+# AiQ  
 
 ## Screenshots
 
@@ -124,7 +124,7 @@ http://localhost:5173/
 - [tailwindcss](https://tailwindcss.com/)
 - [vite](https://vitejs.dev/)
 
-## Team 24
+## Voyage 54 Team 24
 
 - **Carissa Abraham**: Scrum Master [GitHub](https://github.com/carissayeaaa) | [LinkedIn](https://www.linkedin.com/in/carissa-abraham/)
 - **Aaron Goodwin**: Scrum Master [GitHub](https://github.com/tradingwait) | [LinkedIn](https://www.linkedin.com/in/goodwinaaron/)
