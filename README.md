@@ -1,4 +1,4 @@
-# AiQ  
+# AiQ
 
 ## Screenshots
 
@@ -32,9 +32,9 @@
 
 ## Overview
 
-Building an app, which is not just any AI tool, but a game-changer. An app, which enhances the end-users' learning experience by helping them become better at building prompts and improving their proficiency in AI communication.
+Building an app that is not just any AI tool, but a game-changer. AiQ is an app that enhances the end-users' learning experience by helping them become better at building prompts and improving their proficiency in AI communication.
 
-A structured productivity tool that makes AI responses more useful, accurate, and efficient, while removing the frustration of bad AI responses, and replacing it with structured, meaningful interactions. This app will transform AI from an unpredictable tool into a powerful and reliable assistant.
+It is a structured productivity tool that makes AI responses more useful, accurate, and efficient while removing the frustration of bad AI responses and replacing it with structured, meaningful interactions. This app will transform your AI from an unpredictable tool into a powerful and reliable assistant.
 
 ## Core Features
 
@@ -85,9 +85,9 @@ http://localhost:5173/
 
 ## Links
 
-[![live_Demo](https://img.shields.io/badge/AIQ_live_Demo-0?style=for-the-badge&logo=ko-fi&logoColor=white)](https://getaiq.netlify.app/)
+[![live_Demo](https://img.shields.io/badge/AIQ_live_Demo-0?style=for-the-badge)](https://getaiq.netlify.app/)
 
-[![live_Demo](https://img.shields.io/badge/Chingu-003?style=for-the-badge&logo=ko-fi&logoColor=white)](https://www.chingu.io/)
+[![live_Demo](https://img.shields.io/badge/Chingu-0?style=for-the-badge)](https://www.chingu.io/)
 
 ## Dev Dependencies
 
@@ -129,7 +129,6 @@ http://localhost:5173/
 - **Carissa Abraham**: Scrum Master [GitHub](https://github.com/carissayeaaa) | [LinkedIn](https://www.linkedin.com/in/carissa-abraham/)
 - **Aaron Goodwin**: Scrum Master [GitHub](https://github.com/tradingwait) | [LinkedIn](https://www.linkedin.com/in/goodwinaaron/)
 - **Christel**: Product Owner [GitHub](https://github.com/christel-l) | [LinkedIn](https://www.linkedin.com/in/welahlookymba/)
-
 - **Jessica Hackett**: UI/UX Designer [GitHub](https://github.com/mooglemoxie0018) | [LinkedIn](https://www.linkedin.com/in/jessica-hackett-6725a4325/)
 - **Sokuen Ryan**: Developer [GitHub](https://github.com/sokuenryan) | [LinkedIn](https://linkedin.com/in/sokuenryan)
 - **Benjamin Corbett**: Developer [GitHub](https://github.com/bcsurf2822) | [LinkedIn](https://linkedin.com/in/benjamin-corbett-84822424a/)
