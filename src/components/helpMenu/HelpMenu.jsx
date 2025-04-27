@@ -71,7 +71,9 @@ const HelpMenu = ({ width, position, isOpen, onRequestClose }) => {
             </button>
           </div>
           <div className="text-center flex flex-col gap-3 mb-4">
-            <h2 className="text-center text-white text-3xl font-bold">{welcome}</h2>
+            <h2 className="text-center text-white text-3xl font-bold">
+              {welcome}
+            </h2>
             <p className="text-white mx-2">{welcomeContent}</p>
           </div>
         </div>

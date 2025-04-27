@@ -103,7 +103,10 @@ function Header() {
 
         <div className="flex justify-end items-center gap-1 sm:gap-2">
           {isAuthenticated ? (
-            <div className="flex items-center gap-1 sm:gap-2 relative" ref={dropdownRef}>
+            <div
+              className="flex items-center gap-1 sm:gap-2 relative"
+              ref={dropdownRef}
+            >
               <div className="flex items-center">
                 <img
                   className="w-7 h-7 sm:w-8 sm:h-8 rounded-full cursor-pointer"
@@ -140,7 +143,7 @@ function Header() {
                     user={user}
                     width="w-full sm:w-[80%] md:w-[60%]"
                     position="right-0"
-                    onRequestClose={toggleDropdown}
+                    onRequestClose={() => setShowDropdown(false)}
                   />
                 </div>
               )}
@@ -153,12 +156,15 @@ function Header() {
               Sign In
             </button>
           )}
-          <button onClick={toggleHelp} className="cursor-pointer ml-1 sm:ml-2 flex-shrink-0">
+          <button
+            onClick={toggleHelp}
+            className="cursor-pointer ml-1 sm:ml-2 flex-shrink-0"
+          >
             <FaRegQuestionCircle className="text-white h-4 w-4 sm:h-5 sm:w-5" />
           </button>
         </div>
       </header>
-      
+
       {showHelp && (
         <HelpMenu
           isOpen={showHelp}
