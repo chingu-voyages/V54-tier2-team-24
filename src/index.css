@@ -1,1 +1,101 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: Karla-SemiBold;
+  src: url("./assets/fonts/Karla/Karla-SemiBold.ttf");
+}
+@font-face {
+  font-family: Karla-Bold;
+  src: url("./assets/fonts/Karla/Karla-Bold.ttf");
+}
+@font-face {
+  font-family: Inconsolata-Regular;
+  src: url("./assets/fonts/Inconsolata/Inconsolata-Regular.ttf");
+}
+
+@font-face {
+  font-family: Inconsolata-Bold;
+  src: url("./assets/fonts/Inconsolata/Inconsolata-Bold.ttf");
+}
+
+@font-face {
+  font-family: Inconsolata-ExtraLight;
+  src: url("./assets/fonts/Inconsolata/Inconsolata-ExtraLight.ttf");
+}
+
+@theme {
+  --font-karlasemibold: Karla-SemiBold, "sans-serif";
+  --font-karlabold: Karla-Bold, "sans-serif";
+  --font-inconsolataregular: Inconsolata-Regular, monospace;
+  --font-inconsolatabold: Inconsolata-Bold, monospace;
+  --font-inconsolataextralight: Inconsolata-ExtraLight, monospace;
+  --color-icon: #a3caf6;
+}
+.font-Karla-SemiBold {
+  font-family: "Karla-SemiBold", sans-serif;
+}
+
+.font-Karla-Bold {
+  font-family: "Karla-Bold", sans-serif;
+}
+
+.font-Inconsolata-Regular {
+  font-family: "Inconsolata-Regular", monospace;
+}
+
+.font-Inconsolata-Bold {
+  font-family: "Inconsolata-Bold", monospace;
+}
+
+.font-Inconsolata-ExtraLight {
+  font-family: "Inconsolata-ExtraLight", monospace;
+}
+
+.response-display {
+  width: 60vw;
+}
+
+.new-prompt-button {
+  color: white;
+  border: solid 2px blue;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100%;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 1024px) {
+  .response-display {
+    width: 70vw;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .response-display {
+    width: 95vw;
+  }
+  .tooltip-wrapper {
+    width: 220px;
+    left: 20px;
+  }
+  .tooltip-desc {
+    font-size: 12px;
+  }
+}
